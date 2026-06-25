@@ -43,7 +43,7 @@ const App = () => {
 
         <button
           className="reset"
-          onClick={() => setCount(0)}
+          onClick={() => setcount(0)}
         >
           Reset Counter
         </button>
