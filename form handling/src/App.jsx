@@ -5,14 +5,14 @@ const App = () => {
   //  console.log("Form Data",formData); better approach
 
   const [formData, setFormData] = useState({});
-  
-  console.log("formData",formData);
-  
+
+  console.log("formData", formData);
 
   let formDataHandler = (e) => {
-    setFormData({ 
-      ...formData, 
-      [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
