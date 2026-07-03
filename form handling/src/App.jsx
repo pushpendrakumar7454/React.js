@@ -14,7 +14,7 @@ const App = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-950">
       <form className="w-80 bg-white p-6 rounded-xl shadow-lg space-y-4">
@@ -24,7 +24,6 @@ const App = () => {
           placeholder="Enter Name..."
           className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:border-blue-500"
           onChange={formDataHandler}
-
           //  onChange={(e)=>{
           //   setFormData({...formData,name:e.target.value})
           //  }} better approach
