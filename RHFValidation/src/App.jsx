@@ -8,32 +8,38 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(null);
 
+  // Delete User
   const deleteUser = (idx) => {
-    setUsers((prev) => prev.filter((user, i) => i != idx));
+    setUsers((prev) => prev.filter((user, i) => i !== idx));
   };
 
+  // Update User
   const updateUser = (idx, updatedData) => {
-  setUsers((prev) =>
-    prev.map((user, i) => (i === idx ? updatedData : user))
-  );
-};
+    setUsers((prev) => prev.map((user, i) => (i === idx ? updatedData : user)));
+  };
 
   return (
     <div className="p-5 bg-black min-h-screen">
       <Navvar settoggle={settoggle} />
 
       {toggle ? (
-        <Form settoggle={settoggle} setUsers={setUsers} />
+        <Form
+          setUsers={setUsers}
+          settoggle={settoggle}
+          editUser={editUser}
+          setEditUser={setEditUser}
+          updateUser={updateUser}
+        />
       ) : (
-        <div className="flex flex-wrap gap-6  mt-6">
+        <div className="flex flex-wrap gap-6 mt-6">
           {users.map((elem, idx) => (
             <UserCard
               key={idx}
               elem={elem}
               idx={idx}
-              settoggle={settoggle}
               deleteUser={deleteUser}
-                setEditUser={setEditUser}
+              settoggle={settoggle}
+              setEditUser={setEditUser}
             />
           ))}
         </div>
