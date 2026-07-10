@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-const Form = ({ setUsers, settoggle, editUser, updateUser, setEditUser }) => {
+const Form = ({ setUsers, settoggle, editUser, updateUser, setEditUser,users }) => {
   const {
     handleSubmit,
     register,
@@ -11,22 +11,11 @@ const Form = ({ setUsers, settoggle, editUser, updateUser, setEditUser }) => {
     mode: "onChange",
   });
 
-  // Edit button click hone par form me data fill ho jayega
-  useEffect(() => {
-    if (editUser) {
-      reset(editUser);
-    }
-  }, [editUser, reset]);
 
-  const summitForm = (data) => {
-    if (editUser) {
-      // Update User
-      updateUser(editUser.idx, data);
-      setEditUser(null);
-    } else {
-      // Create User
+
+  const summitForm = (data) => {  
       setUsers((prev) => [...prev, data]);
-    }
+    
 
     reset();
     settoggle(false);

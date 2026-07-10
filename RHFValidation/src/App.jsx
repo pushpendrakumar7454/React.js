@@ -8,15 +8,9 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(null);
 
-  // Delete User
-  const deleteUser = (idx) => {
-    setUsers((prev) => prev.filter((user, i) => i !== idx));
-  };
 
-  // Update User
-  const updateUser = (idx, updatedData) => {
-    setUsers((prev) => prev.map((user, i) => (i === idx ? updatedData : user)));
-  };
+
+
 
   return (
     <div className="p-5 bg-black min-h-screen">
@@ -24,6 +18,7 @@ const App = () => {
 
       {toggle ? (
         <Form
+        users={users}
           setUsers={setUsers}
           settoggle={settoggle}
           editUser={editUser}
