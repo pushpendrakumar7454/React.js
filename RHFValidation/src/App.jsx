@@ -23,7 +23,7 @@ const App = () => {
           settoggle={settoggle}
           editUser={editUser}
           setEditUser={setEditUser}
-          updateUser={updateUser}
+        
         />
       ) : (
         <div className="flex flex-wrap gap-6 mt-6">
@@ -32,7 +32,7 @@ const App = () => {
               key={idx}
               elem={elem}
               idx={idx}
-              deleteUser={deleteUser}
+            
               settoggle={settoggle}
               setEditUser={setEditUser}
             />
