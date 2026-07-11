@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { nanoid } from 'nanoid'
+import { useState } from "react";
 
-const Form = ({ setUsers, settoggle, editUser, updateUser, setEditUser,users }) => {
+const Form = ({setUsers,users,settoggle,updateUser}) => {
+
   const {
     handleSubmit,
     register,
@@ -9,23 +12,39 @@ const Form = ({ setUsers, settoggle, editUser, updateUser, setEditUser,users }) 
     formState: { errors },
   } = useForm({
     mode: "onChange",
+    defaultValues:updateUser
+   
   });
 
 
+ const summitForm=(data)=>{
+  if(updateUser){
+    setUsers((prev)=>{
+      const updateUsers=prev.map((val)=>{
+      return val.id===updateUser.id?{...data}:val
+      }
+    )
+    localStorage.setItem('users',JSON.stringify(updateUsers))
+     return updateUsers;
+      
+    })
+  }else{
+    let arr=[...users,{...data,id:nanoid()}]
+  setUsers(arr)
+  localStorage.setItem('users',JSON.stringify(arr))
+  }
 
-  const summitForm = (data) => {  
-      setUsers((prev) => [...prev, data]);
-    
+  settoggle(prev=>!prev)
+  reset()
+ }
 
-    reset();
-    settoggle(false);
-  };
+
 
   return (
     <div className="p-5 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
         <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
-          {editUser ? "Update User" : "Create User"}
+      
         </h2>
 
         <form className="space-y-5" onSubmit={handleSubmit(summitForm)}>
@@ -128,7 +147,7 @@ const Form = ({ setUsers, settoggle, editUser, updateUser, setEditUser,users }) 
             type="submit"
             className="w-full bg-blue-600 text-white py-2.5 rounded-lg cursor-pointer active:scale-95 hover:bg-blue-700 transition duration-300 font-semibold"
           >
-            {editUser ? "Update User" : "Create Card"}
+           Create User
           </button>
         </form>
       </div>

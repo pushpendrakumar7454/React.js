@@ -1,46 +1,48 @@
-import React, { useState } from "react";
-import Form from "./components/Form";
-import Navvar from "./components/Navvar";
-import UserCard from "./components/UserCard";
+import React from 'react'
+import Navvar from './components/Navvar'
+import Form from './components/Form'
+import UserCard from './components/UserCard'
+import { useState } from 'react'
 
 const App = () => {
-  const [toggle, settoggle] = useState(true);
-  const [users, setUsers] = useState([]);
-  const [editUser, setEditUser] = useState(null);
+  const [toggle, settoggle] = useState(false)
+  const [users, setUsers] = useState(()=>{
+    return JSON.parse(localStorage.getItem('users')) || []
+  })
+  
+  const [updateUser, setUpdateUser] = useState(null)
 
-
-
-
+   
+  const detetUser=(idx)=>{
+   let newUser= users.filter((user,i)=>i!==idx)
+   setUsers(newUser)
+   localStorage.setItem('users',JSON.stringify(newUser))
+   console.log(newUser);
+  }
 
   return (
-    <div className="p-5 bg-black min-h-screen">
-      <Navvar settoggle={settoggle} />
 
-      {toggle ? (
-        <Form
-        users={users}
-          setUsers={setUsers}
-          settoggle={settoggle}
-          editUser={editUser}
-          setEditUser={setEditUser}
-        
-        />
-      ) : (
-        <div className="flex flex-wrap gap-6 mt-6">
-          {users.map((elem, idx) => (
-            <UserCard
-              key={idx}
-              elem={elem}
-              idx={idx}
-            
-              settoggle={settoggle}
-              setEditUser={setEditUser}
-            />
-          ))}
-        </div>
-      )}
+    <div className='w-full h-full min-h-screen bg-slate-950 p-4'>
+      <Navvar settoggle={settoggle}/>
+
+     {toggle ? (
+  <Form users={users}  setUpdateUser={setUpdateUser} updateUser={updateUser} settoggle={settoggle} setUsers={setUsers} />
+) : (
+  <div className="flex h-full min-h-screen flex-wrap gap-5">
+    {users.map((elem, idx) => (
+      <UserCard
+        key={idx}
+        idx={idx}
+        detetUser={detetUser}
+        elem={elem}
+        setUpdateUser={setUpdateUser}
+        settoggle={settoggle}
+      />
+    ))}
+  </div>
+)}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
