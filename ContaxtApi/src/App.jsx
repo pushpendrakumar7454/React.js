@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Navavar from './components/Navavar'
 import UserCard from './components/UserCard.'
 import Cart from './components/Cart'
+import { MyStore } from './context/MyContext'
 
 const App = () => {
 
@@ -249,23 +250,24 @@ const App = () => {
   }
 ]
 
-const [toggle, settoggle] = useState(false)
-const [carts, SetCarts] = useState([])
+
+
+let {toggle}=useContext(MyStore)
+
 
   return (
     <div>
       <div className='p-3'>
-        <Navavar settoggle={settoggle}/>
+        <Navavar/>
       </div>
 {toggle ? (
-  <Cart carts={carts} setCarts={SetCarts} />
+  <Cart/>
 ) : (
   <div className="flex flex-wrap gap-5 p-5 justify-center">
     {products.map((product) => (
       <UserCard
         key={product.id}
         product={product}
-        SetCarts={SetCarts}
       />
     ))}
   </div>

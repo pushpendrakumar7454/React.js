@@ -1,8 +1,11 @@
 
 
-import React from "react";
+import React, { useContext } from "react";
+import { MyStore } from "../context/MyContext";
 
-const Cart = ({ carts, setCarts }) => {
+const Cart = () => {
+
+  let {carts,setCarts}=useContext(MyStore)
 
 
   
@@ -16,7 +19,7 @@ const Cart = ({ carts, setCarts }) => {
 
   // Empty Cart
   if (carts.length === 0) {
-    retuforn (
+    return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="bg-white p-10 rounded-xl shadow-lg text-center">
           <h1 className="text-4xl font-bold text-red-700 ">
