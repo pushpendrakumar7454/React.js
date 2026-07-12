@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { MyStore } from '../context/MyContext'
+import { MyStore } from '../context/MyStoreContext'
 
 const Navavar = () => {
+   
+    let {settoggle}=useContext(MyStore)
 
-     let{settoggle}=useContext(MyStore)
     return (
         <div className='flex w-full bg-black rounded justify-between items-center p-4'>
             <div className='text-white text-xl'>

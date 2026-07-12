@@ -1,7 +1,7 @@
 
 
 import React, { useContext } from "react";
-import { MyStore } from "../context/MyContext";
+import { MyStore } from "../context/MyStoreContext";
 
 const Cart = () => {
 
