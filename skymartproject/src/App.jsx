@@ -9,6 +9,9 @@ import Login from './form/Login'
 import Register from './form/Register'
 import Electronic from './components/Electronic'
 import Fashion from './components/Fashion'
+import Furniture from './components/Furniture'
+import Sports from './components/Sports'
+import Accessories from './components/Accessories'
 
 
 const App = () => {
@@ -20,6 +23,9 @@ const App = () => {
           <Route path="/product" element={<Product/>}/>
           <Route path='/electronic' element={<Electronic/>}/>
           <Route path='/fashion' element={<Fashion/>}/>
+          <Route path='/furniture' element={<Furniture/>}/>
+          <Route path='/sports' element={<Sports/>}/>
+          <Route path='/accessories' element={<Accessories/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>

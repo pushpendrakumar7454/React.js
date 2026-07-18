@@ -1,28 +1,31 @@
-import axios from "axios";
-import React, { useContext, useEffect } from "react";
-import { MyStore } from "../constext/MyContext";
+import axios from 'axios'
+import React, { useContext, useEffect } from 'react'
+import { MyStore } from '../constext/MyContext'
 import { Search, ChevronDown } from "lucide-react";
 import ProductCart1 from "./ProductCart1";
 
-const Furniture = () => {
-  const { furnicureData, setFurnicureData } = useContext(MyStore);
 
-  const getData = async () => {
-    try {
-      let res = await axios.get(
-        "https://dummyjson.com/products/category/furniture",
-      );
-      setFurnicureData(res.data.products);
-    } catch (error) {
-      console.log("Data not found", error);
-    }
-  };
+const Accessories = () => {
 
-  useEffect(() => {
-    getData();
-  }, []);
+   const {accessories,setAccessories}= useContext(MyStore)
 
-  return (
+     const getData=async()=>{
+
+         try {
+            let res=await axios.get("https://dummyjson.com/products/category/smartphones")
+           setAccessories(res.data.products)
+         } catch (error) {
+            console.log("Data not found",error);
+            
+         }
+     }
+
+     useEffect(()=>{
+       getData()
+     },[])
+
+
+    return (
     <div className="bg-black">
       <div className="mb-10 bg-black p-6">
         <h1 className="text-3xl font-semibold text-white">All Products</h1>
@@ -62,7 +65,7 @@ const Furniture = () => {
         </div>
       </div>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-black">
-        {furnicureData.map((product) => {
+        {accessories.map((product) => {
           return (
             <ProductCart1 key={product.key} product={product}></ProductCart1>
           );
@@ -72,4 +75,5 @@ const Furniture = () => {
   );
 };
 
-export default Furniture;
+
+export default Accessories;

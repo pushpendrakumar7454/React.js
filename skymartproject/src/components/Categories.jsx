@@ -86,7 +86,7 @@ const Categories = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
+          <div onClick={()=>navigate('/furniture')} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
             <div className="absolute -right-10 -top-10 h-70 w-70 rounded-full bg-gradient-to-br from-orange-400 to-yellow-500 blur-[90px] opacity-20 group-hover:opacity-50 transition"></div>
 
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-400 to-yellow-500 flex items-center justify-center shadow-xl">
@@ -108,7 +108,7 @@ const Categories = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
+          <div onClick={()=>navigate("/product")} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
             <div className="absolute -right-10 -top-10 h-70 w-70 rounded-full bg-gradient-to-br from-green-400 to-lime-500 blur-[90px] opacity-20 group-hover:opacity-50 transition"></div>
 
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-lime-500 flex items-center justify-center shadow-xl">
@@ -130,7 +130,7 @@ const Categories = () => {
           </div>
 
           {/* Card 5 */}
-          <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
+          <div onClick={()=>navigate('/sports')} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
             <div className="absolute -right-10 -top-10 h-70 w-70 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 blur-[90px] opacity-20 group-hover:opacity-50 transition"></div>
 
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center shadow-xl">
@@ -152,7 +152,7 @@ const Categories = () => {
           </div>
 
           {/* Card 6 */}
-          <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
+          <div onClick={()=>navigate("/accessories")} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40">
             <div className="absolute -right-10 -top-10 h-70 w-70 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 blur-[90px] opacity-20 group-hover:opacity-50 transition"></div>
 
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-xl">

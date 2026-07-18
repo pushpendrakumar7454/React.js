@@ -1,18 +1,18 @@
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { MyStore } from "../constext/MyContext";
-import { Search, ChevronDown } from "lucide-react";
-import ProductCart1 from "./ProductCart1";
+import { Search,ChevronDown } from 'lucide-react'
+import ProductCart1 from './ProductCart1'
 
-const Furniture = () => {
-  const { furnicureData, setFurnicureData } = useContext(MyStore);
+const Sports = () => {
+    const { sportsData, setSportsData } = useContext(MyStore);
+  let getData = async () => {
 
-  const getData = async () => {
     try {
       let res = await axios.get(
-        "https://dummyjson.com/products/category/furniture",
+        "https://dummyjson.com/products/category/sports-accessories",
       );
-      setFurnicureData(res.data.products);
+      setSportsData(res.data.products);
     } catch (error) {
       console.log("Data not found", error);
     }
@@ -23,8 +23,8 @@ const Furniture = () => {
   }, []);
 
   return (
-    <div className="bg-black">
-      <div className="mb-10 bg-black p-6">
+        <div className='bg-black'>
+            <div className="mb-10 bg-black p-6">
         <h1 className="text-3xl font-semibold text-white">All Products</h1>
 
         <p className="mt-2 text-zinc-500">
@@ -61,15 +61,13 @@ const Furniture = () => {
           </div>
         </div>
       </div>
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-black">
-        {furnicureData.map((product) => {
-          return (
-            <ProductCart1 key={product.key} product={product}></ProductCart1>
-          );
+      <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-black'>
+        {sportsData.map((product)=>{
+            return <ProductCart1 key={product.key} product={product}></ProductCart1>
         })}
       </div>
-    </div>
-  );
+        </div>
+    )
 };
 
-export default Furniture;
+export default Sports;
