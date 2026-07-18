@@ -1,33 +1,39 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import ProductCart from "./ProductCart";
-import { Search, ChevronDown } from "lucide-react";
-import { MyStore } from "../constext/MyContext";
+import React, { useContext, useEffect } from 'react'
+import ProductCart from './ProductCart'
+import { MyStore } from '../constext/MyContext'
+import { Search,ChevronDown } from 'lucide-react'
+import axios from 'axios'
 
-const Product = () => {
- const{setData,data}= useContext(MyStore)
+const Electronic = () => {
 
-  const getData = async () => {
-    try {
-      const res = await axios.get("https://fakestoreapi.com/products");
-      setData(res.data);
-    } catch (error) {
-      console.log("Data not found", error);
+
+let {electronicData,setElectronicData}=useContext(MyStore)
+
+    const getData=async()=>{
+        try {
+            let res=await axios.get("https://fakestoreapi.com/products/category/electronics")
+            console.log(res.data);
+            setElectronicData(res.data)
+            
+        } catch (error) {
+            console.log("Data not found",error);
+            
+            
+        }
     }
-  };
 
-  useEffect(() => {
-    getData();
-  }, []);
+    useEffect(()=>{
+        getData()
+    },[])
 
-  return (
-    <div className="min-h-screen bg-[#0b0b0b] px-8 py-10">
-      {/* Top Section */}
-      <div className="mb-10">
+
+    return (
+        <div className='bg-black'>
+            <div className="mb-10 bg-black p-6">
         <h1 className="text-3xl font-semibold text-white">All Products</h1>
 
         <p className="mt-2 text-zinc-500">
-          {data.length} products found
+          {/* {data.length} products found */}
         </p>
 
         <div className="mt-8 rounded-3xl border border-zinc-700 p-4">
@@ -60,16 +66,13 @@ const Product = () => {
           </div>
         </div>
       </div>
-
-      {/* Product Grid */}
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {data.map((product) => (
-          <ProductCart key={product.id} product={product} />
-        ))}
+      <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-black'>
+        {electronicData.map((product)=>{
+            return <ProductCart key={product.id} product={product} />
+        })}
       </div>
-    </div>
-  );
-};
+        </div>
+    )
+}
 
-export default Product;
-
+export default Electronic;

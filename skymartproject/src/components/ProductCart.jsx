@@ -62,13 +62,11 @@ const ProductCart = ({product}) => {
 
           <div className="flex items-center gap-1 text-yellow-400">
             <Star fill="currentColor" size={16} />
-            <Star fill="currentColor" size={16} />
-            <Star fill="currentColor" size={16} />
-            <Star fill="currentColor" size={16} />
-            <Star fill="currentColor" size={16} />
+            {product.rating.rate}
+           
 
             <span className="ml-2 text-sm text-zinc-400">
-              (120 Reviews)
+              ({product.rating.count} Reviews)
             </span>
           </div>
 
@@ -80,12 +78,10 @@ const ProductCart = ({product}) => {
           <div className="flex gap-16 items-center justify-between">
             <div>
             <h3 className="text-2xl font-semibold text-white  ">
-              $129
+              ${product.price}
             </h3>
 
-            <p className="text-sm text-zinc-500 line-through">
-              $169
-            </p>
+           
             </div>
            <div>
              <button className="flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-4 py-3 cursor-pointer active:scale-95  font-semibold text-white transition duration-300 hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(168,85,247,.45)]">

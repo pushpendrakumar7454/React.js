@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LogOut } from "lucide-react";
 import {
   Search,
   ShoppingCart,
@@ -8,9 +9,21 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router";
+import { MyStore } from "../constext/MyContext";
 
 const Navbar = () => {
   let naviagte = useNavigate();
+  let {currentUser,setCurrentUser}=useContext(MyStore)
+
+
+
+  const logout=()=>{
+       localStorage.removeItem("currentUser")
+       setCurrentUser(null)
+       alert("user logout")
+       naviagte('/login')
+  }
+
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-zinc-800 bg-[#0a0a0a]/90 backdrop-blur-xl">
@@ -98,17 +111,21 @@ const Navbar = () => {
           {/* Profile */}
 
           <div className="flex items-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-900 px-3 py-2 cursor-pointer hover:border-lime-400 transition">
-            <div className="h-9 w-9 rounded-xl bg-lime-400 flex items-center justify-center text-black font-semibold">
+           {currentUser? <div className="h-9 w-9 uppercase  rounded-xl bg-lime-400 flex items-center justify-center text-black font-semibold">
+              {currentUser.name.slice(0,1)}
+            </div>: <div className="h-9 w-9 rounded-xl bg-lime-400 flex items-center justify-center text-black font-semibold">
               P
-            </div>
+            </div>}
 
             <div>
-              <h3 className="text-white text-sm font-semibold">Pushpendra</h3>
+              {currentUser? <h3 className="text-white text-sm font-semibold">{currentUser?.name}</h3>: <h3 className="text-white text-sm font-semibold">guest</h3>}
+             
               <p className="text-xs text-zinc-500">Premium User</p>
             </div>
 
             <ChevronDown size={18} className="text-zinc-400" />
           </div>
+          {currentUser?<div><button onClick={logout} className="text-white  cursor-pointer active:scale-95"><LogOut size={20}/></button></div>:""}
         </div>
 
         {/* Mobile */}
