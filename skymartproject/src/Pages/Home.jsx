@@ -5,6 +5,7 @@ import StatsSection from '../components/StatsSection'
 import Categories from '../components/Categories'
 import FeaturedProducts from '../components/FeaturedProducts'
 import Seaction from '../components/Seaction'
+import { Outlet } from 'react-router'
 
 
 const Home = () => {
@@ -15,6 +16,8 @@ const Home = () => {
             <Categories/>
             <FeaturedProducts/>
             <Seaction/>
+
+            <Outlet/>
         </div>
     )
 }

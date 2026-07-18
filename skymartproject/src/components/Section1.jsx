@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 
 const Section1 = () => {
 
-   let data=useNavigate()
+   let naviagte=useNavigate()
 
   return (
     <section className="relative overflow-hidden bg-[#090909] text-white py-24">
@@ -69,7 +69,7 @@ const Section1 = () => {
 
                 </button>
 
-                <button className="rounded-xl border border-white/20 active:scale-95 px-6 py-3 cursor-pointer  hover:bg-white/10 transition">
+                <button onClick={()=> naviagte('/product')} className="rounded-xl border border-white/20 active:scale-95 px-6 py-3 cursor-pointer  hover:bg-white/10 transition">
                   Explore Products
                 </button>
 
