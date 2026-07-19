@@ -1,199 +1,199 @@
-import React from "react";
-import {
-  ArrowRight,
-  ShoppingCart,
-  Star,
-  Zap,
-} from "lucide-react";
-
-const topRated = [
-  {
-    name: "Gaming Keyboard",
-    price: "$99.99",
-    old: "$149",
-    rating: "4.9",
-    img: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=300",
-  },
-  {
-    name: "MacBook Pro",
-    price: "$1499",
-    old: "$1699",
-    rating: "5.0",
-    img: "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=300",
-  },
-  {
-    name: "Smart Watch",
-    price: "$249",
-    old: "$299",
-    rating: "4.8",
-    img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300",
-  },
-  {
-    name: "Gaming Mouse",
-    price: "$59",
-    old: "$89",
-    rating: "4.7",
-    img: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=300",
-  },
-];
-
-const arrivals = [
-  {
-    name: "Headphones",
-    price: "$89",
-    old: "$120",
-    rating: "4.9",
-    img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300",
-  },
-  {
-    name: "Wireless Charger",
-    price: "$39",
-    old: "$59",
-    rating: "4.8",
-    img: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=300",
-  },
-  {
-    name: "Premium T-Shirt",
-    price: "$24",
-    old: "$39",
-    rating: "4.7",
-    img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300",
-  },
-  {
-    name: "Water Bottle",
-    price: "$19",
-    old: "$30",
-    rating: "4.8",
-    img: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300",
-  },
-];
-
-const ProductCard = ({ title, icon, data }) => {
-  return (
-    <div className="rounded-2xl lg:rounded-[30px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 sm:p-6 lg:p-8">
-
-      {/* Header */}
-      <div className="flex items-center justify-between gap-3 mb-6 lg:mb-8">
-
-        <h2 className="flex items-center gap-2 lg:gap-3 text-lg sm:text-xl lg:text-2xl font-semibold text-white">
-          {icon}
-          {title}
-        </h2>
-
-        <button className="text-lime-400 flex items-center gap-1 lg:gap-2 text-sm sm:text-base hover:gap-3 duration-300 whitespace-nowrap">
-          See All
-          <ArrowRight size={18} />
-        </button>
-
-      </div>
-
-      {/* Products */}
-
-      <div className="space-y-4 lg:space-y-5">
-
-        {data.map((item, index) => (
-
-          <div
-            key={index}
-            className="group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#111111] p-3 sm:p-4 hover:border-lime-400/40 hover:-translate-y-1 duration-300"
-          >
-
-            {/* Left */}
-
-            <div className="flex items-center gap-3 sm:gap-5 flex-1 min-w-0">
-
-              <img
-                src={item.img}
-                alt={item.name}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover shrink-0"
-              />
-
-              <div className="min-w-0">
-
-                <h3 className="text-white text-sm sm:text-base lg:text-[17px] font-semibold truncate">
-                  {item.name}
-                </h3>
-
-                <div className="flex items-center gap-2 mt-1">
-
-                  <Star
-                    size={14}
-                    className="fill-yellow-400 text-yellow-400 shrink-0"
-                  />
-
-                  <span className="text-gray-400 text-xs sm:text-sm">
-                    {item.rating}
-                  </span>
-
-                </div>
-
-                <div className="mt-2 flex flex-wrap items-center gap-2">
-
-                  <span className="text-lime-400 font-semibold text-base sm:text-lg">
-                    {item.price}
-                  </span>
-
-                  <span className="line-through text-gray-500 text-xs sm:text-sm">
-                    {item.old}
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* Cart */}
-
-            <button className="w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl bg-lime-400 text-black flex items-center justify-center hover:scale-110 duration-300 shrink-0">
-
-              <ShoppingCart size={20} />
-
-            </button>
-
-          </div>
-
-        ))}
-
-      </div>
-
-    </div>
-  );
-};
+import React, { useContext, useEffect } from "react";
+import { Star, ShoppingCart, ArrowRight, Zap } from "lucide-react";
+import axios from "axios";
+import { MyStore } from "../constext/MyContext";
+import { useNavigate } from "react-router";
 
 const FeaturedProducts = () => {
+  let {
+    topproducts,
+    setTopProducts,
+    topRated,
+    setTopRated,
+    arrivals,
+    setArrivals,
+    topArrivals,
+    settopArrivals,
+  } = useContext(MyStore);
+
+
+
+  const navigate=useNavigate()
+
+  const getData = async () => {
+    try {
+      const res = await axios.get("https://fakestoreapi.com/products");
+      setTopProducts(res.data);
+
+      const topRankedData = [...res.data]
+        .sort((a, b) => b.rating.rate - a.rating.rate)
+        .slice(0, 8);
+
+      setTopRated(topRankedData);
+    } catch (error) {
+      console.log("Data not found", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData2 = async () => {
+    try {
+      let res = await axios.get("https://fakestoreapi.com/products");
+      setArrivals(res.data);
+
+      const newArrivals = [...res.data].sort((a, b) => b.id - a.id).slice(0, 8);
+      settopArrivals(newArrivals);
+    } catch (error) {
+      console.log("Data not found", error);
+    }
+  };
+
+  useEffect(() => {
+    getData2();
+  }, []);
+
   return (
-    <section className="relative overflow-hidden bg-[#090909] py-12 sm:py-16 lg:py-20">
+    <div>
+      <div className="w-full py-8 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* ================= TOP RATED ================= */}
 
-      {/* Background */}
+          <div className="bg-[#171717] border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
+            {/* Heading */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center lg:gap-3 gap-1">
+                <Star size={21} className="fill-[#FFD21F] text-[#FFD21F]" />
 
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[size:45px_45px]"></div>
+                <h2 className="text-white lg:text-[22px] text-[16px] lg:font-semibold font-small">
+                  Top Rated
+                </h2>
+              </div>
 
-      <div className="absolute left-0 top-0 w-56 sm:w-72 lg:w-80 h-56 sm:h-72 lg:h-80 rounded-full bg-lime-500/10 blur-[120px] lg:blur-[150px]"></div>
+              <button className="flex items-center gap-2 text-[#B7FF00] lg:text-[18px] text-[14px] font-medium hover:gap-3 duration-300">
+                See All
+                <ArrowRight size={16} />
+              </button>
+            </div>
 
-      <div className="absolute right-0 bottom-0 w-56 sm:w-72 lg:w-80 h-56 sm:h-72 lg:h-80 rounded-full bg-cyan-500/10 blur-[120px] lg:blur-[150px]"></div>
+            {topRated.map((product) => {
+              return (
+                <div
+                 onClick={() => navigate(`/detail/${product.id}`)}
+                  key={product.id}
+                  product={product}
+                  className="bg-[#111111] border cursor-pointer border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
+                >
+                  <div className="flex items-center lg:gap-4 gap-4">
+                    <img
+                      src={product.image}
+                      alt=""
+                      className="lg:w-20 lg:h-20 w-18 h:18 lg:rounded-2xl rounded object-cover flex-shrink-0"
+                    />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div>
+                      <h3 className="text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
+                        {product.title.slice(0, 20)}
+                      </h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                      <div className="flex items-center gap-1 ">
+                        <Star
+                          size={13}
+                          className="fill-[#FFD21F] text-[#FFD21F]"
+                        />
+                        <span className="text-[#BDBDBD] text-[13px]">
+                          {product.rating.rate}
+                        </span>
+                      </div>
 
-          <ProductCard
-            title="Top Rated"
-            icon={<Star className="fill-yellow-400 text-yellow-400" />}
-            data={topRated}
-          />
+                      <div className="flex items-center gap-2 ">
+                        <span className="text-[#9BFF00] text-[15px] font-small">
+                          ${product.price}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-          <ProductCard
-            title="New Arrivals"
-            icon={<Zap className="text-lime-400" />}
-            data={arrivals}
-          />
+                  <button className="p-4 rounded-2xl bg-[#A7F300] hover:bg-[#B8FF19] duration-300 flex items-center justify-center flex-shrink-0">
+                    <ShoppingCart size={16} className="text-black" />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
 
+          {/* ================= NEW ARRIVALS ================= */}
+
+          <div className="bg-[#171717] border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
+            {/* Heading */}
+
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center lg:gap-3 gap-1">
+                <Zap size={24} className="text-[#B7FF00]" />
+
+                <h2 className="text-white lg:text-[22px] text-[16px] lg:font-semibold font-small">
+                  New Arrivals
+                </h2>
+              </div>
+
+              <button className="flex items-center gap-2 text-[#B7FF00] lg:text-[18px] text-[14px] font-medium hover:gap-3 duration-300">
+                See All
+                <ArrowRight size={20} />
+              </button>
+            </div>
+
+            {/* ================= Product 1 ================= */}
+
+            {topArrivals.map((product) => {
+              return (
+                <div
+                onClick={() => navigate(`/detail/${product.id}`)}
+                  key={product.id}
+                  product={product}
+                  className="bg-[#111111] border cursor-pointer border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
+                >
+                  <div className="flex items-center lg:gap-4 gap-4">
+                    <img
+                      src={product.image}
+                      alt=""
+                      className="lg:w-20 lg:h-20 w-18 h:18 lg:rounded-2xl rounded object-cover flex-shrink-0"
+                    />
+
+                    <div>
+                      <h3 className="text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
+                        {product.title.slice(0, 20)}
+                      </h3>
+
+                      <div className="flex items-center gap-1 ">
+                        <Star
+                          size={13}
+                          className="fill-[#FFD21F] text-[#FFD21F]"
+                        />
+                        <span className="text-[#BDBDBD] text-[13px]">
+                          {product.rating.rate}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 ">
+                        <span className="text-[#9BFF00] text-[15px] font-small">
+                          ${product.price}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button className="p-4 rounded-2xl bg-[#A7F300] hover:bg-[#B8FF19] duration-300 flex items-center justify-center flex-shrink-0">
+                    <ShoppingCart size={16} className="text-black" />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
         </div>
-
       </div>
-
-    </section>
+    </div>
   );
 };
 
