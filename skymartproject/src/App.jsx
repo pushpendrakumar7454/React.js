@@ -12,6 +12,8 @@ import Fashion from './components/Fashion'
 import Furniture from './components/Furniture'
 import Sports from './components/Sports'
 import Accessories from './components/Accessories'
+import Cartdetail from './components/Cartdetail'
+import Cartdetail1 from './components/Cartdetail1'
 
 
 const App = () => {
@@ -26,6 +28,8 @@ const App = () => {
           <Route path='/furniture' element={<Furniture/>}/>
           <Route path='/sports' element={<Sports/>}/>
           <Route path='/accessories' element={<Accessories/>}/>
+          <Route path='/detail/:id' element={<Cartdetail/>}/>
+          <Route path='/detailproduct/:id' element={<Cartdetail1/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
