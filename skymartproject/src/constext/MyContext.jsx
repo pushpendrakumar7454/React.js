@@ -14,7 +14,8 @@ export const MyStoreSkyCartProvider=({children})=>{
     const [furnicureData, setFurnicureData] = useState([])
     const [sportsData, setSportsData] = useState([])
     const [accessories, setAccessories] = useState([])
+     const [currentIndex, setCurrentIndex] = useState(0);
 
 
-    return <MyStore.Provider value={{users,setUsers,data,setData,electronicData,setElectronicData,fashionData,setFashionData,furnicureData,setFurnicureData,sportsData,setSportsData,accessories,setAccessories,currentUser,setCurrentUser}}>{children}</MyStore.Provider>
+    return <MyStore.Provider value={{users,setUsers,data,setData,electronicData,setElectronicData,fashionData,setFashionData,furnicureData,setFurnicureData,sportsData,setSportsData,accessories,setAccessories,currentUser,setCurrentUser,currentIndex,setCurrentIndex}}>{children}</MyStore.Provider>
 }

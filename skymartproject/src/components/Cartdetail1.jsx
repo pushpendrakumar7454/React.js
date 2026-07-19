@@ -15,30 +15,36 @@ import { MyStore } from "../constext/MyContext";
 const Cartdetail1 = () => {
   const { id } = useParams();
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const { sportsData, furnicureData, accessories } = useContext(MyStore);
-
- 
-
- 
-
   const allDummyProducts = [...sportsData, ...furnicureData, ...accessories];
-
   let product = allDummyProducts.find((val) => val.id == Number(id));
 
+  const productdetail = allDummyProducts
+    .filter((item) => item.category === product.category)
+    .filter(
+      (item, index, self) => index === self.findIndex((p) => p.id === item.id),
+    );
 
- const currentIndex = allDummyProducts.findIndex(
-    (item) => item.id === product.id,
+  const relatedProducts = productdetail.filter(
+    (item) => item.id !== product.id,
   );
 
-   const previousProduct = allDummyProducts[currentIndex - 1];
-  const nextProduct = allDummyProducts[currentIndex + 1];
-  const relatedProducts = allDummyProducts.filter(
-    (item) => item.category === product?.category && item.id !== product?.id,
-  );
+  const nextButton = () => {
+    const current = productdetail.findIndex((item) => item.id === product.id);
 
+    if (current < productdetail.length - 1) {
+      navigate(`/detailproduct/${productdetail[current + 1].id}`);
+    }
+  };
 
-  
+  const prevbutton = () => {
+    const current = productdetail.findIndex((item) => item.id === product.id);
+    if (current > 0) {
+      navigate(`/detailproduct/${productdetail[current - 1].id}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0d0d0d] text-white px-5 md:px-10 lg:px-16 py-10">
       {/* Main Section */}
@@ -128,11 +134,7 @@ const Cartdetail1 = () => {
 
       <div className="flex justify-end gap-4 mt-4 flex-wrap">
         <button
-          onClick={() => {
-            if (previousProduct) {
-              navigate(`/detail/${previousProduct.id}`);
-            }
-          }}
+          onClick={prevbutton}
           className="px-8 py-3 w-full justify-center lg:w-40 active:scale-95 cursor-pointer rounded-xl bg-zinc-800 hover:bg-zinc-700 flex items-center gap-2"
         >
           <ChevronLeft size={18} />
@@ -140,11 +142,7 @@ const Cartdetail1 = () => {
         </button>
 
         <button
-          onClick={() => {
-            if (nextProduct) {
-              navigate(`/detail/${nextProduct.id}`);
-            }
-          }}
+          onClick={nextButton}
           className="px-8 py-3 w-full text-center lg:w-40  active:scale-95 cursor-pointer justify-center rounded-xl bg-lime-400 text-black hover:bg-lime-300 flex items-center gap-2"
         >
           Next

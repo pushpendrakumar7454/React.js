@@ -9,24 +9,48 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { MyStore } from "../constext/MyContext";
 
 const Cartdetail = () => {
   const { id } = useParams();
-  const { data, electronicData, fashionData } = useContext(MyStore);
 
-  const product = data.find((item) => item.id === Number(id));
-
-  if (!product) {
-    return <h1>Loading...</h1>;
-  }
+  const navigate = useNavigate();
+  const { data, electronicData, fashionData } =
+    useContext(MyStore);
 
   const allDummyProducts = [...data, ...electronicData, ...fashionData];
+  const product = allDummyProducts.find((item) => item.id === Number(id));
 
-  let relatedProduct = allDummyProducts.filter(
-    (val) => val.id !== product.id && val.category === product.category,
-  );
+  
+
+  const productList = allDummyProducts
+    .filter((item) => item.category === product.category)
+    .filter(
+      (item, index, self) => index === self.findIndex((p) => p.id === item.id),
+    );
+
+
+  const relatedProduct = productList.filter((item) => item.id !== product.id);
+
+  // button ke liye prev and next
+
+  const nextProduct = () => {
+    const current = productList.findIndex((item) => item.id === product.id);
+
+    if (current < productList.length - 1) {
+      navigate(`/detail/${productList[current + 1].id}`);
+    }
+  };
+
+  const prevProduct = () => {
+    const current = productList.findIndex((item) => item.id === product.id);
+
+    if (current > 0) {
+      navigate(`/detail/${productList[current - 1].id}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0d0d0d] text-white px-5 md:px-10 lg:px-16 py-10">
       {/* Main Section */}
@@ -115,12 +139,18 @@ const Cartdetail = () => {
       {/* Previous Next */}
 
       <div className="flex justify-end gap-4 mt-4 flex-wrap">
-        <button className="px-8 py-3 w-full justify-center lg:w-40 active:scale-95 cursor-pointer rounded-xl bg-zinc-800 hover:bg-zinc-700 flex items-center gap-2">
+        <button
+          onClick={prevProduct}
+          className="px-8 py-3 w-full justify-center lg:w-40 active:scale-95 cursor-pointer rounded-xl bg-zinc-800 hover:bg-zinc-700 flex items-center gap-2"
+        >
           <ChevronLeft size={18} />
           Previous
         </button>
 
-        <button className="px-8 py-3 w-full text-center lg:w-40  active:scale-95 cursor-pointer justify-center rounded-xl bg-lime-400 text-black hover:bg-lime-300 flex items-center gap-2">
+        <button
+          onClick={nextProduct}
+          className="px-8 py-3 w-full text-center lg:w-40  active:scale-95 cursor-pointer justify-center rounded-xl bg-lime-400 text-black hover:bg-lime-300 flex items-center gap-2"
+        >
           Next
           <ChevronRight size={18} />
         </button>
