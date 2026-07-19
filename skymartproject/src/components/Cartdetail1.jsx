@@ -20,23 +20,16 @@ const Cartdetail1 = () => {
   const allDummyProducts = [...sportsData, ...furnicureData, ...accessories];
   let product = allDummyProducts.find((val) => val.id == Number(id));
 
-  const productdetail = allDummyProducts
-    .filter((item) => item.category === product.category)
-    .filter(
-      (item, index, self) => index === self.findIndex((p) => p.id === item.id),
-    );
+  const productdetail=allDummyProducts.filter((item)=>item.category===product.category).filter((item,index,self)=>index===self.findIndex((p)=>p.id==item.id))
 
-  const relatedProducts = productdetail.filter(
-    (item) => item.id !== product.id,
-  );
+  const relatedProduct=productdetail.filter((item)=>item.id!==product.id)
 
-  const nextButton = () => {
-    const current = productdetail.findIndex((item) => item.id === product.id);
-
-    if (current < productdetail.length - 1) {
-      navigate(`/detailproduct/${productdetail[current + 1].id}`);
+  const nextButton=()=>{
+    let current=productdetail.findIndex((item)=>item.id===product.id)
+    if(current<productdetail.length-1){
+      navigate(`/detailproduct/${productdetail[current+1].id}`)
     }
-  };
+  }
 
   const prevbutton = () => {
     const current = productdetail.findIndex((item) => item.id === product.id);
@@ -156,7 +149,7 @@ const Cartdetail1 = () => {
         <h2 className="text-2xl font-small mb-5">Related Products</h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {relatedProducts.map((item) => (
+          {relatedProduct.map((item) => (
             <div
               key={item.id}
               className="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-lime-400 hover:-translate-y-2 duration-300"
