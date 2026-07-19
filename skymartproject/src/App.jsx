@@ -14,6 +14,7 @@ import Sports from './components/Sports'
 import Accessories from './components/Accessories'
 import Cartdetail from './components/Cartdetail'
 import Cartdetail1 from './components/Cartdetail1'
+import CartPage from './components/CartPage'
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/accessories' element={<Accessories/>}/>
           <Route path='/detail/:id' element={<Cartdetail/>}/>
           <Route path='/detailproduct/:id' element={<Cartdetail1/>}/>
+          <Route path='/cartpage' element={<CartPage/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>

@@ -105,7 +105,7 @@ const Navbar = () => {
               </span>
             </button>
 
-            <button className="relative h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
+            <button onClick={()=>navigate("/cartpage")} className="relative h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
               <ShoppingCart className="text-white" size={18} />
 
               <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
@@ -130,10 +130,7 @@ const Navbar = () => {
             </div>
 
             {currentUser && (
-              <button
-                onClick={logout}
-                className="text-white active:scale-95"
-              >
+              <button onClick={logout} className="text-white active:scale-95">
                 <LogOut />
               </button>
             )}
@@ -170,9 +167,7 @@ const Navbar = () => {
                   {currentUser ? currentUser.name : "Guest"}
                 </h2>
 
-                <p className="text-zinc-500 text-sm">
-                  Premium User
-                </p>
+                <p className="text-zinc-500 text-sm">Premium User</p>
               </div>
             </div>
 

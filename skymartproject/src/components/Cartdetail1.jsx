@@ -16,20 +16,25 @@ const Cartdetail1 = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const { sportsData, furnicureData, accessories } = useContext(MyStore);
+  const { sportsData, furnicureData, accessories, setCarts } =
+    useContext(MyStore);
   const allDummyProducts = [...sportsData, ...furnicureData, ...accessories];
   let product = allDummyProducts.find((val) => val.id == Number(id));
 
-  const productdetail=allDummyProducts.filter((item)=>item.category===product.category).filter((item,index,self)=>index===self.findIndex((p)=>p.id==item.id))
+  const productdetail = allDummyProducts
+    .filter((item) => item.category === product.category)
+    .filter(
+      (item, index, self) => index === self.findIndex((p) => p.id == item.id),
+    );
 
-  const relatedProduct=productdetail.filter((item)=>item.id!==product.id)
+  const relatedProduct = productdetail.filter((item) => item.id !== product.id);
 
-  const nextButton=()=>{
-    let current=productdetail.findIndex((item)=>item.id===product.id)
-    if(current<productdetail.length-1){
-      navigate(`/detailproduct/${productdetail[current+1].id}`)
+  const nextButton = () => {
+    let current = productdetail.findIndex((item) => item.id === product.id);
+    if (current < productdetail.length - 1) {
+      navigate(`/detailproduct/${productdetail[current + 1].id}`);
     }
-  }
+  };
 
   const prevbutton = () => {
     const current = productdetail.findIndex((item) => item.id === product.id);
@@ -89,7 +94,20 @@ const Cartdetail1 = () => {
           {/* Buttons */}
 
           <div className="flex gap-4 mt-4">
-            <button className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300">
+            <button
+              onClick={() =>
+                setCarts((prev) => [
+                  ...prev,
+                  {
+                    ...product,
+                    image:
+                      product.image || product.thumbnail || product.images?.[0],
+                    quantity: 1,
+                  },
+                ])
+              }
+              className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
+            >
               <ShoppingCart size={22} />
               Add To Cart
             </button>

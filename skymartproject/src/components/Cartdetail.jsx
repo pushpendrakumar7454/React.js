@@ -16,7 +16,7 @@ const Cartdetail = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const { data, electronicData, fashionData } =
+  const { data, electronicData, fashionData,setCarts} =
     useContext(MyStore);
 
   const allDummyProducts = [...data, ...electronicData, ...fashionData];
@@ -102,7 +102,7 @@ const Cartdetail = () => {
           {/* Buttons */}
 
           <div className="flex gap-4 mt-4">
-            <button className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300">
+            <button onClick={()=>setCarts((prev)=>[...prev,{...product,quantity:1}])}  className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300">
               <ShoppingCart size={22} />
               Add To Cart
             </button>
