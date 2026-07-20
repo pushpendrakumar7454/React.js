@@ -15,6 +15,8 @@ import Accessories from './components/Accessories'
 import Cartdetail from './components/Cartdetail'
 import Cartdetail1 from './components/Cartdetail1'
 import CartPage from './components/CartPage'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const App = () => {
@@ -36,6 +38,11 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        theme="colored"
+      />
     </div>
   );
 }

@@ -30,6 +30,10 @@ export const MyStoreSkyCartProvider = ({ children }) => {
 
 
   const increment=(id)=>{
+     console.log("Increment id:", id);
+  console.log(carts);
+  console.log("Before Click:", carts);
+
       setCarts((prev)=>{
         return prev.map((item)=>{
             return item.id===id?{...item,quantity:item.quantity+1}:item
@@ -44,6 +48,14 @@ export const MyStoreSkyCartProvider = ({ children }) => {
             return  item.id===id?{...item,quantity:item.quantity-1}:item
         }).filter((item)=>item.quantity>0)
     })
+  }
+
+  const deleteCart=(id)=>{
+    setCarts((prev)=>{
+        return prev.filter((item)=>item.id!==id)
+
+    })
+
   }
 
   return (
@@ -78,7 +90,8 @@ export const MyStoreSkyCartProvider = ({ children }) => {
         setCarts,
         carts,
         increment,
-        decrement
+        decrement,
+        deleteCart
       }}
     >
       {children}

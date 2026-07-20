@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { MyStore } from "../constext/MyContext";
+import { toast } from "react-toastify";
 
 const Cartdetail1 = () => {
   const { id } = useParams();
@@ -95,17 +96,31 @@ const Cartdetail1 = () => {
 
           <div className="flex gap-4 mt-4">
             <button
-              onClick={() =>
-                setCarts((prev) => [
-                  ...prev,
-                  {
-                    ...product,
-                    image:
-                      product.image || product.thumbnail || product.images?.[0],
-                    quantity: 1,
-                  },
-                ])
-              }
+              onClick={() => {
+                setCarts((prev) => {
+                  const exist = prev.find((item) => item.id === product.id);
+
+                  if (exist) {
+                    toast.success("🛒 Quantity Updated!",{
+                      position:"top-center",
+                      autoClose:2000
+
+                    })
+
+                    return prev.map((item) =>
+                      item.id === product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item,
+                    );
+                  }
+                  toast.success("🛒 Product Added to Cart!",{
+                    position:"top-center",
+                    autoClose:2000
+                  })
+
+                  return [...prev, { ...product, quantity: 1 }];
+                });
+              }}
               className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
             >
               <ShoppingCart size={22} />

@@ -14,7 +14,7 @@ import { MyStore } from "../constext/MyContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(MyStore);
+  const { currentUser, setCurrentUser, carts } = useContext(MyStore);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -69,47 +69,26 @@ const Navbar = () => {
             </NavLink>
 
             <li className="text-zinc-400 hover:text-white cursor-pointer">
-              Categories
-            </li>
-
-            <li className="text-zinc-400 hover:text-white cursor-pointer">
-              Deals
-            </li>
-
-            <li className="text-zinc-400 hover:text-white cursor-pointer">
               About
             </li>
           </ul>
 
           {/* Desktop Right */}
           <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2">
-              <Search size={18} className="text-zinc-500" />
-
-              <input
-                type="text"
-                placeholder="Search..."
-                className="bg-transparent outline-none text-sm text-white placeholder:text-zinc-500 w-40"
-              />
-            </div>
-
             <button className="relative h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
               <Heart className="text-white" size={18} />
             </button>
 
-            <button className="relative h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
-              <Bell className="text-white" size={18} />
+          
 
-              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-lime-400 text-black text-xs flex items-center justify-center font-bold">
-                4
-              </span>
-            </button>
-
-            <button onClick={()=>navigate("/cartpage")} className="relative h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
+            <button
+              onClick={() => navigate("/cartpage")}
+              className="relative h-11 cursor-pointer w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition"
+            >
               <ShoppingCart className="text-white" size={18} />
 
               <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
-                2
+                {carts.length}
               </span>
             </button>
 
@@ -172,14 +151,6 @@ const Navbar = () => {
             </div>
 
             {/* Search */}
-            <div className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3">
-              <Search size={18} className="text-zinc-500" />
-
-              <input
-                placeholder="Search..."
-                className="bg-transparent outline-none w-full text-white"
-              />
-            </div>
 
             {/* Links */}
             <div className="flex flex-col gap-4 text-white">
@@ -190,10 +161,6 @@ const Navbar = () => {
               <NavLink onClick={() => setMenuOpen(false)} to="/product">
                 Shop
               </NavLink>
-
-              <button className="text-left">Categories</button>
-
-              <button className="text-left">Deals</button>
 
               <button className="text-left">About</button>
             </div>
@@ -208,8 +175,15 @@ const Navbar = () => {
                 <Bell className="text-white" />
               </button>
 
-              <button className="h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center items-center">
+              <button
+                onClick={() => navigate("/cartpage")}
+                className="relative h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center items-center"
+              >
                 <ShoppingCart className="text-white" />
+
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
+                  {carts.length}
+                </span>
               </button>
             </div>
 
