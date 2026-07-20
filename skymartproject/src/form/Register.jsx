@@ -12,8 +12,8 @@ import {
   Zap,
 } from "lucide-react";
 import { useNavigate } from "react-router";
-import { useState } from "react";
 import { MyStore } from "../constext/MyContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -49,7 +49,10 @@ const Register = () => {
     localStorage.setItem("users", JSON.stringify(newUser));
     setUsers(newUser);
 
-    alert("User Registered Successfully");
+    toast.success("Registration Successful!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
     navigate("/login");
     reset();
   };

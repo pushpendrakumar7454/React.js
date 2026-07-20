@@ -17,10 +17,11 @@ const Cartdetail = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const { data, electronicData, fashionData, setCarts } = useContext(MyStore);
+  const { data, electronicData, fashionData, setCarts,carts } = useContext(MyStore);
 
   const allDummyProducts = [...data, ...electronicData, ...fashionData];
   const product = allDummyProducts.find((item) => item.id === Number(id));
+  const isAdded=carts.find((item)=>item.id==product.id)
 
   const productList = allDummyProducts
     .filter((item) => item.category === product.category)
@@ -99,14 +100,44 @@ const Cartdetail = () => {
           {/* Buttons */}
 
           <div className="flex gap-4 mt-4">
-            <button
+           {isAdded? <button
               onClick={() =>
                 setCarts((prev) => {
                   const exist = prev.find((item) => item.id === product.id);
 
                   if (exist) {
                     toast.success("🛒 Quantity Updated!", {
-                   position: "top-center",
+                      position: "top-center",
+                      autoClose: 2000,
+                    });
+
+                    return prev.map((item) =>
+                      item.id === product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item,
+                    );
+                  }
+
+                  toast.success("🛒 Product Added to Cart!", {
+                    position: "top-right",
+                    autoClose: 2000,
+                  });
+
+                  return [...prev, { ...product, quantity: 1 }];
+                })
+              }
+              className="flex-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
+            >
+              <ShoppingCart size={22} />
+              Added
+            </button>: <button
+              onClick={() =>
+                setCarts((prev) => {
+                  const exist = prev.find((item) => item.id === product.id);
+
+                  if (exist) {
+                    toast.success("🛒 Quantity Updated!", {
+                      position: "top-center",
                       autoClose: 2000,
                     });
 
@@ -129,7 +160,7 @@ const Cartdetail = () => {
             >
               <ShoppingCart size={22} />
               Add To Cart
-            </button>
+            </button>}
 
             <button className="border border-gray-700 rounded-xl w-13 flex justify-center items-center hover:border-lime-400 duration-300">
               <Heart />
@@ -188,6 +219,7 @@ const Cartdetail = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {relatedProduct.map((item) => (
             <div
+              onClick={() => navigate(`/detail/${item.id}`)}
               key={item.id}
               className="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-lime-400 hover:-translate-y-2 duration-300"
             >
@@ -195,23 +227,52 @@ const Cartdetail = () => {
                 <img
                   src={item.image}
                   alt=""
-                  className="h-40 w-full object-cover rounded-xl"
+                  className="h-40 w-full object-cover rounded-xl cursor-pointer"
                 />
               </div>
 
               <div className="p-4">
                 <span className="text-gray-400 text-sm">{item.category}</span>
 
-                <h3 className="text-xl font-semibold ">{item.title}</h3>
+                <h3 className="text-sm font-semibold ">{item.title}</h3>
 
                 <div className="flex justify-between items-center ">
                   <h4 className="text-lime-400 text-2xl font-semibold">
                     ${item.price}
                   </h4>
 
-                  <button className="bg-lime-400 text-black px-4 py-2 rounded-lg hover:bg-lime-300 duration-300">
-                    Add
-                  </button>
+                {isAdded?  <button
+                    onClick={() =>
+                      setCarts((prev) => {
+                        const exist = prev.find(
+                          (item) => item.id === product.id,
+                        );
+
+                        if (exist) {
+                          toast.success("🛒 Quantity Updated!", {
+                            position: "top-center",
+                            autoClose: 2000,
+                          });
+
+                          return prev.map((item) =>
+                            item.id === product.id
+                              ? { ...item, quantity: item.quantity + 1 }
+                              : item,
+                          );
+                        }
+
+                        toast.success("🛒 Product Added to Cart!", {
+                          position: "top-right",
+                          autoClose: 2000,
+                        });
+
+                        return [...prev, { ...product, quantity: 1 }];
+                      })
+                    }
+                    className="bg-green-400 cursor-pointer active:scale-95 text-black px-4 py-2 rounded-lg hover:green-lime-300 duration-300"
+                  >
+                    Added
+                  </button>:""}
                 </div>
               </div>
             </div>

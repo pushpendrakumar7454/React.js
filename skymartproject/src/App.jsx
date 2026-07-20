@@ -17,6 +17,7 @@ import Cartdetail1 from './components/Cartdetail1'
 import CartPage from './components/CartPage'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 const App = () => {
@@ -24,19 +25,22 @@ const App = () => {
     <div>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/product" element={<Product/>}/>
-          <Route path='/electronic' element={<Electronic/>}/>
-          <Route path='/fashion' element={<Fashion/>}/>
-          <Route path='/furniture' element={<Furniture/>}/>
-          <Route path='/sports' element={<Sports/>}/>
-          <Route path='/accessories' element={<Accessories/>}/>
-          <Route path='/detail/:id' element={<Cartdetail/>}/>
-          <Route path='/detailproduct/:id' element={<Cartdetail1/>}/>
-          <Route path='/cartpage' element={<CartPage/>}/>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/cartpage" element={<CartPage />} />
+          </Route>
+          <Route path="/product" element={<Product />} />
+          <Route path='/electronic' element={<Electronic />} />
+          <Route path='/fashion' element={<Fashion />} />
+          <Route path='/furniture' element={<Furniture />} />
+          <Route path='/sports' element={<Sports />} />
+          <Route path='/accessories' element={<Accessories />} />
+          <Route path='/detail/:id' element={<Cartdetail />} />
+          <Route path='/detailproduct/:id' element={<Cartdetail1 />} />
+
         </Route>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <ToastContainer
         position="top-right"

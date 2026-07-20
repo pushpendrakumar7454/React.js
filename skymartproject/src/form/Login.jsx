@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { MyStore } from "../constext/MyContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   let naviagte = useNavigate();
@@ -27,10 +28,16 @@ const Login = () => {
     setCurrentUser(user);
 
     if (user) {
-      alert("User login successfully");
+      toast.success("Successfully Logged In!", {
+        position: "top-center",
+        autoClose: 2000,
+      });
       naviagte("/");
     } else {
-      alert("Invalid email and password");
+      toast.error("Please ENter valid Email and password", {
+        position: "top-center",
+        autoClose: 2000,
+      });
     }
 
     reset();
