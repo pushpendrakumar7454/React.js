@@ -3,7 +3,8 @@ import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
 import { MyStore } from "../constext/MyContext";
 
 const CartPage = () => {
-  const { carts, increment, decrement, deleteCart,menuOpen, setMenuOpen } = useContext(MyStore);
+  const { carts, increment, decrement, deleteCart, menuOpen, setMenuOpen } =
+    useContext(MyStore);
 
   const subtotal = carts.reduce((total, item) => {
     return total + item.price;
@@ -135,7 +136,9 @@ const CartPage = () => {
             <div className="border-t border-[#292929] pt-3 flex justify-between">
               <span>Total</span>
 
-              <span className="text-orange-500 font-semibold">${total.toFixed(2)}</span>
+              <span className="text-orange-500 font-semibold">
+                ${total.toFixed(2)}
+              </span>
             </div>
           </div>
 

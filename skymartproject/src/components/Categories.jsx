@@ -45,7 +45,6 @@ const Categories = () => {
 
         {/* Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
           {/* Electronics */}
           <div
             onClick={() => navigate("/electronic")}
@@ -61,9 +60,7 @@ const Categories = () => {
               Electronics
             </h3>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-400">
-              17 Items
-            </p>
+            <p className="mt-2 text-sm sm:text-base text-gray-400">17 Items</p>
 
             <button className="mt-4 flex items-center gap-2 text-lime-400 opacity-100 sm:opacity-0 duration-300 group-hover:opacity-100">
               Explore
@@ -88,9 +85,7 @@ const Categories = () => {
               Fashion
             </h3>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-400">
-              21 Items
-            </p>
+            <p className="mt-2 text-sm sm:text-base text-gray-400">21 Items</p>
 
             <button className="mt-4 flex items-center gap-2 text-lime-400 opacity-100 sm:opacity-0 duration-300 group-hover:opacity-100">
               Explore
@@ -115,9 +110,7 @@ const Categories = () => {
               Furniture
             </h3>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-400">
-              12 Items
-            </p>
+            <p className="mt-2 text-sm sm:text-base text-gray-400">12 Items</p>
 
             <button className="mt-4 flex items-center gap-2 text-lime-400 opacity-100 sm:opacity-0 duration-300 group-hover:opacity-100">
               Explore
@@ -142,9 +135,7 @@ const Categories = () => {
               Home
             </h3>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-400">
-              18 Items
-            </p>
+            <p className="mt-2 text-sm sm:text-base text-gray-400">18 Items</p>
 
             <button className="mt-4 flex items-center gap-2 text-lime-400 opacity-100 sm:opacity-0 duration-300 group-hover:opacity-100">
               Explore
@@ -169,9 +160,7 @@ const Categories = () => {
               Sports
             </h3>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-400">
-              9 Items
-            </p>
+            <p className="mt-2 text-sm sm:text-base text-gray-400">9 Items</p>
 
             <button className="mt-4 flex items-center gap-2 text-lime-400 opacity-100 sm:opacity-0 duration-300 group-hover:opacity-100">
               Explore
@@ -196,9 +185,7 @@ const Categories = () => {
               Accessories
             </h3>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-400">
-              15 Items
-            </p>
+            <p className="mt-2 text-sm sm:text-base text-gray-400">15 Items</p>
 
             <button className="mt-4 flex items-center gap-2 text-lime-400 opacity-100 sm:opacity-0 duration-300 group-hover:opacity-100">
               Explore
@@ -207,7 +194,6 @@ const Categories = () => {
 
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-lime-400 duration-500 group-hover:w-full"></div>
           </div>
-
         </div>
       </div>
     </section>
