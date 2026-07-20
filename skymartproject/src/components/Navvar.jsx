@@ -104,7 +104,7 @@ const Navbar = () => {
                 <Sun className="text-yellow-400" size={18} />
               )}
             </button>
-
+             
             <button
               onClick={() => navigate("/cartpage")}
               className="relative h-11 cursor-pointer w-11 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition"
@@ -133,23 +133,40 @@ const Navbar = () => {
             </div>
 
             {currentUser && (
-              <button onClick={logout} className="text-white active:scale-95">
+              <button onClick={logout} className="dark:text-white active:scale-95">
                 <LogOut />
               </button>
             )}
           </div>
 
           {/* Mobile Button */}
+       <div className="flex gap-2 lg:hidden">
+            <button
+              onClick={() => {
+                setDarkMode(!darkMode);
+
+                document.documentElement.classList.toggle("dark");
+              }}
+              className="h-11 lg:hidden cursor-pointer active:scale-95 w-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center"
+            >
+              {darkMode ? (
+                <Moon className="text-black dark:text-white" size={18} />
+              ) : (
+                <Sun className="text-yellow-400" size={18} />
+              )}
+            </button>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center"
+            className="lg:hidden h-11 w-11 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex items-center justify-center"
           >
             {menuOpen ? (
-              <X className="text-white" />
+              <X className="dark:text-white" />
             ) : (
-              <Menu className="text-white" />
+              <Menu className="dark:text-white" />
             )}
           </button>
+       </div>
+          
         </div>
 
         {/* Mobile / Tablet Menu */}
@@ -158,15 +175,15 @@ const Navbar = () => {
             menuOpen ? "max-h-[700px]" : "max-h-0"
           }`}
         >
-          <div className="border-t border-zinc-800 bg-[#0a0a0a] px-5 py-5 space-y-5">
+          <div className="border-t border-zinc-800 dark:bg-[#0a0a0a] text-black px-5 py-5 space-y-5">
             {/* Profile */}
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 uppercase rounded-xl bg-lime-400 flex items-center justify-center text-black font-bold">
+              <div className="h-12 w-12 uppercase rounded-xl bg-lime-400 flex items-center justify-center dark:text-black font-bold">
                 {currentUser ? currentUser.name.slice(0, 1) : "P"}
               </div>
 
               <div>
-                <h2 className="text-white font-semibold">
+                <h2 className="dark:text-white font-semibold">
                   {currentUser ? currentUser.name : "Guest"}
                 </h2>
 
@@ -177,7 +194,7 @@ const Navbar = () => {
             {/* Search */}
 
             {/* Links */}
-            <div className="flex flex-col gap-4 text-white">
+            <div className="flex flex-col gap-4 dark:text-white">
               <NavLink onClick={() => setMenuOpen(false)} to="/">
                 Home
               </NavLink>
@@ -192,19 +209,19 @@ const Navbar = () => {
             {/* Icons */}
 
             <div className="flex justify-between">
-              <button className="h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center items-center">
-                <Heart className="text-white" />
+              <button className="h-12 w-12 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex justify-center items-center">
+                <Heart className="dark:text-white" />
               </button>
 
-              <button className="h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center items-center">
-                <Bell className="text-white" />
+              <button className="h-12 w-12 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex justify-center items-center">
+                <Bell className="dark:text-white" />
               </button>
 
               <button
                 onClick={() => navigate("/cartpage")}
-                className="relative h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center items-center"
+                className="relative h-12 w-12 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex justify-center items-center"
               >
-                <ShoppingCart className="text-white" />
+                <ShoppingCart className="dark:text-white" />
 
                 <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
                   {carts.length}

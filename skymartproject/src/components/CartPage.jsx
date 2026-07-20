@@ -35,7 +35,7 @@ const CartPage = () => {
 
         <div className="lg:col-span-2 space-y-4">
           {carts.length === 0 ? (
-            <div className="bg-[#171717] border border-[#292929] rounded-2xl p-10 flex flex-col items-center justify-center">
+            <div className="dark:bg-[#171717] border border-[#292929] rounded-2xl p-10 flex flex-col items-center justify-center">
               <ShoppingBag size={60} className="text-gray-500 mb-4" />
 
               <h2 className="text-xl font-semibold">Your Cart is Empty</h2>
