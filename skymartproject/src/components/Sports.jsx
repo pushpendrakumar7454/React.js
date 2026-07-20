@@ -92,8 +92,8 @@ const Sports = () => {
       break;
   }
 
-  return (<div className="bg-black">
-  <div className="mb-10 bg-black p-6">
+  return (<div className="dark:bg-black">
+  <div className="mb-10 dark:bg-black p-6">
     <h1 className="text-3xl font-semibold text-white">
       All Products
     </h1>
@@ -117,7 +117,7 @@ const Sports = () => {
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="p-3 mt-1 w-full rounded-2xl border border-lime-700 bg-zinc-900 pl-14 pr-4 text-white outline-none placeholder:text-zinc-500 focus:border-violet-500"
+            className="p-3 mt-1 w-full rounded-2xl border border-lime-700 dark:bg-zinc-900 pl-14 pr-4 dark:text-white outline-none placeholder:text-zinc-500 focus:border-violet-500"
           />
         </div>
 
@@ -128,7 +128,7 @@ const Sports = () => {
               setCategoryOpen(!categoryOpen);
               setSortOpen(false);
             }}
-            className="flex p-3 text-sm mt-1 min-w-[170px] items-center justify-between rounded-2xl border border-zinc-700 bg-zinc-900 px-5 text-white transition hover:border-violet-500"
+            className="flex p-3 text-sm mt-1 min-w-[170px] items-center justify-between rounded-2xl border border-zinc-700 dark:bg-zinc-900 px-5 dark:text-white transition hover:border-violet-500"
           >
             <span>{selectedCategory}</span>
             <ChevronDown size={18} />
@@ -159,7 +159,7 @@ const Sports = () => {
               setSortOpen(!sortOpen);
               setCategoryOpen(false);
             }}
-            className="flex p-3 text-sm mt-1 min-w-[180px] items-center justify-between rounded-2xl border border-zinc-700 bg-zinc-900 px-5 text-white transition hover:border-violet-500"
+            className="flex p-3 text-sm mt-1 min-w-[180px] items-center justify-between rounded-2xl border border-zinc-700 dark:bg-zinc-900 px-5 dark:text-white transition hover:border-violet-500"
           >
             <span>{sortBy}</span>
             <ChevronDown size={18} />
@@ -197,7 +197,7 @@ const Sports = () => {
   </div>
 
   {/* Product Grid */}
-  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-black">
+  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6  dark:bg-black">
     {filteredProducts.length > 0 ? (
       filteredProducts.map((product) => (
         <ProductCart1

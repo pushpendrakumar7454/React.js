@@ -11,14 +11,14 @@ const ProductCart1 = ({ product }) => {
   const isAdded = carts.find((item) => item.id == product.id);
 
   return (
-    <div className="group relative overflow-hidden cursor-pointer rounded-2xl lg:rounded-[28px] border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:-translate-y-2 hover:border-violet-500/50 hover:shadow-[0_20px_60px_rgba(139,92,246,.25)]">
+    <div className="group relative overflow-hidden cursor-pointer rounded-2xl lg:rounded-[28px] border border-zinc-800 dark:bg-zinc-900 transition-all duration-500 hover:-translate-y-2 hover:border-violet-500/50 hover:shadow-[0_20px_60px_rgba(139,92,246,.25)]">
       {/* Top */}
       <div
         onClick={() => naviagte(`/detailproduct/${product.id}`)}
         className="relative h-40 sm:h-52 lg:h-60 overflow-hidden bg-gradient-to-br from-zinc-800 via-zinc-900 to-black"
       >
         {/* Category */}
-        <span className="absolute left-2 top-2 lg:left-4 lg:top-4 z-20 rounded-full bg-white/10 px-2 py-1 lg:px-3 text-[10px] sm:text-xs font-semibold text-white backdrop-blur-md">
+        <span className="absolute left-2 top-2 lg:left-4 lg:top-4 z-20 rounded-full dark:bg-white/10 px-2 py-1 lg:px-3 text-[10px] sm:text-xs font-semibold text-white backdrop-blur-md">
           Electronics
         </span>
 
@@ -41,7 +41,7 @@ const ProductCart1 = ({ product }) => {
         />
 
         {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
+        <div className="absolute inset-0 dark:bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
       </div>
 
       {/* Content */}
@@ -51,7 +51,7 @@ const ProductCart1 = ({ product }) => {
             Premium Audio
           </p>
 
-          <h2 className="mt-1 text-sm sm:text-base lg:text-lg font-semibold text-white transition group-hover:text-violet-400 leading-snug">
+          <h2 className="mt-1 text-sm sm:text-base lg:text-lg font-semibold dark:text-white transition group-hover:text-violet-400 leading-snug">
             {product.title.slice(0, 25)}
           </h2>
         </div>
@@ -63,7 +63,7 @@ const ProductCart1 = ({ product }) => {
 
             {product.rating}
 
-            <span className="ml-1 lg:ml-2 text-[10px] sm:text-xs lg:text-sm text-zinc-400">
+            <span className="ml-1 lg:ml-2 text-[10px] sm:text-xs lg:text-sm dark:text-zinc-400">
               ({product.reviews?.length || 0} Reviews)
             </span>
           </div>
@@ -72,7 +72,7 @@ const ProductCart1 = ({ product }) => {
         {/* Price */}
         <div className="flex items-center justify-between gap-2 lg:gap-13">
           <div>
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold dark:text-white">
               ${product.price}
             </h3>
           </div>

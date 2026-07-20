@@ -57,17 +57,17 @@ const FeaturedProducts = () => {
 
   return (
     <div>
-      <div className="w-full py-8 px-4 sm:px-6 lg:px-8">
+      <div className="w-full bg-white dark:bg-black py-8 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* ================= TOP RATED ================= */}
 
-          <div className="bg-[#171717] border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
+          <div className="dark:bg-[#171717] bg-white/50 border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
             {/* Heading */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center lg:gap-3 gap-1">
                 <Star size={21} className="fill-[#FFD21F] text-[#FFD21F]" />
 
-                <h2 className="text-white lg:text-[22px] text-[16px] lg:font-semibold font-small">
+                <h2 className="dark:text-white lg:text-[22px] text-[16px] lg:font-semibold font-small">
                   Top Rated
                 </h2>
               </div>
@@ -84,7 +84,7 @@ const FeaturedProducts = () => {
                  onClick={() => navigate(`/detail/${product.id}`)}
                   key={product.id}
                   product={product}
-                  className="bg-[#111111] border cursor-pointer border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
+                  className="dark:bg-[#111111] bg-gray-200 border cursor-pointer border-white dark:border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
                 >
                   <div className="flex items-center lg:gap-4 gap-4">
                     <img
@@ -94,7 +94,7 @@ const FeaturedProducts = () => {
                     />
 
                     <div>
-                      <h3 className="text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
+                      <h3 className="dark:text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
                         {product.title.slice(0, 20)}
                       </h3>
 
@@ -103,13 +103,13 @@ const FeaturedProducts = () => {
                           size={13}
                           className="fill-[#FFD21F] text-[#FFD21F]"
                         />
-                        <span className="text-[#BDBDBD] text-[13px]">
+                        <span className="dark:text-[#BDBDBD] text-[13px]">
                           {product.rating.rate}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2 ">
-                        <span className="text-[#9BFF00] text-[15px] font-small">
+                        <span className="dark:text-[#9BFF00] text-[15px] font-small">
                           ${product.price}
                         </span>
                       </div>
@@ -126,7 +126,7 @@ const FeaturedProducts = () => {
 
           {/* ================= NEW ARRIVALS ================= */}
 
-          <div className="bg-[#171717] border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
+          <div className="dark:bg-[#171717] border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
             {/* Heading */}
 
             <div className="flex items-center justify-between mb-6">
@@ -152,7 +152,7 @@ const FeaturedProducts = () => {
                 onClick={() => navigate(`/detail/${product.id}`)}
                   key={product.id}
                   product={product}
-                  className="bg-[#111111] border cursor-pointer border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
+                  className="dark:bg-[#111111] bg-gray-200 border cursor-pointer border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
                 >
                   <div className="flex items-center lg:gap-4 gap-4">
                     <img
@@ -162,7 +162,7 @@ const FeaturedProducts = () => {
                     />
 
                     <div>
-                      <h3 className="text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
+                      <h3 className="dark:text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
                         {product.title.slice(0, 20)}
                       </h3>
 
@@ -171,13 +171,13 @@ const FeaturedProducts = () => {
                           size={13}
                           className="fill-[#FFD21F] text-[#FFD21F]"
                         />
-                        <span className="text-[#BDBDBD] text-[13px]">
+                        <span className="dark:text-[#BDBDBD] text-[13px]">
                           {product.rating.rate}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2 ">
-                        <span className="text-[#9BFF00] text-[15px] font-small">
+                        <span className="dark:text-[#9BFF00] text-[15px] font-small">
                           ${product.price}
                         </span>
                       </div>

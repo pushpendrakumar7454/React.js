@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#090909] border-t border-zinc-800">
+    <footer className="dark:bg-[#090909]  bg-gray-400 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-6 py-16">
 
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10">
@@ -11,10 +11,10 @@ const Footer = () => {
 
           <div>
             <h1 className="text-3xl font-bold text-white">
-              Shop<span className="text-lime-400">X</span>
+              Shop<span className="dark:text-lime-400">X</span>
             </h1>
 
-            <p className="text-zinc-400 mt-5 leading-7">
+            <p className="dark:text-zinc-400 mt-5 leading-7">
               Discover premium products with the best prices, secure
               checkout and lightning-fast delivery.
             </p>
@@ -43,11 +43,11 @@ const Footer = () => {
           {/* Quick Links */}
 
           <div>
-            <h2 className="text-white text-xl font-semibold mb-6">
+            <h2 className="dark:text-white text-xl font-semibold mb-6">
               Quick Links
             </h2>
 
-            <ul className="space-y-4 text-zinc-400">
+            <ul className="space-y-4 dark:text-zinc-400">
               <li className="hover:text-lime-400 cursor-pointer duration-300">Home</li>
               <li className="hover:text-lime-400 cursor-pointer duration-300">Shop</li>
               <li className="hover:text-lime-400 cursor-pointer duration-300">Categories</li>
@@ -59,11 +59,11 @@ const Footer = () => {
           {/* Contact */}
 
           <div>
-            <h2 className="text-white text-xl font-semibold mb-6">
+            <h2 className="dark:text-white text-xl font-semibold mb-6">
               Contact
             </h2>
 
-            <div className="space-y-5 text-zinc-400">
+            <div className="space-y-5 dark:text-zinc-400">
 
               <div className="flex gap-3">
                 {/* <MapPin className="text-lime-400" /> */}
@@ -86,11 +86,11 @@ const Footer = () => {
           {/* Newsletter */}
 
           <div>
-            <h2 className="text-white text-xl font-semibold mb-6">
+            <h2 className="dark:text-white text-xl font-semibold mb-6">
               Newsletter
             </h2>
 
-            <p className="text-zinc-400 mb-5">
+            <p className="dark:text-zinc-400 mb-5">
               Subscribe and get the latest offers directly in your inbox.
             </p>
 

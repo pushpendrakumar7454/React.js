@@ -10,7 +10,7 @@ import { Outlet } from 'react-router'
 
 const Home = () => {
     return (
-        <div className='bg-black'>
+        <div className='bg-white dark:bg-black'>
             <Section1/>
             <StatsSection/>
             <Categories/>

@@ -3,7 +3,7 @@ import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
 import { MyStore } from "../constext/MyContext";
 
 const CartPage = () => {
-  const { carts, increment, decrement, deleteCart } = useContext(MyStore);
+  const { carts, increment, decrement, deleteCart,menuOpen, setMenuOpen } = useContext(MyStore);
 
   const subtotal = carts.reduce((total, item) => {
     return total + item.price;
@@ -14,7 +14,7 @@ const CartPage = () => {
   console.log(carts);
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen dark:bg-[#0d0d0d] bg-slate-200 dark:text-white p-4 sm:p-6 lg:p-8">
       {/* Header */}
 
       <div className="flex items-center gap-3 mb-8">
@@ -48,7 +48,7 @@ const CartPage = () => {
               return (
                 <div
                   key={item.id}
-                  className="bg-[#171717] border border-[#292929] rounded-2xl p-4"
+                  className="dark:bg-[#171717] bg-white border border-[#292929] rounded-2xl p-4"
                 >
                   <div className="flex flex-col sm:flex-row gap-4">
                     <img
@@ -77,7 +77,7 @@ const CartPage = () => {
                         </p>
 
                         <div className="flex items-center justify-between sm:justify-end gap-3">
-                          <div className="flex items-center gap-3 bg-[#222] px-3 py-2 rounded-lg">
+                          <div className="flex items-center gap-3 dark:bg-[#222] bg-gray-400 px-3 py-2 rounded-lg">
                             <button
                               onClick={() => decrement(item.id)}
                               className="cursor-pointer"
@@ -113,7 +113,7 @@ const CartPage = () => {
 
         {/* Order Summary */}
 
-        <div className="bg-[#171717] border border-[#292929] rounded-2xl p-5 h-fit lg:sticky lg:top-6">
+        <div className="dark:bg-[#171717] border border-[#292929] rounded-2xl p-5 h-fit lg:sticky lg:top-6">
           <h2 className="text-base font-semibold mb-5">Order Summary</h2>
 
           <div className="space-y-3 text-xs">

@@ -7,16 +7,20 @@ import {
   Menu,
   ChevronDown,
   LogOut,
+  Sun,
+  Moon,
   X,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router";
 import { MyStore } from "../constext/MyContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, carts } = useContext(MyStore);
+  const { currentUser, setCurrentUser, carts,menuOpen, setMenuOpen } = useContext(MyStore);
 
-  const [menuOpen, setMenuOpen] = useState(false);
+
 
   const logout = () => {
     localStorage.removeItem("currentUser");
@@ -28,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full border-b border-zinc-800 bg-[#0a0a0a]/90 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 w-full border-b border-zinc-800 dark:bg-[#0a0a0a]/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-6">
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer">
@@ -37,21 +41,21 @@ const Navbar = () => {
             </div>
 
             <div>
-              <h1 className="text-xl font-semibold text-white">
-                Sky<span className="text-lime-400">Mart</span>
+              <h1 className="text-xl font-bold dark:text-white">
+                Sky<span className="dark:text-lime-400">Mart</span>
               </h1>
-              <p className="text-xs text-zinc-500 -mt-1">Premium Store</p>
+              <p className="text-xs text-black dark:text-zinc-500 -mt-1">Premium Store</p>
             </div>
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden lg:flex items-center gap-10 text-sm font-semibold">
+          <ul className="hidden lg:flex items-center gap-10 text-sm lg:text-lg font-semibold">
             <NavLink
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? "text-lime-400"
-                  : "text-zinc-400 hover:text-white transition"
+                  ? "dark:text-lime-400 text-red-600"
+                  : "dark:text-zinc-400 "
               }
             >
               Home
@@ -61,48 +65,68 @@ const Navbar = () => {
               to="/product"
               className={({ isActive }) =>
                 isActive
-                  ? "text-lime-400"
-                  : "text-zinc-400 hover:text-white transition"
+                  ? "dark:text-lime-400 text-red-600"
+                  : "dark:text-zinc-400 hover:text-green-600 dark:hover:text-white transition"
               }
             >
               Shop
             </NavLink>
 
-            <li className="text-zinc-400 hover:text-white cursor-pointer">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "dark:text-lime-400 text-red-600"
+                  : "dark:text-zinc-400 hover:text-green-600  dark:hover:text-white transition"
+              }
+            >
               About
-            </li>
+            </NavLink>
           </ul>
 
           {/* Desktop Right */}
           <div className="hidden lg:flex items-center gap-4">
-            <button className="relative h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
-              <Heart className="text-white" size={18} />
+            <button className="relative h-11 w-11 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition">
+              <Heart className="dark:text-white" size={18} />
             </button>
+            <button
+              onClick={() => {
+                setDarkMode(!darkMode);
 
-          
+                document.documentElement.classList.toggle("dark");
+              }}
+              className="h-11 cursor-pointer active:scale-95 w-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center"
+            >
+              {darkMode ? (
+                 <Moon className="text-black dark:text-white" size={18} />
+              ) : (
+               
+                 <Sun className="text-yellow-400" size={18} />
+              )}
+            </button>
 
             <button
               onClick={() => navigate("/cartpage")}
-              className="relative h-11 cursor-pointer w-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition"
+              className="relative h-11 cursor-pointer w-11 rounded-xl dark:bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-lime-400 transition"
             >
-              <ShoppingCart className="text-white" size={18} />
+              <ShoppingCart className="dark:text-white" size={18} />
 
               <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
                 {carts.length}
               </span>
             </button>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-900 px-3 py-2">
-              <div className="h-9 w-9 uppercase rounded-xl bg-lime-400 flex items-center justify-center text-black font-semibold">
+            <div className="flex items-center gap-3 rounded-2xl border dark:border-zinc-800 dark:bg-zinc-900 px-3 py-2">
+              <div className="h-9 w-9 uppercase rounded-xl dark:bg-lime-400 flex items-center justify-center dark:text-black  bg-green-500 font-semibold">
                 {currentUser ? currentUser.name.slice(0, 1) : "P"}
               </div>
 
               <div>
-                <h3 className="text-white text-sm font-semibold">
+                <h3 className="dark:text-white text-sm font-semibold">
                   {currentUser ? currentUser.name : "Guest"}
                 </h3>
 
-                <p className="text-xs text-zinc-500">Premium User</p>
+                <p className="text-xs dark:text-zinc-500">Premium User</p>
               </div>
 
               <ChevronDown size={18} className="text-zinc-400" />
@@ -166,6 +190,7 @@ const Navbar = () => {
             </div>
 
             {/* Icons */}
+
             <div className="flex justify-between">
               <button className="h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center items-center">
                 <Heart className="text-white" />

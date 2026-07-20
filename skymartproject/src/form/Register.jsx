@@ -51,7 +51,7 @@ const Register = () => {
 
     toast.success("Registration Successful!", {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 1000,
     });
     navigate("/login");
     reset();

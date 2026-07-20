@@ -18,7 +18,7 @@ import CartPage from './components/CartPage'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from './components/ProtectedRoute'
-
+import About from './Pages/About'
 
 const App = () => {
   return (
@@ -28,6 +28,7 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/cartpage" element={<CartPage />} />
+            <Route path="/about" element={<About/>}/>
           </Route>
           <Route path="/product" element={<Product />} />
           <Route path='/electronic' element={<Electronic />} />

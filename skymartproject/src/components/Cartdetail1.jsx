@@ -48,7 +48,7 @@ const Cartdetail1 = () => {
  
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white px-5 md:px-10 lg:px-16 py-10">
+    <div className="min-h-screen dark:bg-[#0d0d0d] bg-gray-100 dark:text-white px-5 md:px-10 lg:px-16 py-10">
       {/* Main Section */}
 
       <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -217,7 +217,7 @@ const Cartdetail1 = () => {
             <div
               onClick={() => navigate(`/detailproduct/${item.id}`)}
               key={item.id}
-              className="bg-zinc-900 cursor-pointer rounded-3xl overflow-hidden border border-zinc-800 hover:border-lime-400 hover:-translate-y-2 duration-300"
+              className="dark:bg-zinc-900 cursor-pointer rounded-3xl overflow-hidden border border-zinc-800 hover:border-lime-400 hover:-translate-y-2 duration-300"
             >
               <div className="bg-white p-6">
                 <img

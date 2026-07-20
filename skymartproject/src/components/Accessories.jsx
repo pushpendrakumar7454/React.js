@@ -80,8 +80,8 @@ const Accessories = () => {
 
   // Return yahi se start hoga
   return (
-    <div className="bg-black">
-      <div className="mb-10 bg-black p-6">
+    <div className="dark:bg-black">
+      <div className="mb-10 dark:bg-black p-6">
         <h1 className="text-3xl font-semibold text-white">All Products</h1>
 
         <p className="mt-2 text-zinc-500">
@@ -178,7 +178,7 @@ const Accessories = () => {
         </div>
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-black">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 dark:bg-black">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCart1 key={product.id} product={product} />

@@ -30,13 +30,13 @@ const Login = () => {
     if (user) {
       toast.success("Successfully Logged In!", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1000,
       });
       naviagte("/");
     } else {
       toast.error("Please ENter valid Email and password", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1000,
       });
     }
 

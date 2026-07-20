@@ -14,12 +14,12 @@ const Categories = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative overflow-hidden bg-[#090909] py-12 sm:py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-gray-100 dark:bg-[#090909] py-12 sm:py-16 lg:py-20">
       {/* Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[size:45px_45px]" />
 
-      <div className="absolute left-0 top-10 h-56 w-56 sm:h-72 sm:w-72 lg:h-80 lg:w-80 rounded-full bg-lime-500/10 blur-[120px]" />
-      <div className="absolute right-0 bottom-0 h-56 w-56 sm:h-72 sm:w-72 lg:h-80 lg:w-80 rounded-full bg-cyan-500/10 blur-[130px]" />
+      <div className="absolute left-0 top-10 h-56 w-56 sm:h-72 sm:w-72 lg:h-80 lg:w-80 rounded-full dark:bg-lime-500/10 blur-[120px] " />
+      <div className="absolute right-0 bottom-0 h-56 w-56 sm:h-72 sm:w-72 lg:h-80 lg:w-80 rounded-full dark:bg-cyan-500/10 blur-[130px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
@@ -29,7 +29,7 @@ const Categories = () => {
               Categories
             </span>
 
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-2xl font-semibold text-white">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-2xl font-semibold dark:text-white">
               Shop by Category
             </h2>
           </div>
@@ -49,9 +49,9 @@ const Categories = () => {
           {/* Electronics */}
           <div
             onClick={() => navigate("/electronic")}
-            className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
+            className="group relative cursor-pointer overflow-hidden rounded-3xl border bg-black border-white/10 dark:bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
           >
-            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
+            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full  dark:bg-gradient-to-br from-cyan-400 to-blue-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
 
             <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 shadow-xl">
               <Laptop className="text-white" size={24} />
@@ -76,7 +76,7 @@ const Categories = () => {
           {/* Fashion */}
           <div
             onClick={() => navigate("/fashion")}
-            className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
+            className="group relative cursor-pointer bg-black overflow-hidden rounded-3xl border border-white/10 dark:bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
           >
             <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
 
@@ -103,11 +103,11 @@ const Categories = () => {
           {/* Furniture */}
           <div
             onClick={() => navigate("/furniture")}
-            className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
+            className="group relative cursor-pointer overflow-hidden bg-black rounded-3xl border border-white/10 dark:bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
           >
             <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gradient-to-br from-orange-400 to-yellow-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
 
-            <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-yellow-500 shadow-xl">
+            <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center  justify-center rounded-2xl dark:bg-gradient-to-br from-orange-400 to-yellow-500 shadow-xl">
               <Sofa className="text-white" size={24} />
             </div>
 
@@ -130,9 +130,9 @@ const Categories = () => {
           {/* Home */}
           <div
             onClick={() => navigate("/product")}
-            className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
+            className="group relative cursor-pointer overflow-hidden rounded-3xl border bg-black border-white/10 dark:bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
           >
-            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gradient-to-br from-green-400 to-lime-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
+            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-black dark:bg-gradient-to-br from-green-400 to-lime-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
 
             <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-lime-500 shadow-xl">
               <Home className="text-white" size={24} />
@@ -157,11 +157,11 @@ const Categories = () => {
           {/* Sports */}
           <div
             onClick={() => navigate("/sports")}
-            className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
+            className="group relative cursor-pointer bg-black overflow-hidden rounded-3xl border border-white/10 dark:bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
           >
             <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
 
-            <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-400 to-indigo-500 shadow-xl">
+            <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center  justify-center rounded-2xl bg-gradient-to-br from-purple-400 to-indigo-500 shadow-xl">
               <Dumbbell className="text-white" size={24} />
             </div>
 
@@ -184,11 +184,11 @@ const Categories = () => {
           {/* Accessories */}
           <div
             onClick={() => navigate("/accessories")}
-            className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
+            className="group relative cursor-pointer overflow-hidden rounded-3xl bg-black border border-white/10 dark:bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-lime-400/40"
           >
-            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
+            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-black dark:bg-gradient-to-br from-emerald-400 to-teal-500 opacity-20 blur-[90px] transition group-hover:opacity-50"></div>
 
-            <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 shadow-xl">
+            <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center  rounded-2xl dark:bg-gradient-to-br from-emerald-400 to-teal-500 shadow-xl">
               <Watch className="text-white" size={24} />
             </div>
 

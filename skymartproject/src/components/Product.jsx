@@ -77,12 +77,12 @@ const Product = () => {
   }
 
   return (
-    <div className="bg-black p-6">
+    <div className="dark:bg-black bg-gray-200 p-6">
       {/* Top Section */}
       <div className="mb-10">
-        <h1 className="text-3xl font-semibold text-white">All Products</h1>
+        <h1 className="text-3xl font-semibold dark:text-white">All Products</h1>
 
-        <p className="mt-2 text-zinc-500">
+        <p className="mt-2 dark:text-zinc-500">
           {filteredProducts.length} products found
         </p>
 
@@ -100,7 +100,7 @@ const Product = () => {
                 placeholder="Search products..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="p-3 mt-0.5 w-full rounded-2xl border border-lime-700 bg-zinc-900 pl-14 pr-4 text-white outline-none placeholder:text-zinc-500 focus:border-violet-500"
+                className="p-3 mt-0.5 w-full rounded-2xl border border-lime-700 dark:bg-zinc-900 pl-14 pr-4 darkk:text-white outline-none placeholder:text-zinc-500 focus:border-violet-500"
               />
             </div>
 
@@ -111,7 +111,7 @@ const Product = () => {
                   setCategoryOpen(!categoryOpen);
                   setSortOpen(false);
                 }}
-                className="flex p-3 text-sm mt-1 min-w-[170px] items-center justify-between rounded-2xl border border-zinc-700 bg-zinc-900 px-5 text-white transition hover:border-violet-500"
+                className="flex p-3 text-sm mt-1 min-w-[170px] items-center justify-between rounded-2xl border border-zinc-700 dark:bg-zinc-900 px-5 dark:text-white transition hover:border-violet-500"
               >
                 <span>{selectedCategory}</span>
                 <ChevronDown size={18} />
@@ -142,7 +142,7 @@ const Product = () => {
                   setSortOpen(!sortOpen);
                   setCategoryOpen(false);
                 }}
-                className="flex p-3 text-sm mt-1 min-w-[180px] items-center justify-between rounded-2xl border border-zinc-700 bg-zinc-900 px-5 text-white transition hover:border-violet-500"
+                className="flex p-3 text-sm mt-1 min-w-[180px] items-center justify-between rounded-2xl border border-zinc-700 dark:bg-zinc-900 px-5 dark:text-white transition hover:border-violet-500"
               >
                 <span>{sortBy}</span>
                 <ChevronDown size={18} />
