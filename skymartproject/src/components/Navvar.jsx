@@ -24,7 +24,10 @@ const Navbar = () => {
   const logout = () => {
     localStorage.removeItem("currentUser");
     setCurrentUser(null);
-    alert("User Logout");
+    toast.error("User logout",{
+      position:"top-center",
+      autoClose:1000
+    })
     navigate("/login");
     setMenuOpen(false);
   };
