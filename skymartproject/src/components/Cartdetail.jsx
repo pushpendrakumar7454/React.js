@@ -17,11 +17,12 @@ const Cartdetail = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const { data, electronicData, fashionData, setCarts,carts } = useContext(MyStore);
+  const { data, electronicData, fashionData, setCarts, carts } =
+    useContext(MyStore);
 
   const allDummyProducts = [...data, ...electronicData, ...fashionData];
   const product = allDummyProducts.find((item) => item.id === Number(id));
-  const isAdded=carts.find((item)=>item.id==product.id)
+  const isAdded = carts.find((item) => item.id == product.id);
 
   const productList = allDummyProducts
     .filter((item) => item.category === product.category)
@@ -100,67 +101,71 @@ const Cartdetail = () => {
           {/* Buttons */}
 
           <div className="flex gap-4 mt-4">
-           {isAdded? <button
-              onClick={() =>
-                setCarts((prev) => {
-                  const exist = prev.find((item) => item.id === product.id);
+            {isAdded ? (
+              <button
+                onClick={() =>
+                  setCarts((prev) => {
+                    const exist = prev.find((item) => item.id === product.id);
 
-                  if (exist) {
-                    toast.success("🛒 Quantity Updated!", {
-                      position: "top-center",
+                    if (exist) {
+                      toast.success("🛒 Quantity Updated!", {
+                        position: "top-center",
+                        autoClose: 2000,
+                      });
+
+                      return prev.map((item) =>
+                        item.id === product.id
+                          ? { ...item, quantity: item.quantity + 1 }
+                          : item,
+                      );
+                    }
+
+                    toast.success("🛒 Product Added to Cart!", {
+                      position: "top-right",
                       autoClose: 2000,
                     });
 
-                    return prev.map((item) =>
-                      item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item,
-                    );
-                  }
+                    return [...prev, { ...product, quantity: 1 }];
+                  })
+                }
+                className="flex-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
+              >
+                <ShoppingCart size={22} />
+                Added
+              </button>
+            ) : (
+              <button
+                onClick={() =>
+                  setCarts((prev) => {
+                    const exist = prev.find((item) => item.id === product.id);
 
-                  toast.success("🛒 Product Added to Cart!", {
-                    position: "top-right",
-                    autoClose: 2000,
-                  });
+                    if (exist) {
+                      toast.success("🛒 Quantity Updated!", {
+                        position: "top-center",
+                        autoClose: 2000,
+                      });
 
-                  return [...prev, { ...product, quantity: 1 }];
-                })
-              }
-              className="flex-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
-            >
-              <ShoppingCart size={22} />
-              Added
-            </button>: <button
-              onClick={() =>
-                setCarts((prev) => {
-                  const exist = prev.find((item) => item.id === product.id);
+                      return prev.map((item) =>
+                        item.id === product.id
+                          ? { ...item, quantity: item.quantity + 1 }
+                          : item,
+                      );
+                    }
 
-                  if (exist) {
-                    toast.success("🛒 Quantity Updated!", {
-                      position: "top-center",
+                    toast.success("🛒 Product Added to Cart!", {
+                      position: "top-right",
                       autoClose: 2000,
                     });
 
-                    return prev.map((item) =>
-                      item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item,
-                    );
-                  }
-
-                  toast.success("🛒 Product Added to Cart!", {
-                    position: "top-right",
-                    autoClose: 2000,
-                  });
-
-                  return [...prev, { ...product, quantity: 1 }];
-                })
-              }
-              className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
-            >
-              <ShoppingCart size={22} />
-              Add To Cart
-            </button>}
+                    return [...prev, { ...product, quantity: 1 }];
+                  })
+                }
+                className="flex-1 bg-lime-400 hover:bg-lime-300 text-black font-semibold rounded-xl  flex justify-center items-center py-3 cursor-pointer active:scale-95 gap-3 duration-300"
+              >
+                <ShoppingCart size={22} />
+                Add To Cart
+              </button>
+            )}
 
             <button className="border border-gray-700 rounded-xl w-13 flex justify-center items-center hover:border-lime-400 duration-300">
               <Heart />
@@ -241,38 +246,42 @@ const Cartdetail = () => {
                     ${item.price}
                   </h4>
 
-                {isAdded?  <button
-                    onClick={() =>
-                      setCarts((prev) => {
-                        const exist = prev.find(
-                          (item) => item.id === product.id,
-                        );
+                  {isAdded ? (
+                    <button
+                      onClick={() =>
+                        setCarts((prev) => {
+                          const exist = prev.find(
+                            (item) => item.id === product.id,
+                          );
 
-                        if (exist) {
-                          toast.success("🛒 Quantity Updated!", {
-                            position: "top-center",
+                          if (exist) {
+                            toast.success("🛒 Quantity Updated!", {
+                              position: "top-center",
+                              autoClose: 2000,
+                            });
+
+                            return prev.map((item) =>
+                              item.id === product.id
+                                ? { ...item, quantity: item.quantity + 1 }
+                                : item,
+                            );
+                          }
+
+                          toast.success("🛒 Product Added to Cart!", {
+                            position: "top-right",
                             autoClose: 2000,
                           });
 
-                          return prev.map((item) =>
-                            item.id === product.id
-                              ? { ...item, quantity: item.quantity + 1 }
-                              : item,
-                          );
-                        }
-
-                        toast.success("🛒 Product Added to Cart!", {
-                          position: "top-right",
-                          autoClose: 2000,
-                        });
-
-                        return [...prev, { ...product, quantity: 1 }];
-                      })
-                    }
-                    className="bg-green-400 cursor-pointer active:scale-95 text-black px-4 py-2 rounded-lg hover:green-lime-300 duration-300"
-                  >
-                    Added
-                  </button>:""}
+                          return [...prev, { ...product, quantity: 1 }];
+                        })
+                      }
+                      className="bg-green-400 cursor-pointer active:scale-95 text-black px-4 py-2 rounded-lg hover:green-lime-300 duration-300"
+                    >
+                      Added
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
