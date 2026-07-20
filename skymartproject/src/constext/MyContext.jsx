@@ -26,9 +26,8 @@ export const MyStoreSkyCartProvider = ({ children }) => {
   const [topRated, setTopRated] = useState([]);
   const [arrivals, setArrivals] = useState([]);
   const [topArrivals, settopArrivals] = useState([]);
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  
   const [carts, setCarts] = useState([]);
 
   useEffect(() => {
@@ -48,8 +47,6 @@ export const MyStoreSkyCartProvider = ({ children }) => {
     }
   }, [carts, currentUser]);
 
- 
-
   const increment = (id) => {
     setCarts((prev) => {
       return prev.map((item) => {
@@ -64,7 +61,6 @@ export const MyStoreSkyCartProvider = ({ children }) => {
       });
     });
   };
-
 
   const decrement = (id) => {
     setCarts((prev) => {
@@ -83,7 +79,6 @@ export const MyStoreSkyCartProvider = ({ children }) => {
     });
   };
 
-
   const deleteCart = (id) => {
     setCarts((prev) => {
       return prev.filter((item) => item.id !== id);
@@ -92,8 +87,7 @@ export const MyStoreSkyCartProvider = ({ children }) => {
 
   return (
     <MyStore.Provider
-      value={{users,setUsers,data,setData,electronicData,setElectronicData, fashionData, setFashionData, furnicureData, setFurnicureData,sportsData, setSportsData, accessories, setAccessories, currentUser, setCurrentUser, currentIndex, setCurrentIndex, topproducts, setTopProducts, topRated, setTopRated,arrivals,setArrivals,topArrivals,settopArrivals,carts,setCarts,increment,decrement,deleteCart,menuOpen,setMenuOpen
-      }}
+      value={{users,setUsers,data,setData,electronicData,setElectronicData,fashionData,setFashionData,furnicureData, setFurnicureData, sportsData, setSportsData, accessories, setAccessories, currentUser,setCurrentUser,currentIndex,setCurrentIndex,topproducts,setTopProducts,topRated,setTopRated,arrivals,setArrivals,topArrivals,settopArrivals,carts,setCarts,increment,decrement,deleteCart,menuOpen,setMenuOpen,}}
     >
       {children}
     </MyStore.Provider>

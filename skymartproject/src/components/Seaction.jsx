@@ -52,9 +52,7 @@ const Seaction = () => {
                   {item.title}
                 </h2>
 
-                <p className="text-zinc-400 mt-1 text-sm">
-                  {item.desc}
-                </p>
+                <p className="text-zinc-400 mt-1 text-sm">{item.desc}</p>
               </div>
             </div>
 

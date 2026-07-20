@@ -18,9 +18,8 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, carts,menuOpen, setMenuOpen } = useContext(MyStore);
-
-
+  const { currentUser, setCurrentUser, carts, menuOpen, setMenuOpen } =
+    useContext(MyStore);
 
   const logout = () => {
     localStorage.removeItem("currentUser");
@@ -44,7 +43,9 @@ const Navbar = () => {
               <h1 className="text-xl font-bold dark:text-white">
                 Sky<span className="dark:text-lime-400">Mart</span>
               </h1>
-              <p className="text-xs text-black dark:text-zinc-500 -mt-1">Premium Store</p>
+              <p className="text-xs text-black dark:text-zinc-500 -mt-1">
+                Premium Store
+              </p>
             </div>
           </div>
 
@@ -98,10 +99,9 @@ const Navbar = () => {
               className="h-11 cursor-pointer active:scale-95 w-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center"
             >
               {darkMode ? (
-                 <Moon className="text-black dark:text-white" size={18} />
+                <Moon className="text-black dark:text-white" size={18} />
               ) : (
-               
-                 <Sun className="text-yellow-400" size={18} />
+                <Sun className="text-yellow-400" size={18} />
               )}
             </button>
 

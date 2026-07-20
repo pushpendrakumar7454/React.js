@@ -6,9 +6,9 @@ import { toast } from "react-toastify";
 
 const ProductCart = ({ product }) => {
   const navigate = useNavigate();
-  const { setCarts,carts } = useContext(MyStore);
+  const { setCarts, carts } = useContext(MyStore);
 
-  const isAdded=carts.find((item)=>item.id===product.id)
+  const isAdded = carts.find((item) => item.id === product.id);
 
   return (
     <div className="group relative overflow-hidden cursor-pointer rounded-2xl lg:rounded-[28px] border border-zinc-800 dark:bg-zinc-900 transition-all duration-500 hover:-translate-y-2 hover:border-violet-500/50 hover:shadow-[0_20px_60px_rgba(139,92,246,.25)]">
@@ -78,67 +78,71 @@ const ProductCart = ({ product }) => {
           </div>
 
           <div>
-            {isAdded?<button
-              onClick={() =>
-                setCarts((prev) => {
-                  const exist = prev.find((item) => item.id === product.id);
+            {isAdded ? (
+              <button
+                onClick={() =>
+                  setCarts((prev) => {
+                    const exist = prev.find((item) => item.id === product.id);
 
-                  if (exist) {
-                    toast.success("🛒 Quantity Updated!",{
-                      position:"top-center",
-                      autoClose:2000
-                    })
-                    return prev.map((item) =>
-                      item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item,
-                    );
-                  }
+                    if (exist) {
+                      toast.success("🛒 Quantity Updated!", {
+                        position: "top-center",
+                        autoClose: 2000,
+                      });
+                      return prev.map((item) =>
+                        item.id === product.id
+                          ? { ...item, quantity: item.quantity + 1 }
+                          : item,
+                      );
+                    }
 
-                  toast.success("✅ Product Added to Cart!", {
-                    position: "top-right",
-                    autoClose: 2000,
-                  });
+                    toast.success("✅ Product Added to Cart!", {
+                      position: "top-right",
+                      autoClose: 2000,
+                    });
 
-                  return [...prev, { ...product, quantity: 1 }];
-                })
-              }
-              className="flex items-center justify-center gap-1 lg:gap-1 rounded-xl lg:rounded-2xl bg-green-500 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 cursor-pointer active:scale-95 font-semibold text-xs sm:text-sm lg:text-base text-white transition duration-300 hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(168,85,247,.45)]"
-            >
-              <ShoppingCart size={16} className="lg:w-5 lg:h-5" />
-              Added
-              <ArrowUpRight size={14} className="lg:w-[18px] lg:h-[18px]" />
-            </button>:<button
-              onClick={() =>
-                setCarts((prev) => {
-                  const exist = prev.find((item) => item.id === product.id);
+                    return [...prev, { ...product, quantity: 1 }];
+                  })
+                }
+                className="flex items-center justify-center gap-1 lg:gap-1 rounded-xl lg:rounded-2xl bg-green-500 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 cursor-pointer active:scale-95 font-semibold text-xs sm:text-sm lg:text-base text-white transition duration-300 hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(168,85,247,.45)]"
+              >
+                <ShoppingCart size={16} className="lg:w-5 lg:h-5" />
+                Added
+                <ArrowUpRight size={14} className="lg:w-[18px] lg:h-[18px]" />
+              </button>
+            ) : (
+              <button
+                onClick={() =>
+                  setCarts((prev) => {
+                    const exist = prev.find((item) => item.id === product.id);
 
-                  if (exist) {
-                    toast.success("🛒 Quantity Updated!",{
-                      position:"top-center",
-                      autoClose:2000
-                    })
-                    return prev.map((item) =>
-                      item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item,
-                    );
-                  }
+                    if (exist) {
+                      toast.success("🛒 Quantity Updated!", {
+                        position: "top-center",
+                        autoClose: 2000,
+                      });
+                      return prev.map((item) =>
+                        item.id === product.id
+                          ? { ...item, quantity: item.quantity + 1 }
+                          : item,
+                      );
+                    }
 
-                  toast.success("✅ Product Added to Cart!", {
-                    position: "top-right",
-                    autoClose: 2000,
-                  });
+                    toast.success("✅ Product Added to Cart!", {
+                      position: "top-right",
+                      autoClose: 2000,
+                    });
 
-                  return [...prev, { ...product, quantity: 1 }];
-                })
-              }
-              className="flex items-center justify-center gap-1 lg:gap-3 rounded-xl lg:rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 cursor-pointer active:scale-95 font-semibold text-xs sm:text-sm lg:text-base text-white transition duration-300 hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(168,85,247,.45)]"
-            >
-              <ShoppingCart size={16} className="lg:w-5 lg:h-5" />
-              Add
-              <ArrowUpRight size={14} className="lg:w-[18px] lg:h-[18px]" />
-            </button>}
+                    return [...prev, { ...product, quantity: 1 }];
+                  })
+                }
+                className="flex items-center justify-center gap-1 lg:gap-3 rounded-xl lg:rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-2 sm:px-3 lg:px-4 py-2 lg:py-3 cursor-pointer active:scale-95 font-semibold text-xs sm:text-sm lg:text-base text-white transition duration-300 hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(168,85,247,.45)]"
+              >
+                <ShoppingCart size={16} className="lg:w-5 lg:h-5" />
+                Add
+                <ArrowUpRight size={14} className="lg:w-[18px] lg:h-[18px]" />
+              </button>
+            )}
           </div>
         </div>
       </div>

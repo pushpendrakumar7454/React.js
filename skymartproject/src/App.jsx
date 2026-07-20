@@ -1,24 +1,24 @@
-import React from 'react'
-import Navbar from './components/Navvar'
-import { Route, Routes } from 'react-router'
-import Layout from './components/Layout'
-import Home from './Pages/Home'
-import ProductCart from './components/ProductCart'
-import Product from './components/Product'
-import Login from './form/Login'
-import Register from './form/Register'
-import Electronic from './components/Electronic'
-import Fashion from './components/Fashion'
-import Furniture from './components/Furniture'
-import Sports from './components/Sports'
-import Accessories from './components/Accessories'
-import Cartdetail from './components/Cartdetail'
-import Cartdetail1 from './components/Cartdetail1'
-import CartPage from './components/CartPage'
+import React from "react";
+import Navbar from "./components/Navvar";
+import { Route, Routes } from "react-router";
+import Layout from "./components/Layout";
+import Home from "./Pages/Home";
+import ProductCart from "./components/ProductCart";
+import Product from "./components/Product";
+import Login from "./form/Login";
+import Register from "./form/Register";
+import Electronic from "./components/Electronic";
+import Fashion from "./components/Fashion";
+import Furniture from "./components/Furniture";
+import Sports from "./components/Sports";
+import Accessories from "./components/Accessories";
+import Cartdetail from "./components/Cartdetail";
+import Cartdetail1 from "./components/Cartdetail1";
+import CartPage from "./components/CartPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProtectedRoute from './components/ProtectedRoute'
-import About from './Pages/About'
+import ProtectedRoute from "./components/ProtectedRoute";
+import About from "./Pages/About";
 
 const App = () => {
   return (
@@ -28,28 +28,23 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/cartpage" element={<CartPage />} />
-            <Route path="/about" element={<About/>}/>
+            <Route path="/about" element={<About />} />
           </Route>
           <Route path="/product" element={<Product />} />
-          <Route path='/electronic' element={<Electronic />} />
-          <Route path='/fashion' element={<Fashion />} />
-          <Route path='/furniture' element={<Furniture />} />
-          <Route path='/sports' element={<Sports />} />
-          <Route path='/accessories' element={<Accessories />} />
-          <Route path='/detail/:id' element={<Cartdetail />} />
-          <Route path='/detailproduct/:id' element={<Cartdetail1 />} />
-
+          <Route path="/electronic" element={<Electronic />} />
+          <Route path="/fashion" element={<Fashion />} />
+          <Route path="/furniture" element={<Furniture />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/accessories" element={<Accessories />} />
+          <Route path="/detail/:id" element={<Cartdetail />} />
+          <Route path="/detailproduct/:id" element={<Cartdetail1 />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        theme="colored"
-      />
+      <ToastContainer position="top-right" autoClose={2000} theme="colored" />
     </div>
   );
-}
+};
 
-export default App
+export default App;
