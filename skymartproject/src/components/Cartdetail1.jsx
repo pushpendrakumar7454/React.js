@@ -114,7 +114,7 @@ const Cartdetail1 = () => {
                     );
                   }
                   toast.success("🛒 Product Added to Cart!",{
-                    position:"top-center",
+                    position:"top-right",
                     autoClose:2000
                   })
 
