@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router";
+import { MyStore } from "../constext/MyContext";
 
 const Section1 = () => {
   let naviagte = useNavigate();
+ const{ currentUser}= useContext(MyStore)
+  
 
   return (
     <section className="relative overflow-hidden bg-white dark:bg-[#090909] dark:text-white py-14 sm:py-16 md:py-20 lg:py-24">
@@ -28,7 +31,7 @@ const Section1 = () => {
               <h1 className="mt-6 sm:mt-8 text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold leading-tight">
                 Welcome Back,
                 <br />
-                <span className="text-lime-400">Pushpendra.</span>
+                <span className="text-lime-400 capitalize">{currentUser.name}</span>
               </h1>
 
               <p className="mt-5 text-gray-400 text-[15px] sm:text-base lg:text-[17px] max-w-xl leading-7 mx-auto lg:mx-0">
