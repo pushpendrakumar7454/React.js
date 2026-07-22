@@ -86,7 +86,6 @@ useEffect(()=>{
           />
 
           <div>
-
             <h3 className="dark:text-white text-[13px] lg:text-xl font-semibold font-small gap-1">
              {product.title.slice(0,24)}
             </h3>
