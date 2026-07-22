@@ -17,12 +17,12 @@ const getData = async () => {
 
     const products = res.data.products;
 
-    // Top Rated (Highest Rating)
+    // Top Rated
     const topRatedProducts = [...products]
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 8);
 
-    // New Arrivals (Last 4 Products)
+    // New Arrivals 
     const topArrivalProducts = [...products]
       .sort((a, b) => b.id - a.id)
       .slice(0, 8);
