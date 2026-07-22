@@ -12,7 +12,6 @@ const FeaturedProducts = () => {
  const navigate=useNavigate()
     
 const getData = async () => {
-
   try {
     const res = await axios.get("https://dummyjson.com/products");
 
