@@ -4,6 +4,7 @@ import MainLayout from '../layout/MainLayout'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Services from '../pages/Services'
+import Login from '../layout/Login'
 
 
 const MainRouter = () => {
@@ -15,6 +16,7 @@ const MainRouter = () => {
             path:"",
             element:<Home/>,
         },
+        
         {
             path:"about",
             element:<About/>
@@ -23,9 +25,14 @@ const MainRouter = () => {
             path:"services",
             element:<Services/>
         }
-    ]
+    ],
+    },
+    {
+         path:"/login",
+    element:<Login/>
+    }
 
-    }])
+])
 
 
     return <RouterProvider router={router}/>

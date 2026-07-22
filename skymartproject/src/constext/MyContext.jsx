@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const MyStore = createContext();
 
@@ -85,9 +86,19 @@ export const MyStoreSkyCartProvider = ({ children }) => {
     });
   };
 
+  const checkout = () => {
+  if (!currentUser) return; 
+  setCarts([]);
+   toast.success("checkout all products",{
+    position:'top-center',
+    autoClose:1000
+   })
+  localStorage.setItem(`carts_${currentUser.email}`, JSON.stringify([]));
+};
+
   return (
     <MyStore.Provider
-      value={{users,setUsers,data,setData,electronicData,setElectronicData,fashionData,setFashionData,furnicureData, setFurnicureData, sportsData, setSportsData, accessories, setAccessories, currentUser,setCurrentUser,currentIndex,setCurrentIndex,topproducts,setTopProducts,topRated,setTopRated,arrivals,setArrivals,topArrivals,settopArrivals,carts,setCarts,increment,decrement,deleteCart,menuOpen,setMenuOpen,}}
+      value={{users,setUsers,data,setData,electronicData,setElectronicData,fashionData,setFashionData,furnicureData, setFurnicureData, sportsData, setSportsData, accessories, setAccessories, currentUser,setCurrentUser,currentIndex,setCurrentIndex,topproducts,setTopProducts,topRated,setTopRated,arrivals,setArrivals,topArrivals,settopArrivals,carts,setCarts,increment,decrement,deleteCart,menuOpen,setMenuOpen,checkout}}
     >
       {children}
     </MyStore.Provider>

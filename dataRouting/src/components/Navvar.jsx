@@ -8,7 +8,7 @@ const Navvar = () => {
            <div className='flex gap-4'> <NavLink to={"/"}>Home</NavLink>
             <NavLink to={"/about"}>About</NavLink>
             <NavLink to={"/services"}>Services</NavLink></div>
-            <div><h1>Login</h1></div>
+            <div><NavLink to={"/login"}>Login</NavLink></div>
         </div>
     )
 }

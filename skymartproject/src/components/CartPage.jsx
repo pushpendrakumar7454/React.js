@@ -3,7 +3,7 @@ import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
 import { MyStore } from "../constext/MyContext";
 
 const CartPage = () => {
-  const { carts, increment, decrement, deleteCart, menuOpen, setMenuOpen } =
+  const { carts, increment, decrement, deleteCart, menuOpen, setMenuOpen, checkout } =
     useContext(MyStore);
 
   const subtotal = carts.reduce((total, item) => {
@@ -142,7 +142,7 @@ const CartPage = () => {
             </div>
           </div>
 
-          <button className="w-full mt-6 bg-orange-500 hover:bg-orange-600 py-3 rounded-xl text-sm font-medium cursor-pointer">
+          <button  onClick={checkout} className="w-full mt-6 bg-orange-500 hover:bg-orange-600 py-3 rounded-xl text-sm font-medium cursor-pointer">
             Checkout
           </button>
         </div>
