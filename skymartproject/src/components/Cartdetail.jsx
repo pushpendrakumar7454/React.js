@@ -37,7 +37,7 @@ const product = allDummyProducts.find(
   (item) => item.id === Number(id)
 );
 
-// Jab tak product load na ho tab tak UI mat dikhao
+
 if (!product) {
   return (
     <div className="min-h-screen flex justify-center items-center text-2xl font-semibold">
