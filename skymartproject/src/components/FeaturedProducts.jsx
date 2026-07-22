@@ -1,200 +1,228 @@
-import React, { useContext, useEffect } from "react";
-import { Star, ShoppingCart, ArrowRight, Zap } from "lucide-react";
+
+import { Star, ShoppingCart, ArrowRight,Zap } from "lucide-react";
 import axios from "axios";
+import { useContext, useEffect } from "react";
 import { MyStore } from "../constext/MyContext";
 import { useNavigate } from "react-router";
 
 const FeaturedProducts = () => {
-  let {
-    topproducts,
-    setTopProducts,
-    topRated,
-    setTopRated,
-    arrivals,
-    setArrivals,
-    topArrivals,
-    settopArrivals,
-  } = useContext(MyStore);
+  
+
+ const{topRated, setTopRated,topArrivals, settopArrivals}= useContext(MyStore)
+ const navigate=useNavigate()
+    
+const getData = async () => {
+
+  try {
+    const res = await axios.get("https://dummyjson.com/products");
+
+    const products = res.data.products;
+
+    // Top Rated (Highest Rating)
+    const topRatedProducts = [...products]
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 8);
+
+    // New Arrivals (Last 4 Products)
+    const topArrivalProducts = [...products]
+      .sort((a, b) => b.id - a.id)
+      .slice(0, 8);
+
+    setTopRated(topRatedProducts);
+    settopArrivals(topArrivalProducts);
+
+  } catch (error) {
+    console.log("Data not found");
+  }
+};
+
+useEffect(()=>{
+  getData()
+},[])
 
 
 
-  const navigate=useNavigate()
-
-  const getData = async () => {
-    try {
-      const res = await axios.get("https://fakestoreapi.com/products");
-      setTopProducts(res.data);
-
-      const topRankedData = [...res.data]
-        .sort((a, b) => b.rating.rate - a.rating.rate)
-        .slice(0, 8);
-
-      setTopRated(topRankedData);
-    } catch (error) {
-      console.log("Data not found", error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData2 = async () => {
-    try {
-      let res = await axios.get("https://fakestoreapi.com/products");
-      setArrivals(res.data);
-
-      const newArrivals = [...res.data].sort((a, b) => b.id - a.id).slice(0, 8);
-      settopArrivals(newArrivals);
-    } catch (error) {
-      console.log("Data not found", error);
-    }
-  };
-
-  useEffect(() => {
-    getData2();
-  }, []);
 
   return (
     <div>
-      <div className="w-full bg-white dark:bg-black py-8 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* ================= TOP RATED ================= */}
+      <div className="w-full py-8 px-4 sm:px-6 lg:px-8">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <div className="dark:bg-[#171717] bg-white/50 border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
-            {/* Heading */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center lg:gap-3 gap-1">
-                <Star size={21} className="fill-[#FFD21F] text-[#FFD21F]" />
+    {/* ================= TOP RATED ================= */}
 
-                <h2 className="dark:text-white lg:text-[22px] text-[16px] lg:font-semibold font-small">
-                  Top Rated
-                </h2>
-              </div>
+    <div className="dark:bg-[#171717] border dark:border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
 
-              <button className="flex items-center gap-2 text-[#B7FF00] lg:text-[18px] text-[14px] font-medium hover:gap-3 duration-300">
-                See All
-                <ArrowRight size={16} />
-              </button>
-            </div>
+      {/* Heading */}
+      <div className="flex items-center justify-between mb-6">
 
-            {topRated.map((product) => {
-              return (
-                <div
-                 onClick={() => navigate(`/detail/${product.id}`)}
-                  key={product.id}
-                  product={product}
-                  className="dark:bg-[#111111] bg-gray-200 border cursor-pointer border-white dark:border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
-                >
-                  <div className="flex items-center lg:gap-4 gap-4">
-                    <img
-                      src={product.image}
-                      alt=""
-                      className="lg:w-20 lg:h-20 w-18 h:18 lg:rounded-2xl rounded object-cover flex-shrink-0"
-                    />
+        <div className="flex items-center gap-3">
+          <Star
+            size={24}
+            className="fill-[#FFD21F] text-[#FFD21F]"
+          />
 
-                    <div>
-                      <h3 className="dark:text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
-                        {product.title.slice(0, 20)}
-                      </h3>
-
-                      <div className="flex items-center gap-1 ">
-                        <Star
-                          size={13}
-                          className="fill-[#FFD21F] text-[#FFD21F]"
-                        />
-                        <span className="dark:text-[#BDBDBD] text-[13px]">
-                          {product.rating.rate}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2 ">
-                        <span className="dark:text-[#9BFF00] text-[15px] font-small">
-                          ${product.price}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button className="p-4 rounded-2xl bg-[#A7F300] hover:bg-[#B8FF19] duration-300 flex items-center justify-center flex-shrink-0">
-                    <ShoppingCart size={16} className="text-black" />
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ================= NEW ARRIVALS ================= */}
-
-          <div className="dark:bg-[#171717] border border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
-            {/* Heading */}
-
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center lg:gap-3 gap-1">
-                <Zap size={24} className="text-[#B7FF00]" />
-
-                <h2 className="text-white lg:text-[22px] text-[16px] lg:font-semibold font-small">
-                  New Arrivals
-                </h2>
-              </div>
-
-              <button className="flex items-center gap-2 text-[#B7FF00] lg:text-[18px] text-[14px] font-medium hover:gap-3 duration-300">
-                See All
-                <ArrowRight size={20} />
-              </button>
-            </div>
-
-            {/* ================= Product 1 ================= */}
-
-            {topArrivals.map((product) => {
-              return (
-                <div
-                onClick={() => navigate(`/detail/${product.id}`)}
-                  key={product.id}
-                  product={product}
-                  className="dark:bg-[#111111] bg-gray-200 border cursor-pointer border-[#2B2B2B] rounded-3xl lg:p-4 p-2 flex items-center justify-between mb-5"
-                >
-                  <div className="flex items-center lg:gap-4 gap-4">
-                    <img
-                      src={product.image}
-                      alt=""
-                      className="lg:w-20 lg:h-20 w-18 h:18 lg:rounded-2xl rounded object-cover flex-shrink-0"
-                    />
-
-                    <div>
-                      <h3 className="dark:text-white lg:text-[17px] text-[13px] font-small lg:font-semibold">
-                        {product.title.slice(0, 20)}
-                      </h3>
-
-                      <div className="flex items-center gap-1 ">
-                        <Star
-                          size={13}
-                          className="fill-[#FFD21F] text-[#FFD21F]"
-                        />
-                        <span className="dark:text-[#BDBDBD] text-[13px]">
-                          {product.rating.rate}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2 ">
-                        <span className="dark:text-[#9BFF00] text-[15px] font-small">
-                          ${product.price}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button className="p-4 rounded-2xl bg-[#A7F300] hover:bg-[#B8FF19] duration-300 flex items-center justify-center flex-shrink-0">
-                    <ShoppingCart size={16} className="text-black" />
-                  </button>
-                </div>
-              );
-            })}
-          </div>
+          <h2 className="dark:text-white text-[22px] font-semibold">
+            Top Rated
+          </h2>
         </div>
+
+        <button className="flex items-center gap-2 text-[#B7FF00] text-[18px] font-medium hover:gap-3 duration-300">
+          See All
+          <ArrowRight size={20} />
+        </button>
       </div>
+
+      {/* ================= Product 1 ================= */}
+
+     {topRated.map((product)=>{
+      return  <div  key={product.id} className="dark:bg-[#111111] border cursor-pointer border-[#2B2B2B] rounded-3xl p-2 flex items-center justify-between mb-5">
+
+        <div onClick={()=>navigate(`/detailproduct/${product.id}`)} className="flex  items-center gap-3">
+
+          <img
+            src={product.images[0]}
+            alt=""
+            className="w-16 h-16 rounded-2xl object-cover flex-shrink-0"
+          />
+
+          <div>
+
+            <h3 className="dark:text-white text-[13px] lg:text-xl font-semibold font-small gap-1">
+             {product.title.slice(0,24)}
+            </h3>
+
+            <div className="flex items-center">
+              <Star
+                size={15}
+                className="fill-[#FFD21F] text-[#FFD21F]"
+              />
+              <span className="text-[#BDBDBD] text-sm">
+                {product.rating.rate}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-[#9BFF00] text-[12px] font-small">
+                ${product.price}
+              </span>
+
+             
+            </div>
+
+          </div>
+
+        </div>
+
+        <button className="p-3 rounded-2xl bg-[#A7F300] hover:bg-[#B8FF19] duration-300 flex items-center justify-center flex-shrink-0">
+
+          <ShoppingCart
+            size={18}
+            className="text-black"
+          />
+
+        </button>
+
+      </div>
+
+      
+     })}
+
+      
+
+
     </div>
-  );
-};
+
+    {/* ================= NEW ARRIVALS ================= */}
+
+    <div className="dark:bg-[#171717] border dark:border-[#2b2b2b] rounded-[28px] p-5 sm:p-6">
+
+      {/* Heading */}
+
+      <div className="flex items-center justify-between mb-6">
+
+        <div className="flex items-center gap-3">
+
+          <Zap
+            size={24}
+            className="text-[#B7FF00]"
+          />
+
+          <h2 className="dark:text-white text-[22px] font-semibold">
+            New Arrivals
+          </h2>
+
+        </div>
+
+        <button className="flex items-center gap-2 text-[#B7FF00] text-[18px] font-medium hover:gap-3 duration-300">
+
+          See All
+
+          <ArrowRight size={20} />
+
+        </button>
+
+      </div>
+
+     {topArrivals.map((product)=>{
+      return  <div  key={product.id} className="dark:bg-[#111111] border cursor-pointer dark:border-[#2B2B2B] rounded-3xl p-2 flex items-center justify-between mb-5">
+
+        <div onClick={()=>navigate(`/detailproduct/${product.id}`)} className="flex items-center gap-3">
+
+          <img
+            src={product.images[0]}
+            alt=""
+            className="w-16 h-16 rounded-2xl object-cover flex-shrink-0"
+          />
+
+          <div>
+
+            <h3 className="dark:text-white text-[13px] lg:text-xl font-semibold gap-1">
+             {product.title.slice(0,24)}
+            </h3>
+
+            <div className="flex items-center">
+              <Star
+                size={15}
+                className="fill-[#FFD21F] text-[#FFD21F]"
+              />
+              <span className="text-[#BDBDBD] text-sm">
+                {product.rating.rate}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-[#9BFF00] text-[12px] font-small">
+                ${product.price}
+              </span>
+
+             
+            </div>
+
+          </div>
+
+        </div>
+
+        <button className="p-3 rounded-2xl bg-[#A7F300] hover:bg-[#B8FF19] duration-300 flex items-center justify-center flex-shrink-0">
+
+          <ShoppingCart
+            size={18}
+            className="text-black"
+          />
+
+        </button>
+
+      </div>
+
+      
+     })}
+
+
+    </div>
+
+  </div>
+</div>
+    </div>
+  )
+}
 
 export default FeaturedProducts;

@@ -17,12 +17,36 @@ const Cartdetail = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const { data, electronicData, fashionData, setCarts, carts } =
+  const { data, electronicData, fashionData, setCarts, carts,  topRated } =
     useContext(MyStore);
 
-  const allDummyProducts = [...data, ...electronicData, ...fashionData];
-  const product = allDummyProducts.find((item) => item.id === Number(id));
-  const isAdded = carts.find((item) => item.id == product.id);
+ const allDummyProducts = [
+  ...(data || []),
+  ...(electronicData || []),
+  ...(fashionData || []),
+  ...(topRated || [])
+];
+ console.log(id);
+console.log(data);
+console.log(electronicData);
+console.log(fashionData);
+console.log(allDummyProducts);
+
+
+const product = allDummyProducts.find(
+  (item) => item.id === Number(id)
+);
+
+// Jab tak product load na ho tab tak UI mat dikhao
+if (!product) {
+  return (
+    <div className="min-h-screen flex justify-center items-center text-2xl font-semibold">
+      Loading...
+    </div>
+  );
+}
+
+const isAdded = carts?.find((item) => item.id === product.id);
 
   const productList = allDummyProducts
     .filter((item) => item.category === product.category)
@@ -49,7 +73,7 @@ const Cartdetail = () => {
       navigate(`/detail/${productList[current - 1].id}`);
     }
   };
-
+ 
   return (
     <div className="min-h-screen dark:bg-[#0d0d0d] bg-gray-100 dark:text-white px-5 md:px-10 lg:px-16 py-10">
       {/* Main Section */}

@@ -17,9 +17,9 @@ const Cartdetail1 = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const { sportsData, furnicureData, accessories, setCarts, carts } =
+  const { sportsData, furnicureData, accessories, setCarts, carts,topRated,topArrivals } =
     useContext(MyStore);
-  const allDummyProducts = [...sportsData, ...furnicureData, ...accessories];
+  const allDummyProducts = [...sportsData, ...furnicureData, ...accessories,...topRated,...topArrivals];
   let product = allDummyProducts.find((val) => val.id == Number(id));
   const isAdded = carts.find((cart) => cart.id === product.id);
 
