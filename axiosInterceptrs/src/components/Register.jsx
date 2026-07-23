@@ -1,11 +1,8 @@
 import { useAuth } from "../hooks/useAuth";
 
 const Register = () => {
-
-  const{register,errors,handleSubmit, subitRegisterForm,watch,}=useAuth()
-
-
-
+  const { register, errors, handleSubmit, subitRegisterForm, watch } =
+    useAuth();
 
   return (
     <div className="scroll-hidden flex items-center justify-center bg-gray-100 p-2">
@@ -17,16 +14,16 @@ const Register = () => {
           Register to get started
         </p>
 
-        <form className="space-y-5"  onSubmit={handleSubmit(subitRegisterForm)}>
+        <form className="space-y-5" onSubmit={handleSubmit(subitRegisterForm)}>
           {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Full Name
             </label>
             <input
-            {...register("name",{
-                required:"Name is required"
-            })}
+              {...register("name", {
+                required: "Name is required",
+              })}
               type="text"
               placeholder="Enter your name"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
@@ -40,15 +37,17 @@ const Register = () => {
               Email Address
             </label>
             <input
-            {...register("email",{
-                required:"Email is required"
-            })}
+              {...register("email", {
+                required: "Email is required",
+              })}
               type="email"
               placeholder="Enter your email"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-           {errors.email && <p className="text-red-600">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-600">{errors.email.message}</p>
+          )}
 
           {/* Password */}
           <div>
@@ -56,15 +55,17 @@ const Register = () => {
               Password
             </label>
             <input
-            {...register('password',{
-                required:"password is required"
-            })}
+              {...register("password", {
+                required: "password is required",
+              })}
               type="password"
               placeholder="Enter your password"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-           {errors.password && <p className="text-red-600">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-600">{errors.password.message}</p>
+          )}
 
           {/* Confirm Password */}
           <div>
@@ -72,18 +73,20 @@ const Register = () => {
               Confirm Password
             </label>
             <input
-           {...register('confirm',{
-            required:"confirm password is required",
-            validate:( value)=>{
-                return value===watch('password') || "Password do not match"
-            }
-           })}
+              {...register("confirm", {
+                required: "confirm password is required",
+                validate: (value) => {
+                  return value === watch("password") || "Password do not match";
+                },
+              })}
               type="password"
               placeholder="Confirm your password"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-           {errors.confirm && <p className="text-red-600">{errors.confirm.message}</p>}
+          {errors.confirm && (
+            <p className="text-red-600">{errors.confirm.message}</p>
+          )}
 
           {/* Button */}
           <button
