@@ -20,6 +20,14 @@ const Register = () => {
 
 
 
+    const submitForm=(data)=>{
+        console.log(data);
+        
+
+    }
+
+
+
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#020617]">
