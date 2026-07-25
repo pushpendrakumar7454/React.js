@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Star,
   Heart,
@@ -9,41 +9,42 @@ import {
   Minus,
   Plus,
 } from "lucide-react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleProduct } from "../features/product/productSlice";
-
+import { addtoCart } from "../features/cart/cartSlice";
 
 const ProductDetail = () => {
   const [qty, setQty] = useState(1);
 
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { singleProduct, loading, error } = useSelector(
-    (state) => state.product
-  );
+  const { products, loading, error } = useSelector((state) => state.products);
 
-   useEffect(() => {
-    dispatch(fetchSingleProduct(id));
-  }, [dispatch, id]);
+  const singleProduct = products.find((product) => product.id === Number(id));
 
+  const relatedProducts = products.filter((product) => {
+    return (
+      product.category === singleProduct.category &&
+      product.id !== singleProduct.id
+    );
+  });
 
-  
   if (loading) {
-  return <h1 className="text-center py-20">Loading...</h1>;
-}
+    return <h1 className="text-center py-20">Loading...</h1>;
+  }
 
-if (error) {
-  return <h1 className="text-center py-20">{error}</h1>;
-}
+  if (error) {
+    return <h1 className="text-center py-20">{error}</h1>;
+  }
 
-if (!singleProduct) {
-  return null;
-}
+  if (!singleProduct) {
+    return null;
+  }
 
-
+  const { cartItems } = useSelector((state) => state.cart);
+  const isAdded = cartItems.some((item) => item.id === singleProduct.id);
 
   return (
     <div className="min-h-screen bg-[#060816] text-white overflow-hidden">
@@ -59,22 +60,22 @@ if (!singleProduct) {
             {/* Big Image */}
             <div className="group h-120 overflow-hidden bg-gradient-to-br from-violet-600/10 to-slate-900 rounded-3xl border border-white/10 p-8 flex justify-center items-center overflow-hidden">
               <img
-               src={singleProduct.images}
+                src={singleProduct.images}
                 alt=""
                 className="w-full h-103 cursor-pointer rounded-lg max-w-md object-cover transition duration-500 group-hover:scale-110"
               />
-            </div>           
+            </div>
           </div>
 
           {/* RIGHT */}
 
           <div className="flex flex-col justify-center">
             <span className="bg-violet-600/20 text-violet-300 w-fit px-3 py-1 rounded-full text-xs">
-              Premium Collection
+              {singleProduct.category}
             </span>
 
-            <h1 className="text-2xl md:text-3xl font-bold mt-4 leading-tight">
-              Nike Air Max Running Shoes
+            <h1 className="text-2xl md:text-3xl font-semibold mt-4 leading-tight">
+              {singleProduct.title}
             </h1>
 
             {/* Rating */}
@@ -88,22 +89,26 @@ if (!singleProduct) {
                 <Star size={16} fill="currentColor" />
               </div>
 
-              <span className="text-gray-400 text-sm">4.9 (248 Reviews)</span>
-            </div>
-
-            <div className="flex items-end gap-3 mt-5">
-              <h2 className="text-3xl font-bold text-violet-400">$149</h2>
-
-              <span className="line-through text-gray-500 text-sm">$199</span>
-
-              <span className="text-green-400 text-xs bg-green-500/10 px-2 py-1 rounded-full">
-                25% OFF
+              <span className="text-gray-400 text-sm">
+                {singleProduct.rating}
+              </span>
+              <span className="text-gray-400 text-sm">
+                ({singleProduct.reviews?.length} Reviews)
               </span>
             </div>
 
-            <p className="text-gray-400 text-sm leading-7 mt-5">
-              Lightweight premium running shoes with breathable mesh, responsive
-              cushioning and durable outsole for everyday comfort.
+            <div className="flex items-end gap-3 mt-5">
+              <h2 className="text-3xl font-bold text-violet-400">
+                ${singleProduct.price}
+              </h2>
+
+              <span className="text-green-400 text-xs bg-green-500/10 px-2 py-1 rounded-full">
+                {singleProduct.discountPercentage} OFF
+              </span>
+            </div>
+
+            <p className="text-gray-400 text-sm  mt-5">
+              {singleProduct.description}
             </p>
 
             {/* Features */}
@@ -124,7 +129,9 @@ if (!singleProduct) {
                 <div>
                   <h4 className="text-sm">Easy Return</h4>
 
-                  <p className="text-xs text-gray-400">7 Days</p>
+                  <p className="text-xs text-gray-400">
+                    {singleProduct.returnPolicy}
+                  </p>
                 </div>
               </div>
 
@@ -134,7 +141,9 @@ if (!singleProduct) {
                 <div>
                   <h4 className="text-sm">Warranty</h4>
 
-                  <p className="text-xs text-gray-400">1 Year</p>
+                  <p className="text-xs text-gray-400">
+                    {singleProduct.warrantyInformation}
+                  </p>
                 </div>
               </div>
             </div>
@@ -165,13 +174,29 @@ if (!singleProduct) {
 
             {/* Buttons */}
 
-            <div className="flex flex-wrap gap-4 mt-8">
-              <button className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 duration-300 px-6 py-3 rounded-xl text-sm font-medium">
-                <ShoppingCart size={18} />
-                Add To Cart
-              </button>
+            <div
+              onClick={() => dispatch(addtoCart(singleProduct))}
+              className="flex flex-wrap gap-4 mt-8"
+            >
+              {isAdded ? (
+                <button
+                  onClick={() => dispatch(addtoCart(singleProduct))}
+                  className="flex cursor-pointer active:scale-95 items-center gap-2 bg-green-600 hover:bg-green-700 duration-300 px-6 py-3 rounded-xl text-sm font-medium"
+                >
+                  <ShoppingCart size={18} />
+                  Added
+                </button>
+              ) : (
+                <button
+                  onClick={() => dispatch(addtoCart(singleProduct))}
+                  className="flex cursor-pointer active:scale-95 items-center gap-2 bg-violet-600 hover:bg-violet-700 duration-300 px-6 py-3 rounded-xl text-sm font-medium"
+                >
+                  <ShoppingCart size={18} />
+                  Add To Cart
+                </button>
+              )}
 
-              <button className="px-6 py-3 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 duration-300 text-sm">
+              <button className="px-6 py-3 cursor-pointer active:scale-95 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 duration-300 text-sm">
                 Buy Now
               </button>
 
@@ -183,7 +208,6 @@ if (!singleProduct) {
         </div>
         {/* Description & Specifications */}
 
-      
         {/* Reviews */}
 
         <div className="mt-5 bg-white/5 border border-white/10 rounded-3xl p-6">
@@ -242,111 +266,53 @@ if (!singleProduct) {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {/* Card 1 */}
 
-            <div className="group bg-white/5 h-69 border border-white/10 rounded-2xl overflow-hidden hover:border-violet-500/40 hover:-translate-y-2 duration-300">
-              <div className="bg-gradient-to-br  from-violet-600/10 to-slate-900 p-2 flex justify-center overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
-                  className="h-30 object-cover rounded group-hover:scale-110 duration-500"
-                  alt=""
-                />
-              </div>
+            {relatedProducts.map((p) => {
+              const isAdded = cartItems.some((item) => item.id === p.id);
+              return (
+                <div
+                  key={p.id}
+                  
+                  className="group cursor-pointer bg-white/5 h-69 border border-white/10 rounded-2xl overflow-hidden hover:border-violet-500/40 hover:-translate-y-2 duration-300"
+                >
+                  <div className="bg-gradient-to-br  from-violet-600/10 to-slate-900 p-2 flex justify-center overflow-hidden">
+                    <img
+                    onClick={() => navigate(`/productdetail/${p.id}`)}
+                      src={p.images}
+                      className="h-30 object-cover rounded group-hover:scale-110 duration-500"
+                      alt=""
+                    />
+                  </div>
 
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">Nike Air Zoom</h3>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold">{p.title}</h3>
 
-                <p className="text-xs text-gray-400 mt-2">
-                  Lightweight Running Shoes
-                </p>
+                    <p className="text-xs text-gray-400 mt-2">
+                      {p.description.slice(0, 71)}
+                    </p>
 
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-violet-400 font-semibold">$129</span>
+                    <div className="flex justify-between items-center mt-4">
+                      <span className="text-violet-400 font-semibold">
+                        ${p.price}
+                      </span>
 
-                  <button className="text-xs cursor-pointer bg-violet-600 hover:bg-violet-700 px-3 py-2 rounded-lg duration-300">
-                    View
-                  </button>
+                      <button
+                        onClick={(e) => {
+                          dispatch(addtoCart(p));
+                        }}
+                        
+                        className={`text-xs px-3 py-2 rounded-lg duration-300 ${
+                          isAdded
+                            ? "bg-green-600 cursor-not-allowed"
+                            : "bg-violet-600 hover:bg-violet-700"
+                        }`}
+                      >
+                        {isAdded ? "Added" : "Add To Cart"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-
-            <div className="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-violet-500/40 hover:-translate-y-2 duration-300">
-              <div className="bg-gradient-to-br from-violet-600/10 to-slate-900 p-5 flex justify-center overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500"
-                  className="h-36 object-contain group-hover:scale-110 duration-500"
-                  alt=""
-                />
-              </div>
-
-              <div className="p-4">
-                <h3 className="text-sm font-medium">Adidas Ultra</h3>
-
-                <p className="text-xs text-gray-400 mt-2">Sports Collection</p>
-
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-violet-400 font-semibold">$159</span>
-
-                  <button className="text-xs bg-violet-600 hover:bg-violet-700 px-3 py-2 rounded-lg duration-300">
-                    View
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-
-            <div className="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-violet-500/40 hover:-translate-y-2 duration-300">
-              <div className="bg-gradient-to-br from-violet-600/10 to-slate-900 p-5 flex justify-center overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=500"
-                  className="h-36 object-contain group-hover:scale-110 duration-500"
-                  alt=""
-                />
-              </div>
-
-              <div className="p-4">
-                <h3 className="text-sm font-medium">Puma Velocity</h3>
-
-                <p className="text-xs text-gray-400 mt-2">
-                  Daily Comfort Shoes
-                </p>
-
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-violet-400 font-semibold">$118</span>
-
-                  <button className="text-xs bg-violet-600 hover:bg-violet-700 px-3 py-2 rounded-lg duration-300">
-                    View
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4 */}
-
-            <div className="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-violet-500/40 hover:-translate-y-2 duration-300">
-              <div className="bg-gradient-to-br from-violet-600/10 to-slate-900 p-5 flex justify-center overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=500"
-                  className="h-36 object-contain group-hover:scale-110 duration-500"
-                  alt=""
-                />
-              </div>
-
-              <div className="p-4">
-                <h3 className="text-sm font-medium">Reebok Runner</h3>
-
-                <p className="text-xs text-gray-400 mt-2">Premium Edition</p>
-
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-violet-400 font-semibold">$139</span>
-
-                  <button className="text-xs bg-violet-600 hover:bg-violet-700 px-3 py-2 rounded-lg duration-300">
-                    View
-                  </button>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

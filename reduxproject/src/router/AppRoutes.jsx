@@ -13,6 +13,8 @@ import Register from "../components/Register";
 
 import ProtectedRouter from "./ProtectedRouter";
 import PublicProtected from "./PublicProtected";
+import Cart from "../components/Cart";
+import Electonic from "../components/Electonic";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,13 @@ const router = createBrowserRouter([
             path: "/productdetail/:id",
             element: <ProductDetail />,
           },
+          {
+            path:"/cart",
+            element:<Cart/>
+          },{
+            path:"/electronic",
+            element:<Electonic/>
+          }
         ],
       },
     ],

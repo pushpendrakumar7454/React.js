@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { ShoppingCart, Heart, Star, Eye, Sparkles } from "lucide-react";
-
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/product/productSlice";
-import { useNavigate } from "react-router";
 
 const Product = () => {
- 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-const { products, loading, error } = useSelector(
-  (state) => state.product
-);
+  const { products, loading, error } = useSelector((state) => state.products);
 
- 
-
- useEffect(() => {
-  dispatch(fetchProducts());
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <section className="relative overflow-hidden bg-[#0B1120] py-20 px-4">
@@ -50,7 +44,7 @@ const { products, loading, error } = useSelector(
         <div className="mx-auto cursor-pointer flex gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">
           {products.map((product) => (
             <div
-             onClick={()=>navigate(`/productdetail/${product.id}`)}
+              onClick={() => navigate(`/productdetail/${product.id}`)}
               key={product.id}
               className="group relative w-[270px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl transition duration-500 hover:-translate-y-3 hover:border-violet-500/50"
             >
@@ -106,10 +100,7 @@ const { products, loading, error } = useSelector(
                   </p>
                 </div>
 
-                <button className="mt-5 cursor-pointer active:scale-95 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-105">
-                  <ShoppingCart size={18} />
-                  Add To Cart
-                </button>
+               
               </div>
             </div>
           ))}
