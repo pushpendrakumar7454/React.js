@@ -4,7 +4,6 @@ import { fetchProducts } from "../features/product/productSlice";
 
 const Electronic = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
