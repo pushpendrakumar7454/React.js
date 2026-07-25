@@ -9,6 +9,9 @@ import {
   Radio,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addUsers } from "../features/auth/AuthSlice";
+import { useNavigate } from "react-router";
 
 
 
@@ -17,12 +20,14 @@ const Register = () => {
 
     const {register,reset,formState:{errors},handleSubmit,watch}= useForm()
     const password = watch("password");
+    const navigate= useNavigate()
 
-
+   const dispatch=useDispatch()
 
     const submitForm=(data)=>{
-        console.log(data);
-        
+        dispatch(addUsers(data))
+        alert("register succefull")
+        navigate('/login')
 
     }
 
@@ -132,7 +137,7 @@ const Register = () => {
                 Join SkyCart in seconds
               </p>
 
-              <form className="mt-4 space-y-4">
+              <form className="mt-4 space-y-4" onSubmit={handleSubmit(submitForm)}>
                 {/* Full Name */}
 
                 <div>
@@ -177,9 +182,9 @@ const Register = () => {
                   </label>
 
                   <input
-                  {...register('passord'),{
+                  {...register('password',{
                     required:"passord is required"
-                  }}
+                  })}
                     type="password"
                     placeholder="Create password"
                     className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/20"
