@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/product/productSlice";
 
-const Electonic = () => {
+const Furniture = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const Electonic = () => {
   console.log(products.map((item) => item.category));
 
   const electronicItem = products.filter(
-    (item) => item.category === "laptops" || item.category === "mobile-accessories" 
+    (item) => item.category === "mens-shirts" || item.category === "mens-shoes" || item.category==="tops" || item.category==="womens-dresses",
   );
 
   useEffect(() => {
@@ -137,4 +137,5 @@ const Electonic = () => {
   );
 };
 
-export default Electonic;
+export default Furniture;
+

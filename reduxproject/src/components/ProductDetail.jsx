@@ -60,7 +60,7 @@ const ProductDetail = () => {
             {/* Big Image */}
             <div className="group h-120 overflow-hidden bg-gradient-to-br from-violet-600/10 to-slate-900 rounded-3xl border border-white/10 p-8 flex justify-center items-center overflow-hidden">
               <img
-                src={singleProduct.images}
+                src={singleProduct.images[0]}
                 alt=""
                 className="w-full h-103 cursor-pointer rounded-lg max-w-md object-cover transition duration-500 group-hover:scale-110"
               />
@@ -277,7 +277,7 @@ const ProductDetail = () => {
                   <div className="bg-gradient-to-br  from-violet-600/10 to-slate-900 p-2 flex justify-center overflow-hidden">
                     <img
                     onClick={() => navigate(`/productdetail/${p.id}`)}
-                      src={p.images}
+                      src={p.images[0]}
                       className="h-30 object-cover rounded group-hover:scale-110 duration-500"
                       alt=""
                     />

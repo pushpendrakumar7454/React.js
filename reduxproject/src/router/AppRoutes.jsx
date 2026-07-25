@@ -15,6 +15,8 @@ import ProtectedRouter from "./ProtectedRouter";
 import PublicProtected from "./PublicProtected";
 import Cart from "../components/Cart";
 import Electonic from "../components/Electonic";
+import Fashion from "../components/Fashion";
+import Furniture from "../components/Furniture";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,12 @@ const router = createBrowserRouter([
           },{
             path:"/electronic",
             element:<Electonic/>
+          },{
+            path:"/fashion",
+            element:<Fashion/>
+          },{
+            path:"/furniture",
+            element:<Furniture/>
           }
         ],
       },

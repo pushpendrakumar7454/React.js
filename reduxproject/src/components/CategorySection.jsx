@@ -71,7 +71,7 @@ const CategorySection = () => {
 
           {/* Fashion */}
 
-          <div className="group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
+          <div onClick={()=>navigate("/fashion")} className="cursor-pointer group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
 
             <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-pink-500/20 text-pink-400 group-hover:scale-110 transition">
               <Shirt size={26} />
@@ -94,7 +94,7 @@ const CategorySection = () => {
 
           {/* Furniture */}
 
-          <div className="group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
+          <div onClick={()=>navigate("/furniture")} className="cursor-pointer group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
 
             <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-yellow-500/20 text-yellow-400 group-hover:scale-110 transition">
               <Sofa size={26} />

@@ -9,6 +9,7 @@ const Product = () => {
   const dispatch = useDispatch();
 
   const { products, loading, error } = useSelector((state) => state.products);
+  const twentyProducts = products.slice(0, 20);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -42,7 +43,7 @@ const Product = () => {
 
         {/* Products */}
         <div className="mx-auto cursor-pointer flex gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">
-          {products.map((product) => (
+          {twentyProducts.map((product) => (
             <div
               onClick={() => navigate(`/productdetail/${product.id}`)}
               key={product.id}
