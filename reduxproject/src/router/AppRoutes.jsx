@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 
 import Layout from "../outlet/Layout";
 import Main from "../components/Main";
@@ -40,36 +37,38 @@ const router = createBrowserRouter([
             element: <ProductDetail />,
           },
           {
-            path:"/product",
-          element:<PrimiumProducts/>
-        },
-          {path:"/categoryes",
-            element:<CategorySection/>
-
+            path: "/product",
+            element: <PrimiumProducts />,
+          },
+          { path: "/categoryes", element: <CategorySection /> },
+          {
+            path: "/about",
+            element: <About />,
           },
           {
-            path:"/about",
-            element:<About/>
+            path: "/cart",
+            element: <Cart />,
           },
           {
-            path:"/cart",
-            element:<Cart/>
-          },{
-            path:"/electronic",
-            element:<Electonic/>
-          },{
-            path:"/fashion",
-            element:<Fashion/>
-          },{
-            path:"/kitchen",
-            element:<Furniture/>
-          },{
-            path:"/sports",
-            element:<Sports/>
-          },{
-            path:"/accessories",
-            element:<Accessories/>
-          }
+            path: "/electronic",
+            element: <Electonic />,
+          },
+          {
+            path: "/fashion",
+            element: <Fashion />,
+          },
+          {
+            path: "/kitchen",
+            element: <Furniture />,
+          },
+          {
+            path: "/sports",
+            element: <Sports />,
+          },
+          {
+            path: "/accessories",
+            element: <Accessories />,
+          },
         ],
       },
     ],
