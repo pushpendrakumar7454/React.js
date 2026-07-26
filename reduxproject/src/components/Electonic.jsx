@@ -32,12 +32,12 @@ const Electonic = () => {
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-5 py-2 text-xs text-violet-300">
             <Sparkles size={14} />
-            Premium Fashion Products
+            Premium Electronic Products
           </div>
 
           <h1 className="mt-5 text-3xl md:text-5xl font-bold text-white">
-            Fashion
-            <span className="text-violet-400"> Collection</span>
+            Electronic
+            <span className="text-violet-400">Collection</span>
           </h1>
 
           <p className="mt-4 max-w-xl mx-auto text-sm leading-6 text-gray-400">
@@ -48,10 +48,11 @@ const Electonic = () => {
 
         {/* Products */}
 
-        <div className="grid grid-cols-1 h-490 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 h-505 sm:grid-cols-2 lg:grid-cols-4 gap-7">
           {electronicItem.map((p) => {
             return (
               <div
+              onClick={()=>navigate(`/productdetail/${p.id}`)}
                 key={p.id}
                 className="group cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition duration-500 hover:-translate-y-3 p-3 hover:border-violet-500/50"
               >
@@ -79,16 +80,15 @@ const Electonic = () => {
                 <div className="p-2">
                   <div className="flex items-center gap-2 text-violet-400 text-xs">
                     <Cpu size={14} />
-                    Smartphone
+                    {p.brand}
                   </div>
 
-                  <h2 className="mt-1 text-base font-semibold text-white">
-                    iPhone 16 Pro Max
+                  <h2 className="mt-1 text-base font-small text-white">
+                   {p.title}
                   </h2>
 
                   <p className="mt-2 text-xs  text-gray-400">
-                    Titanium design with blazing fast performance and pro
-                    camera.
+                    {p.description.slice(0,60)}
                   </p>
 
                   <div className="mt-2 flex items-center gap-1">
@@ -112,15 +112,13 @@ const Electonic = () => {
                       className="fill-yellow-400 text-yellow-400"
                       size={15}
                     />
-                    <span className="ml-2 text-xs text-gray-400">(4.9)</span>
+                    <span className="ml-2 text-xs text-gray-400">({p.rating})</span>
                   </div>
 
                   <div className="mt-5 flex items-center justify-between">
                     <div>
-                      <h3 className="text-xl font-semibold text-white">$1299</h3>
-                      <p className="text-xs text-gray-500 line-through">
-                        $1499
-                      </p>
+                      <h3 className="text-xl font-semibold text-white">${p.price}</h3>
+                      
                     </div>
 
                     <button className="rounded-xl bg-violet-600 px-7 py-2 text-sm text-white transition hover:scale-105 hover:bg-violet-500">

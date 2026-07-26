@@ -94,14 +94,14 @@ const CategorySection = () => {
 
           {/* Furniture */}
 
-          <div onClick={()=>navigate("/furniture")} className="cursor-pointer group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
+          <div onClick={()=>navigate("/kitchen")} className="cursor-pointer group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
 
             <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-yellow-500/20 text-yellow-400 group-hover:scale-110 transition">
               <Sofa size={26} />
             </div>
 
             <h3 className="text-lg font-semibold text-white mt-5">
-              Furniture
+              Kitchen
             </h3>
 
             <p className="text-sm text-gray-400 mt-2">
@@ -116,7 +116,7 @@ const CategorySection = () => {
           </div>
                     {/* Sports */}
 
-          <div className="group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
+          <div onClick={()=>navigate("/sports")} className="cursor-pointer  group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
 
             <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-green-500/20 text-green-400 group-hover:scale-110 transition">
               <Dumbbell size={26} />
@@ -139,7 +139,7 @@ const CategorySection = () => {
 
           {/* Accessories */}
 
-          <div className="group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
+          <div onClick={()=>navigate('/accessories')} className="cursor-pointer group p-6 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.08] transition duration-500 hover:-translate-y-2">
 
             <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-purple-500/20 text-purple-400 group-hover:scale-110 transition">
               <Watch size={26} />

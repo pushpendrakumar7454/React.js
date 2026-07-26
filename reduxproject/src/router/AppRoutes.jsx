@@ -17,6 +17,8 @@ import Cart from "../components/Cart";
 import Electonic from "../components/Electonic";
 import Fashion from "../components/Fashion";
 import Furniture from "../components/Furniture";
+import Sports from "../components/Sports";
+import Accessories from "../components/Accessories";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +45,14 @@ const router = createBrowserRouter([
             path:"/fashion",
             element:<Fashion/>
           },{
-            path:"/furniture",
+            path:"/kitchen",
             element:<Furniture/>
+          },{
+            path:"/sports",
+            element:<Sports/>
+          },{
+            path:"/accessories",
+            element:<Accessories/>
           }
         ],
       },
