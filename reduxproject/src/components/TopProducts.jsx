@@ -59,7 +59,7 @@ const TopProducts = () => {
               <div
                 key={product.id}
                 onClick={() => navigate(`/productdetail/${product.id}`)}
-                className="cursor-pointer group h-90 relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-purple-500/40 transition-all duration-500 hover:-translate-y-3"
+                className="cursor-pointer group lg:h-97 h-66 relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-purple-500/40 transition-all duration-500 hover:-translate-y-3"
               >
                 <span className="absolute top-5 left-5 z-20 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
                   -30%
@@ -73,7 +73,7 @@ const TopProducts = () => {
                   <img
                     src={product.images[0]}
                     alt=""
-                    className="h-50 w-full object-cover transition duration-700 group-hover:scale-110"
+                    className="lg:h-50 h-30 object-contain w-full lg:object-cover transition duration-700 group-hover:scale-110"
                   />
                 </div>
 
@@ -90,7 +90,7 @@ const TopProducts = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-small text-white mt-2">
+                  <h3 className="lg:text-xl text-[11px] font-small text-white mt-2">
                     {product.title}
                   </h3>
 

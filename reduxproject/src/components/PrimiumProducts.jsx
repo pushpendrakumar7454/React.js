@@ -1,27 +1,33 @@
-import React, { useEffect } from "react";
-import {
-  ShoppingCart,
-  Heart,
-  Star,
-  Eye,
-  Sparkles,
-  Search,
-} from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { ShoppingCart, Heart, Star, Eye, Sparkles, Search } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/product/productSlice";
+import { setSearch } from "../features/cart/searchSlice";
 
-const Product = () => {
+const PrimiumProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { products, loading, error } = useSelector((state) => state.products);
-  const twentyProducts = products.slice(0, 20);
+  const twentyProducts = products.slice(0, 90);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+  const search = useSelector((state) => state.search.search);
+  
 
+const filteredProducts = twentyProducts.filter((product) => {
+  const value = search.toLowerCase();
+
+  return (
+    product.title.toLowerCase().includes(value) ||
+    product.category.toLowerCase().includes(value) ||
+    product.brand?.toLowerCase().includes(value)
+  );
+});
+   
   return (
     <section className="relative overflow-hidden bg-[#0B1120] py-20 px-4">
       {/* Glow */}
@@ -46,13 +52,27 @@ const Product = () => {
           <p className="mt-5 text-sm text-slate-400 sm:text-base">
             Discover trending products with premium quality and modern design.
           </p>
+          <div className="mx-auto mt-8 w-full max-w-xl">
+            <div className="relative group">
+              <Search
+                size={20}
+                className="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-violet-400 transition"
+              />
 
-         
+              <input
+                value={search}
+                onChange={(e) => dispatch(setSearch(e.target.value))}
+                type="text"
+                placeholder="Search premium products..."
+                className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-14 pr-5 text-sm text-white  placeholder:text-slate-500 backdrop-blur-xl outline-none transition duration-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/30"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Products */}
-        <div className="mx-auto scroll cursor-pointer flex gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">
-          {twentyProducts.map((product) => (
+        <div className="mx-auto cursor-pointer grid grid-cols-4 gap-6  pb-4">
+          {filteredProducts.map((product) => (
             <div
               onClick={() => navigate(`/productdetail/${product.id}`)}
               key={product.id}
@@ -118,4 +138,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default PrimiumProducts;

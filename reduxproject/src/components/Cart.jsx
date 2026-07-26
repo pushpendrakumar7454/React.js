@@ -9,13 +9,19 @@ import {
   CreditCard,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement,removeCart} from "../features/cart/cartSlice";
-
+import { increment, decrement, removeCart } from "../features/cart/cartSlice";
 
 const Cart = () => {
-    const {cartItems,}=useSelector((state)=>state.cart)
-    const dispatch=useDispatch()
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
+  const subtotal = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
+  const tax = subtotal * 0.05;
+
+  const total = subtotal + tax;
 
   return (
     <div className="min-h-screen bg-[#09090b] text-white px-5 md:px-10 py-10 relative overflow-hidden">
@@ -40,57 +46,79 @@ const Cart = () => {
         <div className="grid lg:grid-cols-3 gap-10 mt-5">
           {/* Products */}
 
-          <div className="lg:col-span-2 flex flex-col  gap-5">
-            {/* Product 1 */}
-            {cartItems.map((product)=>{
-                
-           return  <div key={product.id} className="bg-white/5 border border-white/10 rounded-3xl p-3 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-violet-500/40">
-              <div className="flex gap-5">
-                <img
-                  src={product.images}
-                  className="w-28 h-28 md:w-36 md:h-36 object-cover rounded-2xl"
-                />
+          <div className="lg:col-span-2 flex flex-col gap-3 lg:gap-5">
+            {cartItems.map((product) => {
+              return (
+                <div
+                  key={product.id}
+                  className="relative bg-white/5 border border-white/10 rounded-3xl p-3 sm:p-4 md:p-5 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-violet-500/40"
+                >
+                  {/* Delete Button */}
+                  <button
+                    onClick={() => dispatch(removeCart(product.id))}
+                    className="absolute top-3 right-3 text-red-400 hover:bg-red-500/20 p-2 rounded-xl transition"
+                  >
+                    <Trash2 size={18} />
+                  </button>
 
-                <div className="flex-1">
-                  <p className="text-xs text-pink-400">{product.brand}</p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    {/* Image */}
+                    <div className="flex justify-center sm:block">
+                      <img
+                        src={product.images[0]}
+                        alt={product.title}
+                        className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 object-cover rounded-2xl"
+                      />
+                    </div>
 
-                  <h2 className="text-lg md:text-xl font-semibold mt-2">
-                   {product.title}
-                  </h2>
+                    {/* Product Details */}
+                    <div className="flex-1">
+                      <p className="text-xs text-pink-400">{product.brand}</p>
 
-                  <p className="text-sm text-gray-400 mt-1">
-                    {product.description.slice(0,105)}
-                  </p>
+                      <h2 className="text-base sm:text-lg md:text-xl font-semibold mt-1 sm:mt-2 pr-8">
+                        {product.title}
+                      </h2>
 
-                  <div className="flex justify-between items-center mt-3">
-                    <span className="text-xl font-bold">${product.price}</span>
+                      <p className="block sm:hidden text-xs text-gray-400 mt-2 leading-relaxed">
+                        {product.description.slice(0, 55)}...
+                      </p>
 
-                    <div className="flex items-center bg-black/30 border border-white/10 rounded-xl">
-                      <button onClick={()=>dispatch(decrement(product.id))} className="p-2 hover:bg-white/10">
-                        <Minus size={15} />
-                      </button>
+                      {/* Tablet & Laptop */}
+                      <p className="hidden sm:block text-sm text-gray-400 mt-2 leading-relaxed">
+                        {product.description.slice(0, 105)}...
+                      </p>
+                      {/* Price + Quantity */}
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4">
+                        <span className="text-lg sm:text-xl font-bold">
+                          ${product.price}
+                        </span>
 
-                      <span className="px-4">{product.quantity}</span>
+                        <div className="flex items-center justify-center sm:justify-start bg-black/30 border border-white/10 rounded-xl overflow-hidden w-fit">
+                          <button
+                            onClick={() => dispatch(decrement(product.id))}
+                            className="p-2 sm:p-3 hover:bg-white/10 transition"
+                          >
+                            <Minus size={16} />
+                          </button>
 
-                      <button onClick={()=>dispatch(increment(product.id))} className="p-2 hover:bg-white/10">
-                        <Plus size={15} />
-                      </button>
+                          <span className="px-4 sm:px-5 text-sm sm:text-base font-medium">
+                            {product.quantity}
+                          </span>
+
+                          <button
+                            onClick={() => dispatch(increment(product.id))}
+                            className="p-2 sm:p-3 hover:bg-white/10 transition"
+                          >
+                            <Plus size={16} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <button onClick={()=>dispatch(removeCart(product.id))} className="cursor-pointer text-red-400 hover:bg-red-500/20 p-3 rounded-xl h-fit">
-                  <Trash2 size={20} />
-                </button>
-              </div>
-            </div>
-
+              );
             })}
-
-            
-
           </div>
-
           {/* Summary */}
 
           <div className="bg-white/5 border border-white/10 rounded-3xl p-6 h-fit backdrop-blur-xl">
@@ -104,7 +132,12 @@ const Cart = () => {
               <div className="flex justify-between">
                 <span className="text-gray-400">Subtotal</span>
 
-                <span>$165</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-gray-400">
+                <span>Tax</span>
+
+                <span>5%</span>
               </div>
 
               <div className="flex justify-between text-gray-400">
@@ -113,33 +146,16 @@ const Cart = () => {
                 <span>Free</span>
               </div>
 
-              <div className="border-t border-white/10 pt-5 flex justify-between text-xl font-bold">
+              <div className="border-t border-white/10 pt-5 flex justify-between text-xl font-semibold">
                 <span>Total</span>
 
-                <span className="text-violet-400">$165</span>
+                <span className="text-violet-400">${total.toFixed(2)}</span>
               </div>
             </div>
 
-            <button className="mt-8 w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-semibold hover:scale-105 transition">
+            <button className="mt-4 w-full py-3 active:scale-95 cursor-pointer rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-semibold hover:scale-105 transition">
               Checkout Now
             </button>
-
-            <div className="mt-6 space-y-4 text-xs text-gray-400">
-              <div className="flex gap-3 items-center">
-                <Truck className="text-violet-400" />
-                Free Delivery
-              </div>
-
-              <div className="flex gap-3 items-center">
-                <ShieldCheck className="text-violet-400" />
-                Secure Payment
-              </div>
-
-              <div className="flex gap-3 items-center">
-                <CreditCard className="text-violet-400" />
-                Multiple Payment Options
-              </div>
-            </div>
           </div>
         </div>
       </div>

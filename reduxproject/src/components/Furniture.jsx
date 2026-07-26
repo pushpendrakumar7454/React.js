@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { ShoppingCart, Heart, Eye, Star, Sparkles, Cpu } from "lucide-react";
+import { ShoppingCart, Heart, Eye, Star, Sparkles, Cpu,Search } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/product/productSlice";
+import { setSearch } from "../features/cart/searchSlice";
 
 const Furniture = () => {
   const navigate = useNavigate();
@@ -19,6 +20,16 @@ const Furniture = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+     const search = useSelector((state) => state.search.search);
+  const filteredProducts = electronicItem.filter((product) => {
+  const value = search.toLowerCase();
+
+  return (
+    product.title.toLowerCase().includes(value) ||
+    product.category.toLowerCase().includes(value) ||
+    product.brand?.toLowerCase().includes(value)
+  );
+});
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#050816] px-5 py-12">
@@ -43,12 +54,28 @@ const Furniture = () => {
           <p className="mt-4 max-w-xl mx-auto text-sm leading-6 text-gray-400">
             Explore premium Kitchen for modern lifestyle.
           </p>
+            <div className="mx-auto mt-8 w-full max-w-xl">
+                      <div className="relative group">
+                        <Search
+                          size={20}
+                          className="absolute left-5 top-1/2 -translate-y-1/2 text-white group-focus-within:text-violet-400 transition"
+                        />
+          
+                        <input
+                          value={search}
+                          onChange={(e) => dispatch(setSearch(e.target.value))}
+                          type="text"
+                          placeholder="Search premium products..."
+                          className="w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 pl-14 pr-5 text-sm text-white  placeholder:text-slate-500 backdrop-blur-xl outline-none transition duration-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/30"
+                        />
+                      </div>
+                    </div>
         </div>
 
         {/* Products */}
 
         <div className="grid grid-cols-1 h-799 sm:grid-cols-2 lg:grid-cols-4 gap-7">
-          {electronicItem.map((p) => {
+          {filteredProducts.map((p) => {
             return (
               <div
               onClick={()=>navigate(`/productdetail/${p.id}`)}

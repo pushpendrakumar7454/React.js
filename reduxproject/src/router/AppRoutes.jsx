@@ -20,6 +20,9 @@ import Furniture from "../components/Furniture";
 import Sports from "../components/Sports";
 import Accessories from "../components/Accessories";
 import Product from "../pages/Product";
+import CategorySection from "../components/CategorySection";
+import PrimiumProducts from "../components/PrimiumProducts";
+import About from "../pages/About";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +39,18 @@ const router = createBrowserRouter([
             path: "/productdetail/:id",
             element: <ProductDetail />,
           },
-          {path:"/product",
-          element:<Product/>},
+          {
+            path:"/product",
+          element:<PrimiumProducts/>
+        },
+          {path:"/categoryes",
+            element:<CategorySection/>
+
+          },
+          {
+            path:"/about",
+            element:<About/>
+          },
           {
             path:"/cart",
             element:<Cart/>

@@ -9,8 +9,11 @@ import {
   Package,
   CreditCard,
 } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const Section = () => {
+
+  const navigate=useNavigate()
   return (
     <section className="relative overflow-hidden bg-slate-950 text-white">
       {/* Background Blur */}
@@ -40,7 +43,7 @@ const Section = () => {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <button className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-7 py-3 text-sm font-semibold transition duration-300 hover:scale-105">
+            <button onClick={()=>navigate("/product")} className="cursor-pointer active:scale-95 group flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-7 py-3 text-sm font-semibold transition duration-300 hover:scale-105">
               Shop Now
               <ArrowRight
                 size={18}
@@ -48,7 +51,7 @@ const Section = () => {
               />
             </button>
 
-            <button className="rounded-xl border border-slate-700 bg-slate-900 px-7 py-3 text-sm font-semibold transition hover:border-violet-500 hover:bg-slate-800">
+            <button onClick={()=>navigate("/product")}  className="cursor-pointer active:scale-95 rounded-xl border border-slate-700 bg-slate-900 px-7 py-3 text-sm font-semibold transition hover:border-violet-500 hover:bg-slate-800">
               Explore Collection
             </button>
           </div>
