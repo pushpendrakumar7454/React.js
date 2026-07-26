@@ -9,7 +9,13 @@ import {
   CreditCard,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement, removeCart } from "../features/cart/cartSlice";
+import {
+  increment,
+  decrement,
+  removeCart,
+  checkout,
+} from "../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -153,7 +159,17 @@ const Cart = () => {
               </div>
             </div>
 
-            <button className="mt-4 w-full py-3 active:scale-95 cursor-pointer rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-semibold hover:scale-105 transition">
+            <button
+              onClick={() => {
+                dispatch(checkout());
+                toast.success("All products Checkout",{
+                  position:"top-right",
+                  autoClose:1000
+                })
+
+              }}
+              className="mt-4 w-full py-3 active:scale-95 cursor-pointer rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 font-semibold hover:scale-105 transition"
+            >
               Checkout Now
             </button>
           </div>

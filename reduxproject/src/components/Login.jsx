@@ -19,37 +19,49 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/AuthSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-
+import { setCart, clearCart } from "../features/cart/cartSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {register,handleSubmit,reset,formState:{errors}}=useForm()
-  const users=useSelector((state)=>state.auth.users)
-  const dispatch=useDispatch()
- const navigate= useNavigate()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const users = useSelector((state) => state.auth.users);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const loginFormSubmit = (data) => {
+    console.log(users);
+    const user = users.find(
+      (u) => u.email === data.email && u.password === data.password,
+    );
 
-        const loginFormSubmit = (data) => {
-        const user = users.find(
-            (u) =>
-            u.email === data.email &&
-            u.password === data.password
-        );
+    if (user) {
+      // purana user ka cart clear
+      dispatch(clearCart());
 
-        if (user) {
-          toast.success("User login Successfully",{
-            position:"top-right",
-            autoClose:1000
-          })
-            
-            navigate('/')
-            dispatch(loginUser(user));
-            reset();
+      // new user login
+      dispatch(loginUser(user));
 
-        } else {
-            alert("Invalid Email or Password");
-        }
-        };
+      // new user ka cart load
+      const userCart =
+        JSON.parse(localStorage.getItem(`cart_${user.id}`)) || [];
+
+      dispatch(setCart(userCart));
+
+      toast.success("User login Successfully", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+
+      reset();
+
+      navigate("/");
+    }
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950">
@@ -187,7 +199,10 @@ const Login = () => {
                 Login to continue shopping
               </p>
 
-              <form className="mt-3 space-y-5" onSubmit={handleSubmit(loginFormSubmit)}>
+              <form
+                className="mt-3 space-y-5"
+                onSubmit={handleSubmit(loginFormSubmit)}
+              >
                 {/* Email */}
 
                 <div>
@@ -199,16 +214,17 @@ const Login = () => {
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
 
                     <input
-                    {...register('email',{
-                        required:"Email is required"
-                    })}
+                      {...register("email", {
+                        required: "Email is required",
+                      })}
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 pl-12 pr-4 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4  focus:ring-cyan-500/20"
                     />
                   </div>
-                    {errors.email && (<p className="text-red-500">{errors.email.message}</p>)}
-
+                  {errors.email && (
+                    <p className="text-red-500">{errors.email.message}</p>
+                  )}
                 </div>
 
                 {/* Password */}
@@ -222,9 +238,9 @@ const Login = () => {
                     <LockKeyhole className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
 
                     <input
-                    {...register('password',{
-                        required:"Password is required"
-                    })}
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter password"
                       className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 pl-12 pr-14 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/20"
@@ -238,8 +254,9 @@ const Login = () => {
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                   </div>
-                    {errors.password && (<p className="text-red-500">{errors.password.message}</p>)}
-
+                  {errors.password && (
+                    <p className="text-red-500">{errors.password.message}</p>
+                  )}
                 </div>
 
                 {/* Remember + Forgot */}
@@ -269,7 +286,10 @@ const Login = () => {
 
               <p className="mt-8 text-center text-gray-400">
                 Don't have an account?{" "}
-                <span onClick={()=>navigate('/register')} className="cursor-pointer font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline">
+                <span
+                  onClick={() => navigate("/register")}
+                  className="cursor-pointer font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline"
+                >
                   Create Account
                 </span>
               </p>
