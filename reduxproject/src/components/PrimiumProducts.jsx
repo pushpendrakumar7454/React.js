@@ -71,7 +71,7 @@ const filteredProducts = twentyProducts.filter((product) => {
         </div>
 
         {/* Products */}
-        <div className="mx-auto cursor-pointer grid grid-cols-4 gap-6  pb-4">
+        <div className="mx-auto cursor-pointer grid grid-cols-1 justify-center items-center lg:grid-cols-4 gap-6  pb-4">
           {filteredProducts.map((product) => (
             <div
               onClick={() => navigate(`/productdetail/${product.id}`)}

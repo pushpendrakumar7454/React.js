@@ -12,6 +12,7 @@ import {
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addtoCart } from "../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
 
@@ -173,7 +174,9 @@ const ProductDetail = () => {
                 </button>
               ) : (
                 <button
-                  onClick={() => dispatch(addtoCart(singleProduct))}
+                  onClick={() => {dispatch(addtoCart(singleProduct)),
+                    toast.success("product added Successfully")
+                  }}
                   className="flex cursor-pointer active:scale-95 items-center gap-2 bg-violet-600 hover:bg-violet-700 duration-300 px-6 py-3 rounded-xl text-sm font-medium"
                 >
                   <ShoppingCart size={18} />
@@ -281,6 +284,7 @@ const ProductDetail = () => {
                       <button
                         onClick={(e) => {
                           dispatch(addtoCart(p));
+                          toast.success("Product added Successfully")
                         }}
                         
                         className={`text-xs px-3  py-2 rounded-lg duration-300 ${

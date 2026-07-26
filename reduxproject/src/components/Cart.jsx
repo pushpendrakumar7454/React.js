@@ -61,7 +61,9 @@ const Cart = () => {
                 >
                   {/* Delete Button */}
                   <button
-                    onClick={() => dispatch(removeCart(product.id))}
+                    onClick={() => {dispatch(removeCart(product.id)),
+                      toast.success("product Deleteed")
+                    }}
                     className="absolute top-3 right-3 text-red-400 hover:bg-red-500/20 p-2 rounded-xl transition"
                   >
                     <Trash2 size={18} />
@@ -101,7 +103,9 @@ const Cart = () => {
 
                         <div className="flex items-center justify-center sm:justify-start bg-black/30 border border-white/10 rounded-xl overflow-hidden w-fit">
                           <button
-                            onClick={() => dispatch(decrement(product.id))}
+                            onClick={() => {dispatch(decrement(product.id))
+                             
+                            }}
                             className="p-2 sm:p-3 hover:bg-white/10 transition"
                           >
                             <Minus size={16} />
