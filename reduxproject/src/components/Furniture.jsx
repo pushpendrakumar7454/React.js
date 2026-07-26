@@ -74,7 +74,7 @@ const Furniture = () => {
 
         {/* Products */}
 
-        <div className="grid grid-cols-1 h-799 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
           {filteredProducts.map((p) => {
             return (
               <div
@@ -82,7 +82,7 @@ const Furniture = () => {
                 key={p.id}
                 className="group cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition duration-500 hover:-translate-y-3 p-3 hover:border-violet-500/50"
               >
-                <div className="relative h-40 overflow-hidden">
+                <div className="relative lg:h-40  h-100  overflow-hidden">
                   <span className="absolute left-4 top-4 z-20 rounded-full bg-violet-600 px-3 py-1 text-[11px] font-semibold text-white">
                     NEW
                   </span>
@@ -146,7 +146,7 @@ const Furniture = () => {
                     </div>
 
                     <button className="cursor-pointer active:scale-95 rounded-xl bg-violet-600 px-7 py-2 text-sm text-white transition hover:scale-105 hover:bg-violet-500">
-                      Add
+                      view
                     </button>
                   </div>
                 </div>

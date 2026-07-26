@@ -75,7 +75,7 @@ const Electonic = () => {
 
         {/* Products */}
 
-        <div className="grid grid-cols-1 h-505 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
           {filteredProducts.map((p) => {
             return (
               <div
@@ -149,7 +149,7 @@ const Electonic = () => {
                     </div>
 
                     <button className="rounded-xl bg-violet-600 px-7 py-2 text-sm text-white transition hover:scale-105 hover:bg-violet-500">
-                      Add
+                      view
                     </button>
                   </div>
                 </div>

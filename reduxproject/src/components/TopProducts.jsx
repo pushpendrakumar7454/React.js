@@ -58,7 +58,8 @@ const TopProducts = () => {
             return (
               <div
                 key={product.id}
-                onClick={() => navigate(`/productdetail/${product.id}`)}
+                  onClick={() => navigate(`/productdetail/${product.id}`)}
+                
                 className="cursor-pointer group lg:h-97 h-66 relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-purple-500/40 transition-all duration-500 hover:-translate-y-3"
               >
                 <span className="absolute top-5 left-5 z-20 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
@@ -71,6 +72,7 @@ const TopProducts = () => {
 
                 <div className="overflow-hidden">
                   <img
+                  
                     src={product.images[0]}
                     alt=""
                     className="lg:h-50 h-30 object-contain w-full lg:object-cover transition duration-700 group-hover:scale-110"
@@ -106,8 +108,8 @@ const TopProducts = () => {
                     </div>
 
                     <button className="flex cursor-pointer active:scale-95 items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-1.5 rounded-xl text-white hover:scale-105 transition">
-                      <ShoppingCart size={18} />
-                      Cart
+                    
+                      View
                     </button>
                   </div>
                 </div>

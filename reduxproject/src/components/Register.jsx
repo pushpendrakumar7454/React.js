@@ -13,30 +13,29 @@ import { useDispatch } from "react-redux";
 import { addUsers } from "../features/auth/AuthSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-
-
+import { mergeConfig } from "axios";
 
 const Register = () => {
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+    watch,
+  } = useForm();
+  const password = watch("password");
+  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
 
-    const {register,reset,formState:{errors},handleSubmit,watch}= useForm()
-    const password = watch("password");
-    const navigate= useNavigate()
-
-   const dispatch=useDispatch()
-
-    const submitForm=(data)=>{
-        dispatch(addUsers(data))
-        toast.success("Register Successfull",{
-          position:"top-center",
-          autoClose:1000
-        })
-        navigate('/login')
-
-    }
-
-
-
+  const submitForm = (data) => {
+    dispatch(addUsers(data));
+    toast.success("Register Successfull", {
+      position: "top-center",
+      autoClose: 1000,
+    });
+    navigate("/login");
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#020617]">
@@ -141,7 +140,10 @@ const Register = () => {
                 Join SkyCart in seconds
               </p>
 
-              <form className="mt-4 space-y-4" onSubmit={handleSubmit(submitForm)}>
+              <form
+                className="mt-4 space-y-4"
+                onSubmit={handleSubmit(submitForm)}
+              >
                 {/* Full Name */}
 
                 <div>
@@ -150,15 +152,17 @@ const Register = () => {
                   </label>
 
                   <input
-                  {...register('name',{
-                    required:"Name is required"
-                  })}
+                    {...register("name", {
+                      required: "Name is required",
+                    })}
                     type="text"
                     placeholder="Enter your name"
                     className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/20"
                   />
                 </div>
-                {errors.name && (<p className="text-red-500">{errors.name.message}</p>)}
+                {errors.name && (
+                  <p className="text-red-500">{errors.name.message}</p>
+                )}
 
                 {/* Email */}
 
@@ -168,15 +172,21 @@ const Register = () => {
                   </label>
 
                   <input
-                   {...register('email',{
-                    required:"Email is required"
-                   })}
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Please enter a valid email",
+                      },
+                    })}
                     type="email"
                     placeholder="Enter your email"
                     className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/20"
                   />
                 </div>
-                {errors.email && (<p className="text-red-500">{errors.email.message}</p>)}
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
 
                 {/* Password */}
 
@@ -186,15 +196,23 @@ const Register = () => {
                   </label>
 
                   <input
-                  {...register('password',{
-                    required:"passord is required"
-                  })}
+                    {...register("password", {
+                      required: "Password is required",
+                      pattern: {
+                        value:
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d@$!%*?&^#()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/,
+                        message:
+                          "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+                      },
+                    })}
                     type="password"
                     placeholder="Create password"
                     className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/20"
                   />
                 </div>
-                {errors.password && (<p className="text-red-500">{errors.password.message}</p>)}
+                {errors.password && (
+                  <p className="text-red-500 text-sm">{errors.password.message}</p>
+                )}
 
                 {/* Confirm Password */}
 
@@ -204,20 +222,20 @@ const Register = () => {
                   </label>
 
                   <input
-                  {...register('confirm',{
-                    required:"confirm is required",
-                    validate:(value)=>{
-                        value===password || "password do not match"
-                    }
-                  }
-                )}
+                    {...register("confirm", {
+                      required: "confirm is required",
+                      validate: (value) => {
+                        value === password || "password do not match";
+                      },
+                    })}
                     type="password"
                     placeholder="Confirm password"
                     className="w-full rounded-2xl border border-white/10 bg-white/5 p-3 text-white placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/20"
                   />
                 </div>
-                {errors.confirm && (<p className="text-red-500">{errors.confirm.message}</p>)}
-               
+                {errors.confirm && (
+                  <p className="text-red-500">{errors.confirm.message}</p>
+                )}
 
                 <button
                   type="submit"
