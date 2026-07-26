@@ -19,6 +19,7 @@ import Fashion from "../components/Fashion";
 import Furniture from "../components/Furniture";
 import Sports from "../components/Sports";
 import Accessories from "../components/Accessories";
+import Product from "../pages/Product";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
             path: "/productdetail/:id",
             element: <ProductDetail />,
           },
+          {path:"/product",
+          element:<Product/>},
           {
             path:"/cart",
             element:<Cart/>

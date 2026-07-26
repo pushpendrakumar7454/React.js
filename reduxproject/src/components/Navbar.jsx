@@ -2,13 +2,12 @@ import { useState } from "react";
 import { Menu, X, ShoppingCart, Search, User, Sparkles } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../features/auth/AuthSlice";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = ["Home", "Shop", "Categories", "Offers", "Contact"];
-
+ 
   const currentUser=useSelector((state)=>state.auth.currentUser)
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -49,17 +48,11 @@ const cartQuantity = cartItems.reduce(
           {/* Desktop Menu */}
 
           <nav className="hidden lg:flex items-center gap-8">
-            {links.map((item) => (
-              <a
-                key={item}
-                href="/"
-                className="relative text-gray-300 hover:text-white font-medium transition duration-300 group"
-              >
-                {item}
-
-                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+            <NavLink to={"/"} className="text-cyan-400 text-lg font-semibold">Home</NavLink>
+            <NavLink to={"/product"} className="text-lg text-cyan-500 font-semibold">Products</NavLink>
+            <NavLink className="text-lg text-cyan-500 font-semibold">Category</NavLink>
+            <NavLink className="text-lg text-cyan-500 font-semibold">About</NavLink>
+            
           </nav>
 
           {/* Right Side */}
@@ -115,23 +108,8 @@ const cartQuantity = cartItems.reduce(
          
 
             <div className="flex flex-col gap-2">
-              {links.map((item, index) => (
-                <a
-                  key={item}
-                  href="/"
-                  className="group flex items-center justify-between rounded-xl px-4 py-3 text-gray-300 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all duration-300"
-                  style={{
-                    transitionDelay: `${index * 80}ms`,
-                  }}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <span>{item}</span>
-
-                  <span className="translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-                    →
-                  </span>
-                </a>
-              ))}
+              
+            
             </div>
 
             {/* Bottom Buttons */}
