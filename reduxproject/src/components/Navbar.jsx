@@ -3,6 +3,7 @@ import { Menu, X, ShoppingCart, Search, User, Sparkles } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../features/auth/AuthSlice";
 import { NavLink, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +15,10 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch(logoutUser());
-    alert("User logout");
+    toast.error("User Logout",{
+      position:"top-right",
+      autoClose:1000
+    })
     navigate("/");
   };
 

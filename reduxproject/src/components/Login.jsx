@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/AuthSlice";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 
 const Login = () => {
@@ -36,7 +37,11 @@ const Login = () => {
         );
 
         if (user) {
-            alert("Login Success");
+          toast.success("User login Successfully",{
+            position:"top-right",
+            autoClose:1000
+          })
+            
             navigate('/')
             dispatch(loginUser(user));
             reset();
@@ -264,7 +269,7 @@ const Login = () => {
 
               <p className="mt-8 text-center text-gray-400">
                 Don't have an account?{" "}
-                <span className="cursor-pointer font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline">
+                <span onClick={()=>navigate('/register')} className="cursor-pointer font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline">
                   Create Account
                 </span>
               </p>

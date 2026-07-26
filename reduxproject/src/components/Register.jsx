@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addUsers } from "../features/auth/AuthSlice";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 
 
@@ -26,7 +27,10 @@ const Register = () => {
 
     const submitForm=(data)=>{
         dispatch(addUsers(data))
-        alert("register succefull")
+        toast.success("Register Successfull",{
+          position:"top-center",
+          autoClose:1000
+        })
         navigate('/login')
 
     }

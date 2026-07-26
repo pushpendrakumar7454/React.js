@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 
 
@@ -14,6 +15,7 @@ const authSlice=createSlice({
         addUsers:(state,action)=>{
             state.users.push(action.payload);
             localStorage.setItem('users',JSON.stringify(state.users))
+           
 
         },
         loginUser:(state,action)=>{
