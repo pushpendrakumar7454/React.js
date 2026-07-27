@@ -2,10 +2,17 @@ import React, { act, useEffect, useState } from "react";
 import axios from "axios";
 
 const App = () => {
+
+  //Debouncing
   const [products, setProducts] = useState([]);
   const [allProduct, setAllProduct] = useState([]);
   const [searchData, setSearchData] = useState("");
+  const [scrollY, setScrollY] = useState(null)
+  
 
+ 
+  
+  let throttling=false
   const getData = async () => {
     try {
       const res = await axios.get("https://fakestoreapi.com/products");
@@ -36,6 +43,25 @@ const App = () => {
     getData();
   }, []);
 
+
+//throttling
+    useEffect(()=>{
+      let scrollVar=()=>{
+        if(throttling) return
+        throttling=true
+        console.log("scroll running");
+        setScrollY(window.scrollY)
+        setTimeout(()=>{
+          throttling=false
+        },2000)
+        
+      }
+      
+      window.addEventListener('scroll',scrollVar)
+      return ()=>window.removeEventListener("scroll",scrollVar)
+
+    },[])
+
   return (
     <div className="p-7">
       <div className="mb-5">
@@ -49,7 +75,7 @@ const App = () => {
         />
       </div>
       {products.map((data) => {
-        return <h2 key={data.id}>{data.title}</h2>;
+        return <h2 key={data.id}  className="text-xl">{data.title}</h2>;
       })}
     </div>
   );
