@@ -8,6 +8,7 @@ import Register from "../components/Register";
 import Login from "../components/Login";
 import ProtectedRouter from "./ProtectedRouter";
 import PublicProtected from "./PublicProtected";
+import ProductDetail from "../components/ProductDetail";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,9 @@ const router = createBrowserRouter([
             },{
                 path:"/product",
                 element:<Product/>
+            },{
+                path:"productdetail/:id",
+                element:<ProductDetail/>
             }
         ]
         }

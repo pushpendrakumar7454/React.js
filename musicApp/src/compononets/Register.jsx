@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { MyContext } from "../context/MyContext";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,13 +16,20 @@ const Register = () => {
   } = useForm();
   const password = watch("password");
   const selectedRole = watch("role");
-  const [users, setUsers] = useState([]);
+
+
+  const{users,setUsers}=useContext(MyContext)
 
   const registerForm = (data) => {
-    const oldUser = JSON.parse(localStorage.getItem("users")) || [];
-    const newUser = [...oldUser, data];
-    localStorage.setItem("users", JSON.stringify(newUser));
-    setUsers(newUser);
+      const existUser=users.find((user)=>user.email===data.email)
+      if(existUser){
+        alert("Email allredy Exit")
+        return
+      }
+    const newUser=[...users,data]
+    localStorage.setItem("users",JSON.stringify(newUser))
+    setUsers(newUser)
+    navigate('/login')
     alert("registration succefull");
     console.log(data);
   };

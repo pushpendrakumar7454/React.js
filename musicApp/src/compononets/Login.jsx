@@ -1,8 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { MyContext } from "../context/MyContext";
 
 const Login = () => {
+    
+   const {
+      handleSubmit,
+      reset,
+      register,
+      watch,
+      setValue,
+      formState: { errors },
+    } = useForm();
+
+
+
+    const {users,setCurrentUser}=useContext(MyContext)
   const navigate = useNavigate();
+  const loginForm=(data)=>{
+    const user=users.find((u)=>u.email==data.email && u.password==data.password)
+    console.log(user);
+
+     
+
+    if(user){
+      localStorage.setItem("currentUser",JSON.stringify(user))
+      setCurrentUser(user)
+      console.log(localStorage.getItem("currentUser"));
+
+      alert("login succes")
+      if(user.role=="artist"){
+        navigate("/artist")
+
+      }else if(user.role=='listener'){
+        navigate("/")
+      }
+    }else{
+      alert("invlid email and password")
+    }
+
+  }
+
+
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#04110a]">
@@ -181,9 +221,9 @@ const Login = () => {
         </div>
 
         {/* ================= RIGHT LOGIN ================= */}
-
-        <div className="flex min-h-screen w-full items-center justify-center px-5 py-10 lg:w-1/2">
-          <div className="w-full max-w-md">
+       <form onSubmit={handleSubmit(loginForm)} className="flex min-h-screen w-full items-center justify-center px-5 py-10 lg:w-1/2">
+        <div >
+          <div className="w-full lg:w-100 max-w-md">
             <div className="rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur-3xl shadow-[0_20px_80px_rgba(0,0,0,.5)]">
               {/* Logo */}
 
@@ -208,6 +248,9 @@ const Login = () => {
 
                 <div className="group">
                   <input
+                  {...register("email",{
+                    required:"Email is required"
+                  })}
                     type="email"
                     placeholder="Email Address"
                     className="
@@ -235,6 +278,9 @@ const Login = () => {
 
                 <div>
                   <input
+                  {...register("password",{
+                    required:"password is required"
+                  })}
                     type="password"
                     placeholder="Password"
                     className="
@@ -340,6 +386,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
   );
