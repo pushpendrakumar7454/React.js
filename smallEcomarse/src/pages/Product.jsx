@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../featurs/product/productApi";
+import { getData } from "../features/products/productApi";
+
 
 const Product = () => {
 
    const dispatch=useDispatch()
-   const {products,loading}=useSelector((state)=>state.product)
 
- useEffect(()=>{
-  dispatch(getData())
- },[])
+   const {products,loading} = useSelector(state => state.product)
+   useEffect(()=>{
+    dispatch(getData())
+   },[])
+
    return (
     <div className="min-h-screen bg-gray-100 p-10">
       <h1 className="text-4xl font-bold text-center mb-10">

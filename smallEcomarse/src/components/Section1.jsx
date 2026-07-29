@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../featurs/product/productApi";
+import { getData } from "../features/products/productApi";
+
 
 
 const Section1 = () => {
 
     const dispatch=useDispatch()
-    const {products,loading}=useSelector((state)=>state.product)
- 
+  const {products,loading}= useSelector((state)=>state.product)
 
-    useEffect(()=>{
-      dispatch(getData())
-    },[])
-   
+  useEffect(()=>{
+    dispatch(getData())
+  },[])
 
 
 

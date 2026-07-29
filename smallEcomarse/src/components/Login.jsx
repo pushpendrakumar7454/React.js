@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate} from 'react-router'
 import { useSelector, useDispatch } from "react-redux";
 import { useForm} from "react-hook-form"
-import { loginUser } from "../featurs/auth/userAuth";
+import { loginUser } from "../features/auth/authUser";
 
 
 
@@ -21,6 +21,8 @@ const Login = () => {
    if(user){
     alert("login succefull")
     navigate("/")
+   }else{
+    alert("invalid Email and passowrd")
    }
    dispatch(loginUser(user))
    reset()
@@ -59,7 +61,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+            className="w-full cursor-pointer active:scale-95 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
           >
             Login
           </button>

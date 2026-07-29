@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { RegisterUser } from "../featurs/auth/userAuth";
+import { registerUser } from "../features/auth/authUser";
 
 const Register = () => {
   const {
@@ -32,7 +32,7 @@ const navigate=  useNavigate()
       password: data.password,
     };
 
-    dispatch(RegisterUser(user));
+    dispatch(registerUser(user));
    navigate("/login");
     alert("User registration succefull");
   };

@@ -1,7 +1,7 @@
 import React from 'react' 
 import { useDispatch, useSelector } from 'react-redux'
 import {NavLink, useNavigate} from 'react-router'
-import {logoutUser} from '../featurs/auth/userAuth'
+import { logoutUser } from '../features/auth/authUser'
 
 const Navvar = () => {
 
