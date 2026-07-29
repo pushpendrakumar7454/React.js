@@ -29,7 +29,7 @@ const Section1 = () => {
       {products.map((product)=>{
         return   <div key={product.id} className="bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden hover:shadow-2xl duration-300">
           <img
-          onClick={()=>navigate(`/productdetail/:${product.id}`)}
+         onClick={() => navigate(`/productdetail/${product.id}`)}
             src={product.image}
             alt=""
             className="w-full h-40 object-contain"
