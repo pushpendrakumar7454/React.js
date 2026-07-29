@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Layout from '../layout/Layout';
 import About from '../pages/About';
 import  Login  from '../compononets/Login';
+import Register from '../compononets/Register';
 
 const AppRouter = () => {
 
@@ -23,6 +24,9 @@ const AppRouter = () => {
    {
     path:"/login",
     element:<Login/>
+   },{
+    path:"/register",
+    element:<Register/>
    }
 ])
 
