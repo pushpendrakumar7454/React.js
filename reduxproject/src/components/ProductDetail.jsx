@@ -16,10 +16,6 @@ import { toast } from "react-toastify";
 
 const ProductDetail = () => {
 
-
-  
-
-
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -10,6 +10,7 @@ const Section1 = () => {
     const dispatch=useDispatch()
 
   const {products,loading}= useSelector((state)=>state.product)
+  
    const navigate=useNavigate()
   useEffect(()=>{
     dispatch(getData())

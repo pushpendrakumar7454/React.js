@@ -9,6 +9,7 @@ import Login from "../components/Login";
 import ProtectedRouter from "./ProtectedRouter";
 import PublicProtected from "./PublicProtected";
 import ProductDetail from "../components/ProductDetail";
+import Cart from "../components/Cart";
 
 const router = createBrowserRouter([
     {
@@ -26,9 +27,12 @@ const router = createBrowserRouter([
                 path:"/product",
                 element:<Product/>
             },{
-                
+
                 path:"productdetail/:id",
                 element:<ProductDetail/>
+            },{
+                path:"cart",
+                element:<Cart/>
             }
         ]
         }

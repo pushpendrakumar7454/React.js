@@ -21,7 +21,7 @@ const logoutUserpage=()=>{
 
 
     return (
-        <div className='flex justify-between items-center p-4 bg-black text-white text-xl'>
+        <div className='flex justify-between items-center p-7 bg-black text-white text-xl'>
             <div>
                 <h2>Lobo</h2>
             </div>
@@ -30,9 +30,14 @@ const logoutUserpage=()=>{
                 <NavLink to="/about" className={({isActive})=>isActive?"text-red-500":"text-white"}>About</NavLink>
                 <NavLink to="product" className={({isActive})=>isActive?"text-red-500":"text-white"}>Product</NavLink>
             </div>
+             <div className='flex gap-4 items-center'>
+            <div>
+               <NavLink to="/cart">Cart</NavLink>
+            </div>
             <div>
                <NavLink to="/login" onClick={()=>logoutUserpage()}>Logout</NavLink>
             </div>
+             </div>
         </div>
     )
 }

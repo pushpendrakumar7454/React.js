@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../features/products/productApi";
+import { useNavigate } from "react-router";
 
 
 const Product = () => {
 
    const dispatch=useDispatch()
+   const navigate=useNavigate()
 
    const {products,loading} = useSelector(state => state.product)
    useEffect(()=>{
@@ -24,6 +26,7 @@ const Product = () => {
       {products.map((product)=>{
         return   <div key={product.id} className="bg-white cursor-pointer rounded-xl shadow-lg overflow-hidden hover:shadow-2xl duration-300">
           <img
+          onClick={()=>navigate(`/productdetail/${product.id}`)}
             src={product.image}
             alt=""
             className="w-full h-40 object-contain"
