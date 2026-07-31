@@ -10,6 +10,7 @@ const Product = () => {
    const navigate=useNavigate()
 
    const {products,loading} = useSelector(state => state.product)
+   
    useEffect(()=>{
     dispatch(getData())
    },[])
