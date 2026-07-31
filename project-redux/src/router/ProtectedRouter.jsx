@@ -4,6 +4,7 @@ import { Navigate, Outlet } from 'react-router'
 
 const ProtectedRouter = () => {
   const {user}=useSelector((state)=>state.auth)
+  
   if(!user){
     return <Navigate to="/login" replace/>
   }
