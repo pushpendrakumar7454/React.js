@@ -47,7 +47,7 @@ const Login = () => {
 
                         <input
                          {...register("password",{
-                            required:"password is reequired"
+                            required:"password is required"
                         })}
                             type="password"
                             placeholder="Enter your password"

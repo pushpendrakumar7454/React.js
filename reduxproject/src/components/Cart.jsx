@@ -15,6 +15,7 @@ import {
   removeCart,
   checkout,
 } from "../features/cart/cartSlice";
+
 import { toast } from "react-toastify";
 
 const Cart = () => {

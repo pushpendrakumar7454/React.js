@@ -8,7 +8,6 @@ Ans-:: But before understanding Redux Toolkit, understand one thing first
 Suppose you have a Shopping Cart project.
 App
 |
-
 - Navbar
   | L Cart Count
   |

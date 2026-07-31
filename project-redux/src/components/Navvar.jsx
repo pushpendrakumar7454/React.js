@@ -1,7 +1,15 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router'
+import { removeUser } from '../features/auth/authSlice'
 
 const Navvar = () => {
+    
+
+    const {user}=useSelector((state)=>state.auth)
+    const dispatch=useDispatch()
+
+
     return (
         <div className='bg-black text-white p-7 flex justify-between items-center text-xl'>
            <div>Lobo</div>
@@ -16,7 +24,7 @@ const Navvar = () => {
                  <NavLink to="/cart">Cart</NavLink>
             </div>
             <div>
-                 <NavLink to="/login">Logout</NavLink>
+                 <NavLink to="/login" onClick={()=>dispatch(removeUser())}>Logout</NavLink>
             </div>
            </div>
         </div>
