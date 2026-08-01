@@ -175,7 +175,7 @@ const CreateStartup = () => {
                   <p className="mt-2 text-slate-400">Ready to launch 🚀</p>
                 </div>
 
-                <div className="text-5xl font-semibold text-cyan-400">95%</div>
+                <div className="text-3xl font-semibold text-cyan-400">95%</div>
               </div>
 
               <div className="mt-4 h-3 overflow-hidden rounded-full bg-white/10">

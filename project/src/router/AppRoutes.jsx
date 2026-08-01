@@ -12,6 +12,7 @@ import PublicRoute from "./public/PublicRoute";
 import ProtectedRouter from "./provider/ProtectedRouter";
 import CreateStartup from "../pages/CreateStartup";
 import StartupDetails from "../components/StartupDetails";
+import MyStartups from "../components/MyStartups";
 
 
 
@@ -46,10 +47,13 @@ const AppRoutes = () => {
             path: "/create-startup",
             element: <CreateStartup />
           },{
-            path:"productdetail",
+            path:"productdetail/:id",
             element:<StartupDetails/>
             
-          }
+          },{
+            path:'my-startups',
+            element:<MyStartups/>
+          },
         ]
       }
       ]

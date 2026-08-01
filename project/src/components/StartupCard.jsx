@@ -7,8 +7,12 @@ import {
   FaEye,
   FaCode,
 } from "react-icons/fa";
+import { useAuth } from "../hooks/useAuth";
 
 const StartupCard = ({ startup }) => {
+
+
+  const {navigate}=useAuth()
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -31,8 +35,8 @@ const StartupCard = ({ startup }) => {
       <div className="relative z-10 p-7 cursor-pointer">
         {/* Top */}
 
-        <div className="flex justify-between items-center ">
-          <div className="flex items-center gap-3">
+        <div  className="flex justify-between items-center ">
+          <div  className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/30">
               <FaRocket className="text-white text-xl" />
             </div>
@@ -126,13 +130,14 @@ const StartupCard = ({ startup }) => {
         {/* Footer */}
 
         <motion.button
+         onClick={() => navigate(`/productdetail/${startup.id}`)}
           whileHover={{
             scale: 1.03,
           }}
           whileTap={{
             scale: 0.95,
           }}
-          className="mt-8 w-full rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition"
+          className="mt-8 w-full cursor-pointer rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition"
         >
           View Startup →
         </motion.button>

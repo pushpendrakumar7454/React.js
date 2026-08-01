@@ -1,9 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import StartupCard from "./StartupCard";
+import { useAuth } from "../hooks/useAuth";
 
 const StartupFeed = () => {
   const {startup} = useSelector((state) => state.startup);
+
+
 
   return (
     <div className="max-w-7xl mx-auto px-5 py-10">

@@ -1,334 +1,533 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   HiOutlineMenuAlt3,
   HiOutlineX,
+  HiOutlineBell,
 } from "react-icons/hi";
-import { FaRocket } from "react-icons/fa";
+import {
+  FaRocket,
+  FaBookmark,
+  FaUserCircle,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUser } from "../features/auth/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const logoutHandler = () => {
+    localStorage.removeItem("loggedinUser");
+    dispatch(removeUser());
+  };
+
+  const navItem = ({ isActive }) =>
+    `relative px-2 py-2 text-[15px] font-semibold transition-all duration-300 ${
+      isActive
+        ? "text-cyan-400"
+        : "text-slate-300 hover:text-white"
+    }`;
+
   return (
-    <header className="sticky top-0 z-50 p-2 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-5">
+    <header className="sticky top-0 z-50">
 
-        <div className="h-16 flex items-center justify-between">
+      {/* Blur Background */}
 
-          {/* Logo */}
+      <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-2xl border-b border-cyan-500/10"></div>
 
-          <Link to="/" className="flex items-center gap-3">
+      {/* Stars */}
 
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 flex items-center justify-center">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-              <FaRocket className="text-white text-lg" />
+        <span className="absolute top-5 left-20 w-1 h-1 rounded-full bg-cyan-400 animate-ping"></span>
 
-            </div>
+        <span className="absolute top-8 right-40 w-1 h-1 rounded-full bg-white"></span>
+
+        <span className="absolute top-12 left-1/2 w-1 h-1 rounded-full bg-indigo-400 animate-pulse"></span>
+
+        <span className="absolute top-3 right-1/4 w-1 h-1 rounded-full bg-cyan-300"></span>
+
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
+
+        <div className="h-20 flex items-center justify-between">
+
+          {/* ================= LOGO ================= */}
+
+          <Link
+            to="/"
+            className="flex items-center gap-4 group"
+          >
+            <motion.div
+              whileHover={{
+                rotate: 15,
+                scale: 1.1,
+              }}
+              transition={{
+                duration: 0.3,
+              }}
+              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 via-indigo-500 to-purple-600 flex items-center justify-center shadow-xl shadow-cyan-500/30"
+            >
+              <FaRocket className="text-white text-xl" />
+            </motion.div>
 
             <div>
 
-              <h1 className="text-white font-bold text-lg">
+              <h1 className="text-2xl font-extrabold tracking-wide text-white group-hover:text-cyan-400 transition">
+
                 StartupHub
+
               </h1>
 
-              <p className="text-[10px] tracking-[3px] uppercase text-slate-400">
-                Build Together
+              <p className="uppercase tracking-[5px] text-[10px] text-slate-400">
+
+                Build • Launch • Scale
+
               </p>
 
             </div>
 
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* ============ DESKTOP MENU ============ */}
 
           <nav className="hidden lg:flex items-center gap-8">
 
             <NavLink
               to="/"
-              className={({ isActive }) =>
-                `relative pb-2 text-lg font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-red-500 text-xl"
-                    : "text-slate-300 hover:text-white"
-                }`
-              }
+              className={navItem}
             >
               {({ isActive }) => (
                 <>
                   Home
 
-                  <span
-                    className={`absolute left-0 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
+                  <motion.span
+                    layoutId="activeNav"
+                    className={`absolute left-0 -bottom-2 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 ${
                       isActive
                         ? "w-full"
-                        : "w-0 hover:w-full"
+                        : "w-0"
                     }`}
-                  ></span>
+                  />
                 </>
               )}
             </NavLink>
 
             <NavLink
-              to="/explore"
-              className={({ isActive }) =>
-                `relative group pb-2  font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-red-500 text-xl"
-                    : "text-slate-300 hover:text-white"
-                }`
-              }
+              to="/create-startup"
+              className={navItem}
             >
               {({ isActive }) => (
                 <>
-                  Explore
+                  Create Startup
 
-                  <span
-                    className={`absolute left-0 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
+                  <motion.span
+                    layoutId="activeNav2"
+                    className={`absolute left-0 -bottom-2 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 ${
                       isActive
                         ? "w-full"
-                        : "w-0 group-hover:w-full"
+                        : "w-0"
                     }`}
-                  ></span>
+                  />
+                </>
+              )}
+            </NavLink>
+                        <NavLink
+                        
+              to="/my-startups"
+              className={navItem}
+            >
+              {({ isActive }) => (
+                <>
+                  My Startups
+
+                  <motion.span
+                    className={`absolute left-0 -bottom-2 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0"
+                    }`}
+                  />
                 </>
               )}
             </NavLink>
 
             <NavLink
-              to="/startups"
-              className={({ isActive }) =>
-                `relative group pb-2 text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-red-500 text-xl"
-                    : "text-slate-300 hover:text-white"
-                }`
-              }
+              to="/bookmarks"
+              className={navItem}
             >
               {({ isActive }) => (
                 <>
-                  Startups
+                  Bookmarks
 
-                  <span
-                    className={`absolute left-0 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
-                      isActive
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
+                  <motion.span
+                    className={`absolute left-0 -bottom-2 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0"
                     }`}
-                  ></span>
-                </>
-              )}
-            </NavLink>
-
-            <NavLink
-              to="/community"
-              className={({ isActive }) =>
-                `relative group pb-2 text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-red-500 text-xl"
-                    : "text-slate-300 hover:text-white"
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  Community
-
-                  <span
-                    className={`absolute left-0 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
-                      isActive
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
-                    }`}
-                  ></span>
-                </>
-              )}
-            </NavLink>
-
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `relative group pb-2 text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-red-500 text-xl"
-                    : "text-slate-300 hover:text-white"
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  About
-
-                  <span
-                    className={`absolute left-0 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-300 ${
-                      isActive
-                        ? "text-red-500 text-xl"
-                        : "w-0 group-hover:w-full"
-                    }`}
-                  ></span>
+                  />
                 </>
               )}
             </NavLink>
 
           </nav>
 
-          {/* Right */}
+          {/* ================= RIGHT SECTION ================= */}
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-4">
 
-            <Link
-              to="/login"
-              className="px-5 py-2 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition"
+            {/* Notification */}
+
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: .95 }}
+              className="relative w-11 h-11 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-slate-300 hover:text-white hover:border-cyan-400/40 transition"
             >
-              Login
-            </Link>
+              <HiOutlineBell size={22} />
 
-            <Link
-              to="/register"
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-cyan-500 text-white hover:opacity-90 transition"
-            >
-              Launch Startup
-            </Link>
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+
+            </motion.button>
+
+            {/* User */}
+
+            {user ? (
+
+              <div className="flex items-center gap-3">
+
+                <div className="flex items-center gap-3 px-4 py-2 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+
+                  <div className="relative">
+
+                    <FaUserCircle
+                      size={38}
+                      className="text-cyan-400"
+                    />
+
+                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-400 border-2 border-slate-900"></span>
+
+                  </div>
+
+                  <div>
+
+                    <h3 className="text-white text-sm font-bold">
+
+                      {user.name}
+
+                    </h3>
+
+                    <p className="text-xs text-slate-400">
+
+                      Founder
+
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  whileTap={{
+                    scale: .95,
+                  }}
+                  onClick={logoutHandler}
+                  className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-red-500 to-pink-500 text-white font-semibold shadow-lg shadow-red-500/20"
+                >
+
+                  <FaSignOutAlt />
+
+                  Logout
+
+                </motion.button>
+
+              </div>
+
+            ) : (
+
+              <div className="flex items-center gap-3">
+
+                <Link
+                  to="/login"
+                  className="px-6 py-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl text-slate-300 hover:text-white hover:border-cyan-400 transition"
+                >
+                  Login
+                </Link>
+
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  whileTap={{
+                    scale: .95,
+                  }}
+                >
+                  <Link
+                    to="/register"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 text-white font-bold shadow-xl shadow-cyan-500/30"
+                  >
+                    Launch Startup 🚀
+                  </Link>
+                </motion.div>
+
+              </div>
+
+            )}
 
           </div>
 
-          {/* Mobile Button */}
+          {/* ================= MOBILE MENU BUTTON ================= */}
 
-          <button
+          <motion.button
+            whileTap={{ scale: .9 }}
             onClick={() => setMenuOpen(true)}
-            className="lg:hidden text-white"
+            className="lg:hidden w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"
           >
-            <HiOutlineMenuAlt3 size={30} />
-          </button>
+            <HiOutlineMenuAlt3 size={28} />
+          </motion.button>
 
         </div>
 
       </div>
-            {/* Overlay */}
+            {/* ================= Overlay ================= */}
 
-      <div
-        onClick={() => setMenuOpen(false)}
-        className={`fixed inset-0 bg-black/50 transition duration-300 lg:hidden ${
-          menuOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible"
-        }`}
-      ></div>
+      <AnimatePresence>
 
-      {/* Mobile Drawer */}
+        {menuOpen && (
 
-      <div
-        className={`fixed top-0 right-0 h-screen w-72 bg-slate-900 transition-transform duration-300 lg:hidden ${
-          menuOpen
-            ? "translate-x-0"
-            : "translate-x-full"
-        }`}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: .25 }}
+            onClick={() => setMenuOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm lg:hidden z-40"
+          />
+
+        )}
+
+      </AnimatePresence>
+
+      {/* ================= Mobile Drawer ================= */}
+
+      <motion.div
+        initial={false}
+        animate={{
+          x: menuOpen ? 0 : "100%",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 120,
+          damping: 18,
+        }}
+        className="fixed top-0 right-0 z-50 h-screen w-80 bg-slate-950 border-l border-white/10 lg:hidden"
       >
 
-        <div className="flex justify-between items-center p-5 border-b border-slate-700">
+        {/* Drawer Header */}
 
-          <h2 className="text-white font-semibold">
-            StartupHub
-          </h2>
+        <div className="p-6 flex items-center justify-between border-b border-white/10">
 
-          <button onClick={() => setMenuOpen(false)}>
-            <HiOutlineX
-              size={28}
-              className="text-white"
-            />
+          <div className="flex items-center gap-3">
+
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 via-indigo-500 to-purple-600 flex items-center justify-center">
+
+              <FaRocket className="text-white text-xl" />
+
+            </div>
+
+            <div>
+
+              <h2 className="text-white text-xl font-bold">
+
+                StartupHub
+
+              </h2>
+
+              <p className="text-xs text-slate-400">
+
+                Build • Launch • Scale
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white"
+          >
+
+            <HiOutlineX size={26} />
+
           </button>
 
         </div>
 
-        <div className="p-5 space-y-3">
+        {/* User */}
+
+        {user && (
+
+          <div className="m-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center gap-4">
+
+            <div className="relative">
+
+              <FaUserCircle
+                size={50}
+                className="text-cyan-400"
+              />
+
+              <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-400 border-2 border-slate-900"></span>
+
+            </div>
+
+            <div>
+
+              <h3 className="text-white font-bold">
+
+                {user.name}
+
+              </h3>
+
+              <p className="text-slate-400 text-sm">
+
+                Founder
+
+              </p>
+
+            </div>
+
+          </div>
+
+        )}
+
+        {/* Navigation */}
+
+        <div className="px-5 space-y-3">
 
           <NavLink
             to="/"
             onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
-              `block rounded-lg px-4 py-3 transition ${
+              `block rounded-xl px-5 py-4 transition-all ${
                 isActive
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-red-500 text-xl"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                  ? "bg-gradient-to-r from-cyan-500 to-indigo-500 text-white"
+                  : "text-slate-300 bg-white/5 hover:bg-white/10"
               }`
             }
           >
-            Home
+            🏠 Home
           </NavLink>
 
           <NavLink
-            to="/explore"
+            to="/create-startup"
             onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
-              `block rounded-lg px-4 py-3 transition ${
+              `block rounded-xl px-5 py-4 transition-all ${
                 isActive
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-red-500 text-xl"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                  ? "bg-gradient-to-r from-cyan-500 to-indigo-500 text-white"
+                  : "text-slate-300 bg-white/5 hover:bg-white/10"
               }`
             }
           >
-            Explore
+            🚀 Create Startup
           </NavLink>
 
           <NavLink
-            to="/startups"
+            to="/my-startups"
             onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
-              `block rounded-lg px-4 py-3 transition ${
+              `block rounded-xl px-5 py-4 transition-all ${
                 isActive
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-red-500 text-xl"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                  ? "bg-gradient-to-r from-cyan-500 to-indigo-500 text-white"
+                  : "text-slate-300 bg-white/5 hover:bg-white/10"
               }`
             }
           >
-            Startups
+            💼 My Startups
           </NavLink>
 
           <NavLink
-            to="/community"
+            to="/bookmarks"
             onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
-              `block rounded-lg px-4 py-3 transition ${
+              `block rounded-xl px-5 py-4 transition-all ${
                 isActive
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-red-500 text-xl"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                  ? "bg-gradient-to-r from-cyan-500 to-indigo-500 text-white"
+                  : "text-slate-300 bg-white/5 hover:bg-white/10"
               }`
             }
           >
-            Community
+            <div className="flex items-center gap-3">
+
+              <FaBookmark />
+
+              Bookmarks
+
+            </div>
+
           </NavLink>
+                    {/* Guest Buttons */}
 
-          <NavLink
-            to="/about"
-            onClick={() => setMenuOpen(false)}
-            className={({ isActive }) =>
-              `block rounded-lg px-4 py-3 transition ${
-                isActive
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-red-500 text-xl"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
-              }`
-            }
-          >
-            About
-          </NavLink>
+          {!user && (
+            <>
 
-          <Link
-            to="/login"
-            onClick={() => setMenuOpen(false)}
-            className="block text-center mt-6 border border-slate-700 rounded-lg py-3 text-slate-300 hover:bg-slate-800 hover:text-white transition"
-          >
-            Login
-          </Link>
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="block text-center rounded-xl border border-white/10 bg-white/5 py-4 text-slate-300 hover:bg-white/10 transition-all"
+              >
+                Login
+              </Link>
 
-          <Link
-            to="/register"
-            onClick={() => setMenuOpen(false)}
-            className="block text-center rounded-lg py-3 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white mt-3 hover:opacity-90 transition"
-          >
-            Launch Startup
-          </Link>
+              <Link
+                to="/register"
+                onClick={() => setMenuOpen(false)}
+                className="block text-center rounded-xl py-4 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 text-white font-bold shadow-lg shadow-cyan-500/20"
+              >
+                🚀 Launch Startup
+              </Link>
+
+            </>
+          )}
+
+          {/* Logout */}
+
+          {user && (
+
+            <button
+              onClick={() => {
+                logoutHandler();
+                setMenuOpen(false);
+              }}
+              className="w-full mt-4 flex items-center justify-center gap-3 rounded-xl py-4 bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold shadow-lg shadow-red-500/20"
+            >
+
+              <FaSignOutAlt />
+
+              Logout
+
+            </button>
+
+          )}
 
         </div>
 
-      </div>
+        {/* Bottom Glow */}
+
+        <div className="absolute bottom-0 left-0 right-0">
+
+          <div className="h-28 bg-gradient-to-t from-cyan-500/10 via-indigo-500/5 to-transparent"></div>
+
+        </div>
+
+      </motion.div>
 
     </header>
   );
