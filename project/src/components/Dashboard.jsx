@@ -74,7 +74,10 @@ const Dashboard = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 mt-8">
-                <button onClick={()=>navigate('/create-startup')} className="group flex items-center gap-3 rounded-xl px-6 py-3 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-semibold hover:scale-105 transition">
+                <button
+                  onClick={() => navigate("/create-startup")}
+                  className="group flex items-center gap-3 rounded-xl px-6 py-3 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-semibold hover:scale-105 transition"
+                >
                   Create Startup
                   <FaArrowRight className="group-hover:translate-x-1 transition" />
                 </button>

@@ -54,7 +54,6 @@ const CreateStartup = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050816]">
-      
       <div className="absolute inset-0">
         <div className="absolute left-[-200px] top-[-150px] h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[170px] animate-pulse"></div>
 
@@ -145,7 +144,9 @@ const CreateStartup = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold text-white">Get Funding</h3>
+                  <h3 className="text-xl font-semibold text-white">
+                    Get Funding
+                  </h3>
 
                   <p className="mt-1 text-slate-400">
                     Connect directly with investors.
@@ -201,7 +202,9 @@ const CreateStartup = () => {
             transition={{ duration: 0.7 }}
             className="rounded-[35px] border border-white/10 bg-white/5 p-10 backdrop-blur-2xl shadow-[0_0_80px_rgba(0,255,255,.08)]"
           >
-            <h2 className="text-3xl font-semibold text-white">Launch Startup</h2>
+            <h2 className="text-3xl font-semibold text-white">
+              Launch Startup
+            </h2>
 
             <p className="mt-1 text-slate-400">
               Fill the details below and publish your startup.

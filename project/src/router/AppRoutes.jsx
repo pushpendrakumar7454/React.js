@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import { useDispatch } from "react-redux";
+import { createBrowserRouter, RouterProvider, useSearchParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
@@ -16,6 +16,10 @@ import MyStartups from "../components/MyStartups";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
+
+
+   
+
 
   useEffect(() => {
     const loggedInUser =
@@ -52,7 +56,7 @@ const AppRoutes = () => {
             },
             {
               path: "/edit-startup/:id",
-              element: <EditStartup />,
+              element: <CreateStartup />,
             },
           ],
         },
