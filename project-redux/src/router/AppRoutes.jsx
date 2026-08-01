@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux'
 import { addUser } from '../features/auth/authSlice'
 import ProtectedRouter from './ProtectedRouter'
 import PublicProtected from './PublicProtected'
+import About from '../pages/About'
+import Product from '../pages/Product'
 
 const AppRoutes = () => {
 
@@ -38,6 +40,13 @@ const AppRoutes = () => {
                 children:[{
                     path:'',
                     element:<Home/>
+                },{
+                    path:"/about",
+                    element:<About/>
+                    
+                },{
+                    path:"/product",
+                    element:<Product/>
                 }]
             }
         ]
