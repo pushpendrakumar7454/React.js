@@ -13,12 +13,13 @@ import ProtectedRouter from "./provider/ProtectedRouter";
 import CreateStartup from "../pages/CreateStartup";
 import StartupDetails from "../components/StartupDetails";
 import MyStartups from "../components/MyStartups";
+import Bookmarks from "../pages/Bookmarks";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
 
 
-   
+
 
 
   useEffect(() => {
@@ -57,7 +58,10 @@ const AppRoutes = () => {
             {
               path: "/edit-startup/:id",
               element: <CreateStartup />,
-            },
+            }, {
+              path: "/bookmarks",
+              element: <Bookmarks />
+            }
           ],
         },
       ],

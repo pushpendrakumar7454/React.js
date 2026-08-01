@@ -42,9 +42,26 @@ const startupSlice = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
+
+    toggleLike: (state, action) => {
+      const startup = state.startup.find((item) => item.id == action.payload);
+
+      if (startup) {
+        startup.liked = !startup.liked;
+
+        if (startup.liked) {
+          startup.likes += 1;
+        } else {
+          startup.likes -= 1;
+        }
+
+        localStorage.setItem("startupAll", JSON.stringify(state.startup));
+      }
+    },
     setError: (state, action) => {
       state.error = action.payload;
     },
+
     clearStartup: (state, action) => {
       state.startup = [];
     },
@@ -69,6 +86,7 @@ export const {
   setLoading,
   likeStartup,
   unlikeStartip,
-  bookmarkStartup
+  bookmarkStartup,
+  toggleLike
 } = startupSlice.actions;
 export default startupSlice.reducer;

@@ -6,13 +6,28 @@ import {
   FaUserCircle,
   FaEye,
   FaCode,
+  FaRegHeart,
 } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import {
+  likeStartup,
+  toggleLike,
+  bookmarkStartup,
+} from "../features/startup/startupSlice";
 
 const StartupCard = ({ startup }) => {
+  const { navigate } = useAuth();
 
+  const dispatch = useDispatch();
 
-  const {navigate}=useAuth()
+  const handleLike = (id) => {
+    dispatch(toggleLike(id));
+  };
+  const handleBookmark = (id) => {
+    dispatch(bookmarkStartup(id));
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -35,20 +50,16 @@ const StartupCard = ({ startup }) => {
       <div className="relative z-10 p-7 cursor-pointer">
         {/* Top */}
 
-        <div  className="flex justify-between items-center ">
-          <div  className="flex items-center gap-3">
+        <div className="flex justify-between items-center ">
+          <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/30">
               <FaRocket className="text-white text-xl" />
             </div>
 
             <div>
-              <h2 className="text-xl font-bold text-white">
-                {startup.title}
-              </h2>
+              <h2 className="text-xl font-bold text-white">{startup.title}</h2>
 
-              <p className="text-sm text-slate-400">
-                {startup.category}
-              </p>
+              <p className="text-sm text-slate-400">{startup.category}</p>
             </div>
           </div>
 
@@ -85,13 +96,9 @@ const StartupCard = ({ startup }) => {
           <FaUserCircle className="text-5xl text-cyan-400" />
 
           <div>
-            <h3 className="font-semibold text-white">
-              {startup.founder}
-            </h3>
+            <h3 className="font-semibold text-white">{startup.founder}</h3>
 
-            <p className="text-sm text-slate-400">
-              Founder
-            </p>
+            <p className="text-sm text-slate-400">Founder</p>
           </div>
         </div>
 
@@ -99,20 +106,31 @@ const StartupCard = ({ startup }) => {
 
         <div className="mt-4 flex items-center justify-between">
           <motion.button
+            onClick={() => handleLike(startup.id)}
             whileTap={{ scale: 0.8 }}
             whileHover={{ scale: 1.1 }}
-            className="flex items-center gap-2 rounded-xl bg-red-500/10 px-4 py-2 text-red-400 transition hover:bg-red-500/20"
+            className="flex items-center gap-2 rounded-xl bg-red-500/10 px-4 py-2"
           >
-            <FaHeart />
+            {startup.liked ? (
+              <FaHeart className="text-red-500 text-xl" />
+            ) : (
+              <FaRegHeart className="text-white text-xl" />
+            )}
 
-            <span>{startup.likes}</span>
+            <span className="text-white">{startup.likes}</span>
           </motion.button>
-
           <motion.button
+            onClick={() => handleBookmark(startup.id)}
             whileHover={{ rotate: -10, scale: 1.1 }}
-            className="rounded-xl bg-cyan-500/10 p-3 text-cyan-400 transition hover:bg-cyan-500/20"
+            className="rounded-xl bg-cyan-500/10 p-3 transition"
           >
-            <FaBookmark />
+            <FaBookmark
+              className={
+                startup.bookmarked
+                  ? "text-yellow-400 text-xl"
+                  : "text-white text-xl"
+              }
+            />
           </motion.button>
 
           <div className="flex items-center gap-2 text-slate-400">
@@ -130,7 +148,7 @@ const StartupCard = ({ startup }) => {
         {/* Footer */}
 
         <motion.button
-         onClick={() => navigate(`/productdetail/${startup.id}`)}
+          onClick={() => navigate(`/productdetail/${startup.id}`)}
           whileHover={{
             scale: 1.03,
           }}

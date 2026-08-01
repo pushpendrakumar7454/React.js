@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import {
   FaRocket,
   FaUsers,
@@ -13,44 +13,63 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 
-import { addStartup } from "../features/startup/startupSlice";
+import { addStartup,updateStartup } from "../features/startup/startupSlice";
 
 const CreateStartup = () => {
   const { register, handleSubmit, reset } = useForm();
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const { user } = useSelector((state) => state.auth);
+  const { startup } = useSelector((state) => state.startup);
 
   const submitHandler = (data) => {
-    const startupData = {
-      id: Date.now(),
-      title: data.title,
-      category: data.category,
-      description: data.description,
-      problem: data.problem,
-      solution: data.solution,
-      technology: data.technology,
-      funding: data.funding,
-      stage: data.stage,
-      team: data.team,
-      founder: user?.name || "Unknown",
-      likes: 0,
-      comments: [],
-      bookmarked: false,
-      createdAt: new Date().toISOString(),
-    };
-
-    dispatch(addStartup(startupData));
-
-    alert("Startup Created 🚀");
+    if (editStartUp) {
+      dispatch(
+        updateStartup({
+          ...editStartUp,
+          ...data,
+        }),
+      );
+      alert("Startup Updated 🚀");
+    } else {
+      const startupData = {
+        id: Date.now(),
+        title: data.title,
+        category: data.category,
+        description: data.description,
+        problem: data.problem,
+        solution: data.solution,
+        technology: data.technology,
+        funding: data.funding,
+        stage: data.stage,
+        team: data.team,
+        founder: user?.name || "Unknown",
+        likes: 0,
+        comments: [],
+        bookmarked: false,
+        createdAt: new Date().toISOString(),
+      };
+      dispatch(addStartup(startupData));
+      alert("Startup Created 🚀");
+    }
 
     reset();
 
-    navigate("/");
+    navigate("/my-startups");
   };
+
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  const editStartUp = startup.find((item) => item.id == id);
+
+  useEffect(() => {
+    if (editStartUp) {
+      reset(editStartUp);
+    }
+  }, [editStartUp]);
+
+  
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050816]">

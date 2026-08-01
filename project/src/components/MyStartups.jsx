@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaRocket,
@@ -7,13 +7,15 @@ import {
   FaCode,
   FaHeart,
 } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
+import { deleteStartup } from "../features/startup/startupSlice";
 
 const MyStartups = () => {
   const { startup } = useSelector((state) => state.startup);
   const { user } = useSelector((state) => state.auth);
+  const dispatch=useDispatch()
   const navigate=useNavigate()
 
   const [search, setSearch] = useState("");
@@ -27,6 +29,15 @@ const MyStartups = () => {
         (category === "All" || item.category === category),
     );
   }, [startup, user, search, category]);
+
+
+  const deleted=(id)=>{
+    dispatch(deleteStartup(id))
+    console.log("cicked");
+    
+  }
+
+     
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950">
@@ -232,11 +243,11 @@ const MyStartups = () => {
                       👁 View Details
                     </button>
 
-                    <button onClick={() => navigate(`/edit-startup/${item.id}`)} className="rounded-xl cursor-pointer border border-yellow-400/30 bg-yellow-500/10 px-6 py-3 font-semibold text-yellow-300 transition hover:bg-yellow-500 hover:text-white">
+                    <button onClick={() => navigate(`/create-startup?id=${item.id}`)} className="rounded-xl cursor-pointer border border-yellow-400/30 bg-yellow-500/10 px-6 py-3 font-semibold text-yellow-300 transition hover:bg-yellow-500 hover:text-white">
                       ✏ Edit
                     </button>
 
-                    <button className="rounded-xl cursor-pointer border border-red-400/30 bg-red-500/10 px-6 py-3 font-semibold text-red-400 transition hover:bg-red-500 hover:text-white">
+                    <button onClick={()=>deleted(item.id)} className="rounded-xl cursor-pointer border border-red-400/30 bg-red-500/10 px-6 py-3 font-semibold text-red-400 transition hover:bg-red-500 hover:text-white">
                       🗑 Delete
                     </button>
                   </div>
