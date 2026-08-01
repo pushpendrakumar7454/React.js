@@ -15,9 +15,7 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
   const { startup } = useSelector((state) => state.startup);
 
-  // ==============================
-  // Dynamic Data
-  // ==============================
+ 
 
   const myStartups = startup.filter(
     (item) => item.founder === user?.name
