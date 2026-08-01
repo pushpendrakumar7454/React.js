@@ -10,6 +10,8 @@ import Register from "../pages/Register";
 import { addUser } from "../features/auth/authSlice";
 import PublicRoute from "./public/PublicRoute";
 import ProtectedRouter from "./provider/ProtectedRouter";
+import CreateStartup from "../pages/CreateStartup";
+import StartupDetails from "../components/StartupDetails";
 
 
 
@@ -22,7 +24,7 @@ const AppRoutes = () => {
     const loggedInUser =
       JSON.parse(localStorage.getItem("loggedinUser")) || null;
 
-    if(loggedInUser){
+    if (loggedInUser) {
       dispatch(addUser(loggedInUser));
     }
 
@@ -31,36 +33,43 @@ const AppRoutes = () => {
 
   const router = createBrowserRouter([
     {
-       
-        element:<ProtectedRouter/>,
-        children:[{
-            path:"/",
-            element:<Layout/>,
-            children:[
-                {
-                    path:'',
-                    element:<Home/>
-                }
-            ]
-        }
-    ]
-    },{
-        element:<PublicRoute/>,
-        children:[
-            {
-                path:'/login',
-                element:<Login/>
-            },{
-                path:'/register',
-                element:<Register/>
-            }
+
+      element: <ProtectedRouter />,
+      children: [{
+        path: "/",
+        element: <Layout />,
+        children: [
+          {
+            path: '',
+            element: <Home />
+          }, {
+            path: "/create-startup",
+            element: <CreateStartup />
+          },{
+            path:"productdetail",
+            element:<StartupDetails/>
+            
+          }
         ]
+      }
+      ]
+    }, {
+      element: <PublicRoute />,
+      children: [
+        {
+          path: '/login',
+          element: <Login />
+        }, {
+          path: '/register',
+          element: <Register />
+        }
+      ]
     }
   ])
 
-    
 
-  return <RouterProvider router={router}/>;
+
+  return <RouterProvider router={router} />;
 
 };
 

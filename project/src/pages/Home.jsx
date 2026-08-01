@@ -1,10 +1,12 @@
 import React from 'react'
 import Dashboard from '../components/Dashboard'
+import StartupFeed from "../components/StartupFeed";
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-slate-950'>
             <Dashboard/>
+            <StartupFeed/>
         </div>
     )
 }
