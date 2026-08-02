@@ -14,6 +14,7 @@ import CreateStartup from "../pages/CreateStartup";
 import StartupDetails from "../components/StartupDetails";
 import MyStartups from "../components/MyStartups";
 import Bookmarks from "../pages/Bookmarks";
+import Developer from "../pages/Developer";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const AppRoutes = () => {
               element: <Home />,
             },
             {
-              path: "/create-startup",
+              path: "create-startup",
               element: <CreateStartup />,
             },
             {
@@ -56,14 +57,18 @@ const AppRoutes = () => {
               element: <MyStartups />,
             },
             {
-              path: "/edit-startup/:id",
+              path: "edit-startup/:id",
               element: <CreateStartup />,
             }, {
-              path: "/bookmarks",
+              path: "bookmarks",
               element: <Bookmarks />
             }
           ],
         },
+        ,{
+              path:'developer',
+              element:<Developer/>
+            }
       ],
     },
     {
