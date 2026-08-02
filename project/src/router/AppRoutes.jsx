@@ -14,7 +14,8 @@ import CreateStartup from "../pages/CreateStartup";
 import StartupDetails from "../components/StartupDetails";
 import MyStartups from "../components/MyStartups";
 import Bookmarks from "../pages/Bookmarks";
-import Developer from "../pages/Developer";
+import DevoloperHome from '../pages/DevoloperHome'
+import DevoloperLayout from "../layout/DevoloperLayout";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -66,8 +67,14 @@ const AppRoutes = () => {
           ],
         },
         ,{
-              path:'developer',
-              element:<Developer/>
+             path:"/developer",
+             element:<DevoloperLayout/>,
+             children:[
+              {
+                index:true,
+                element:<DevoloperHome/>
+              }
+             ]
             }
       ],
     },
